@@ -1,0 +1,7 @@
+parameters:
+    # text for config modules
+    settings_config.properties.welcome_head_text: Configure Properties
+    settings_config.test_procedures.welcome_head_text: Configure Test Procedures
+    settings_config.shipping_methods.welcome_head_text: Configure Shipping Methods
+    settings_config.unit_of_measure.welcome_head_text: Configure Units of Measure 
+    settings_config.packaging.welcome_head_text: Configure Packaging Type   

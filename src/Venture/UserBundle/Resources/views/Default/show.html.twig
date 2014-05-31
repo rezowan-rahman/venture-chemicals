@@ -1,0 +1,77 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}User Details view{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">Profile View</h4>
+  	
+    <table id="hor-minimalist-a">
+    <tbody>
+        <tr>
+            <td>Username: </td>
+            <td>{{ user.username }}</td>
+        </tr>
+        
+        <tr>
+            <td>Name: </td>
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+        </tr>
+        
+        <tr>
+            <td>E-mail: </td>
+            <td>{{ user.email }}</td>
+        </tr>
+        
+        <tr>
+            <td>Phone No: </td>
+            <td>{{ user.phone }}</td>
+        </tr>
+        
+        <tr>
+            <td>Location: </td>
+            <td>{{ user.location ? user.location.name : "N/A" }}</td>
+        </tr>
+        
+        <tr>
+            <td>Updated </td>
+            <td>{{ user.updated|date('F j, Y h:iA') }}</td>
+        </tr>
+        
+        <tr>
+            <td>User Type: </td>
+            <td>
+            {% for group in user.groups %}
+                {{ group.name }},
+            {% else %}
+                {{ "N/A" }}
+            {% endfor %}
+            </td>
+        </tr>
+        
+        
+        <tr class="empty">
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <input type="button" 
+                            class="config_form_button target" 
+                            value="Add New User" 
+                            onclick="window.location = '{{ path('fos_user_registration_register') }}'"/>
+                <input type="button" 
+                            class="config_form_button target" 
+                            value="Update" 
+                            onclick="window.location = '{{ path("venture_user_update", {"id": user.id}) }}'"/>
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+    
+    
+</div>
+{% endblock %}

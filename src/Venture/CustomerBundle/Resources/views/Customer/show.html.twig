@@ -1,0 +1,82 @@
+{% extends 'VentureCustomerBundle::layout.html.twig' %}
+
+{% block title %}Customer Details{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+	<h2 class="heading">Customers: {{ entity.name }}</h2>	
+	
+        
+	
+	<div class="style_vendor_details">
+		<p>
+			{{ entity.streetAddress1 }}
+			<br>
+			{{ entity.streetAddress2 }}
+			<br>
+			{{ entity.city }}, {{ entity.state }} &nbsp;&nbsp;&nbsp; {{ entity.zipCode }}
+			<br> <br>
+			{{ entity.website }}
+			<br> </br>
+			{{ entity.phoneNumber }}
+			
+		</p>
+		<div class="thin_liner"></div>
+
+		<p>{{ entity.contact1 }}, {{ entity.contact1Email }}</p>
+		<p>{{ entity.contact2 }}, {{ entity.contact2Email }}</p>
+                
+                {% if entity.note is defined %}
+                <p> {{ entity.note }}</p>
+                {% endif %}
+		
+		<div class="thin_liner"></div>
+	
+    <p>
+        <h4 class="desc-cont">Affiliated Customers:</h4> <br/>
+        <table class="rawListing">
+            <thead>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Contact</th>
+            </thead>
+            <tbody>
+                {% for child in entity.children %}
+                {% if child.isActive %} 
+                <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
+                    <td>{{ child.name }}</td>
+                    <td>{{ child.phoneNumber }}</td>
+                    <td>{{ child.contact1Email }}</td>
+                    <td>{{ child.contact1 }}</td>
+                </tr>
+                {% endif %}
+                {% else %}
+                <tr class="empty">
+                    <td colspan="4">There is no Affiliated Customer listed yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+        
+    </p>
+	<div class="thin_liner"></div>
+	<div style="padding-bottom:10px;"></div>
+	<div class="clear"></div>
+	
+	<div class="button_place_holder">
+        <button class="vendor_form_button" onclick="window.location='{{ path('venture_edit_customer',  {'id': entity.id}) }}'">Edit</button>
+        <div style="float:left;padding-left:40px"><form action="{{ path('venture_delete_customer',  {'id': entity.id}) }}" onsubmit="return confirmDel();">
+            <button class="vendor_form_button" type="submit">Delete</button>
+        </form>
+        </div>     
+        <div style="padding-bottom:40px;"></div>
+	</div>
+	
+	</div>	
+
+</div>
+{% endblock %}  

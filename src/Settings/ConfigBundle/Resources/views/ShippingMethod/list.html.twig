@@ -1,0 +1,32 @@
+    <table id="hor-minimalist-a">
+        <thead>
+            <th>Shipping Method</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for method in methods %}
+            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">
+                <td>{{ method.name }}</td>
+                
+                <td>{% if method.approved %} 
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif %}
+                </td>
+
+                <td>{{ method.updated|date('F j, Y h:iA') }}</td>
+                <td>
+                    <a  class="my_custom_anchor"  href="{{ path('SettingsConfigBundle_shipping_method_update', {'id': method.id}) }}">Edit</a> | 
+                    <a  class="my_custom_anchor"  href="{{ path('SettingsConfigBundle_shipping_method_delete', {'id': method.id}) }}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="5">There is no shipping method listed yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

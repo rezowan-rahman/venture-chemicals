@@ -1,0 +1,15 @@
+{% extends 'VentureCustomerBundle::layout.html.twig' %}
+
+{% block title %}Update Existing Customer{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">CUSTOMER: UPDATE</h4>
+    
+    {% include 'VentureCustomerBundle:Customer:form.html.twig' %}
+    
+</div>
+
+{% endblock %}  

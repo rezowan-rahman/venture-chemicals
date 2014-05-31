@@ -1,0 +1,80 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block title %}User Settings{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">User</h4>
+  
+    {{ form_start(form )}}
+    <table id="hor-minimalist-a">
+        <tbody>
+            <tr>
+                <td>{{ form_label(form.username) }}</td>
+                <td>
+                    {{ form_widget(form.username) }}
+                    <p>{{ form_errors(form.username) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.email) }}</td>
+                <td>
+                    {{ form_widget(form.email) }}
+                    <p>{{ form_errors(form.email) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.firstName) }}</td>
+                <td>
+                    {{ form_widget(form.firstName) }}
+                    <p>{{ form_errors(form.firstName) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.lastName) }}</td>
+                <td>
+                    {{ form_widget(form.lastName) }}
+                    <p>{{ form_errors(form.lastName) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.phone) }}</td>
+                <td>
+                    {{ form_widget(form.phone) }}
+                    <p>{{ form_errors(form.phone) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.location) }}</td>
+                <td>
+                    {{ form_widget(form.location) }}
+                    <p>{{ form_errors(form.location) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.groups) }}</td>
+                <td>
+                    {{ form_widget(form.groups) }}
+                    <p>{{ form_errors(form.groups) }}</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2">
+                    <input class="config_form_button" type="submit" value="Update">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {{ form_end(form )}}
+    
+</div>
+{% endblock %}

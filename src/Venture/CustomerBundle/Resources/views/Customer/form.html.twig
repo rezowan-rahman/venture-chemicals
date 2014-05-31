@@ -1,0 +1,108 @@
+{{ form_start(form) }}
+<div class="property-cont border-bottom">
+    <div class= "form-element-controller smaller-width">
+        <p class="label">{{ form_label(form.name) }}</p>
+        <p>{{ form_errors(form.name) }}</p>
+        <p>{{ form_widget(form.name) }}</p>
+    </div>
+</div>
+
+<div class="form-left-cloumn">
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.streetAddress1) }}</p>
+        <p>{{ form_errors(form.streetAddress1) }}</p>
+        <p>{{ form_widget(form.streetAddress1) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.streetAddress2) }}</p>
+        <p>{{ form_errors(form.streetAddress2) }}</p>
+        <p>{{ form_widget(form.streetAddress2) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.city) }}</p>
+        <p>{{ form_errors(form.city) }}</p>
+        <p>{{ form_widget(form.city) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.state) }}</p>
+        <p>{{ form_errors(form.state) }}</p>
+        <p>{{ form_widget(form.state) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.zipCode) }}</p>
+        <p>{{ form_errors(form.zipCode) }}</p>
+        <p>{{ form_widget(form.zipCode) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.website) }}</p>
+        <p>{{ form_errors(form.website) }}</p>
+        <p>{{ form_widget(form.website) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.phoneNumber) }}</p>
+        <p>{{ form_errors(form.phoneNumber) }}</p>
+        <p>{{ form_widget(form.phoneNumber) }}</p>
+    </div>
+    
+    
+</div>
+
+<div class="form-right-cloumn">
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.contact1) }}</p>
+        <p>{{ form_errors(form.contact1) }}</p>
+        <p>{{ form_widget(form.contact1) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.contact1Email) }}</p>
+        <p>{{ form_errors(form.contact1Email) }}</p>
+        <p>{{ form_widget(form.contact1Email) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.contact2) }}</p>
+        <p>{{ form_errors(form.contact2) }}</p>
+        <p>{{ form_widget(form.contact2) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.contact2Email) }}</p>
+        <p>{{ form_errors(form.contact2Email) }}</p>
+        <p>{{ form_widget(form.contact2Email) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.children) }}</p>
+        <p>{{ form_errors(form.children) }}</p>
+        <p>{{ form_widget(form.children) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.note) }}</p>
+        <p>{{ form_errors(form.note) }}</p>
+        <p>{{ form_widget(form.note) }}</p>
+    </div>
+    
+</div>
+
+<div class="property-cont-row-first">
+    <div class= "form-element-controller smaller-width">	
+        <p class="label">{{ form_label(form.isActive) }}</p>
+        <p>{{ form_errors(form.isActive) }}</p>
+        <p>{{ form_widget(form.isActive) }}</p>	 
+    </div>
+</div>
+
+<div class="property-cont-row-first">	
+    <div class="button_place_holder">
+        <p><input type="submit" value="Save" class="vendor_form_button"></p>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,16 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Packaging Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont font-check">
+    <h4 class="desc-cont">PACKAGING CONFIGURATION</h4>
+    {% include 'SettingsConfigBundle:Packaging:list.html.twig' with { 'packagings': packagings } %}
+    <h4 class="desc-cont">Edit Packaging:</h4>
+    <div class = "form_container">
+    {% render controller('SettingsConfigBundle:Packaging:create', {'id' : packaging_id}) %}
+    </div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    venture_raw_materials.example.class: Venture\RawMaterialsBundle\Example
+
+services:
+#    venture_raw_materials.example:
+#        class: %venture_raw_materials.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,46 @@
+<table id="hor-minimalist-a">
+    <tbody>
+        <tr>
+            <td>Name: </td>
+            <td>{{ group.name }}</td>
+        </tr>
+        
+        <tr>
+            <td>Description: </td>
+            <td>{{ group.description }}</td>
+        </tr>
+        
+        <tr>
+            <td>Role: </td>
+            <td>
+                {% for role in group.roles %}
+                <span> {{ role }},</span>
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Updated </td>
+            <td>{{ group.updated|date('F j, Y h:iA') }}</td>
+        </tr>
+        
+        
+        <tr class="empty">
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        
+        <tr class="empty">
+            <td colspan="2">
+                <input type="button" 
+                       class="config_form_button target" 
+                       value="Update" 
+                       onclick="window.location='{{ path("fos_user_group_edit", {"groupname" : group.name}) }}'" />
+                
+                <input type="button" 
+                       class="config_form_button target" 
+                       value="Delete" 
+                       onclick="window.location='{{ path("fos_user_group_delete", {"groupname" : group.name}) }}'" />
+            </td>
+        </tr>
+    </tbody>
+</table>

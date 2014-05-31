@@ -1,0 +1,142 @@
+/* 
+    Document   : common
+    Created on : Aug 29, 2013, 9:34:44 AM
+    Author     : rezowan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    font-family: 'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif;
+}
+root { 
+    display: block;
+}
+
+.maincont {
+    float:left;
+    background-color: #FFFFFF;
+    border: 0 solid;
+    box-shadow: 0 1px 4px 0 #888888;
+    width: 100%;
+}
+.maincont h2{
+color: #767676;
+padding-left:25px;
+font-family:  'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif;
+}
+.maincont  .configmain_title_header{
+color: #767676;
+padding-left:25px;
+font-family:  'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size:17px;
+}
+.maincont hr{
+margin-left:20px;
+margin-right:57px;
+color:#DEDEDE; /*#444;*/
+}
+/*#hor-minimalist-a
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-family:  'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif; color:#444;
+	font-size: 14px;
+	background: #fff;
+	margin: 20px;
+	width: 90%;
+	border-collapse: collapse;
+	text-align: left;
+}
+#hor-minimalist-a th
+{
+	font-size: 15px;
+	font-weight: bold;
+	color: #767676;
+	padding: 10px 8px;
+	border-bottom: 1px solid #444;
+}
+#hor-minimalist-a td
+{
+	color: #767676;
+	padding: 9px 8px 0px 8px;
+}
+#hor-minimalist-a tbody tr:hover td
+{
+	color: #767676;
+}*/
+
+.my_custom_anchor{
+text-decoration:none;
+color: #767676;
+}
+
+.maincont .notice{
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #DEB887;
+background-color: #FFF;
+}
+
+div.form_container{float: left; padding-left:0px; font-family: 'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif; color:#767676; }
+div.form_container h3 {font-weight: bold;font-size:17px;}
+div.form_container form div { clear: left; margin-bottom: 10px; float:left;}
+div.form_container form div label {display: block; float:left; font-weight: normal;padding-bottom: 15px;}
+div.form_container form input[type=text] { clear:left; float:left; font-size: 15px; line-height: 26px; width: 300px}  
+div.form_container form textarea { clear:left; float:left; font-size: 15px; height: 150px; line-height: 26px; width: 360px}  
+/* div.form_container form p input.config_form_button {width: 185px; height: 27px; border: 1px solid #717171; font-weight:normal; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; background:#fff;} */
+ div.form_container form p input.config_form_button {
+    display: block;
+    float: left;
+    width: 170px;
+    height: 25px;
+ } 
+ 
+ /* =========== */
+ div.cont {
+    color: #767676;
+    padding: 10px;
+}
+
+div.font-check{
+    font-size:13px;
+}
+
+ h4.desc-cont {
+    border-bottom: 1px solid #999999;
+    font-size: 14px;
+    margin: 0;
+    padding: 10px 0 5px;
+}
+
+#hor-minimalist-a {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#hor-minimalist-a thead {
+    font-size: 14px;
+}
+
+#hor-minimalist-a thead tr th{
+    text-align: left;
+}
+
+#hor-minimalist-a tbody {
+    font-size: 12px;
+}
+
+#hor-minimalist-a tbody tr td a{
+    color: inherit;
+    text-decoration: none;
+}
+
+#hor-minimalist-a tbody tr td a:hover{
+    font-weight: bold;
+}
+
+input.group_name { float:left; width: 50%; }
+textarea.group_desc { float:left; width: 50%; height: 150px;}
+select.group_role { float:left; width: 50%;}

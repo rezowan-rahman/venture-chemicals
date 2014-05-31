@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %} {% endblock %} - venturechemicals</title>
+{% block stylesheets %}
+    {% stylesheets 'css/style.css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="left_cont">
+    {% block left %}
+        <img src="{{ asset('images/logo.png') }}" width="213" height="182" alt="logo" />
+    {% endblock %}
+    </div>
+
+    <div class="right_cont">
+    {% block right %}
+        {% block welcome %}
+        <ul class="top_text">
+            {% block welcome_menu_1 %}
+            <li>
+                Welcome: <span>{{ app.user ? app.user.username : 'Anonymous' }}</span> | 
+            </li>
+            {% endblock %}
+            
+            {% block welcome_menu_2 %}
+            <li>
+                <a href="{{ path('fos_user_change_password') }}">Change Password</a> |
+            </li>
+            {% endblock %}
+            
+            {% block welcome_menu_3 %}
+            <li>
+                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+            </li>
+            {% endblock %}
+        </ul>
+        {% endblock %}
+        <div class="clear"></div>
+        {% block search %}
+        <div class="searchbox">
+            <div class="search_icon">
+                <img src="{{ asset('images/search_icon.jpg') }}" width="16" height="14" alt="search icon" />
+            </div>
+            <div class="search">
+              <form id="form1" name="form1" method="post" action="#">
+                <input type="text" class="textbox" name="textfield" id="textfield" placeholder="Search Here"/>
+              </form>
+            </div>
+        </div>
+        {% endblock %}
+        <div class="clear"></div>
+    	<div class="menu">
+        {% block menu %}
+            <ul>
+                {% block menu1 %}
+            	<li><a href="{{ path('_dashboard')}}">Dashboard</a></li>
+                {% endblock %}
+                
+                {% block menu2 %}
+                <li><a href="{{ path('venture_raw_materials_list', {'type': 'show_all'}) }}">Raw Materials</a></li>
+                {% endblock %}
+                
+                {% block menu3 %}
+                <li><a href="{{ path('venture_packaging_list', {'type': 'show_all'}) }}">Packaging</a></li>
+                {% endblock %}
+                
+                {% block menu4 %}
+                <li><a href="{{ path('venture_intermediate_list', {'type': 'show_all'}) }}">Intermediates</a></li>
+                {% endblock %}
+                
+                {% block menu5 %}
+                <li><a href="{{ path('venture_finished_product_list', {'type': 'show_all'}) }}">Finished Products</a></li>
+                {% endblock %}
+                
+                {% block menu6 %}
+                <li><a href="{{ path('venture_competitive_product_list', {'type': 'show_all'}) }}">Competitive Products</a></li>
+                {% endblock %}
+                
+                {% block menu7 %}
+                <li><a href="#">Samples</a></li>
+                {% endblock %}
+                
+                {% block menu8 %}
+                <li><a href="{{ path('VentureVendorBundle_vendor_list', {'type': 'show_all'}) }}">Vendors</a></li>
+                {% endblock %}
+                
+                {% block menu9 %}
+                <li><a href="{{ path('venture_customer_list', {'type': 'show_all'}) }}">Customers</a></li>
+                {% endblock %}
+                
+                {% block menu10 %}
+                <li><a href="#">PO</a></li>
+                {% endblock %}
+                
+                {% block menu11 %}
+                <li><a href="#">Sales Orders</a></li>
+                {% endblock %}
+                
+                {% block menu12 %}
+                <li><a href="#">Production</a></li>
+                {% endblock %}
+                
+                {% block menu13 %}
+                <li><a href="#">Sales</a></li>
+                {% endblock %}
+                
+                {% block menu14 %}
+                <li><a href="{{ path('venture_list_alternate_raw_material', {'type': 'show_all'}) }}">Alternate Raw Materials</a></li>
+                {% endblock %}
+            </ul>
+        {% endblock %}
+        </div>
+    	
+        <div class="middlecont"> 
+            {% block middle %} {% endblock %}
+        </div>
+        
+        <div class="clear"></div>   
+
+        <div class="footer_menu">
+            {% block footer_menu %}
+            <ul>
+                {% block footmenu1 %}
+            	<li>Administration : </li>
+                {% endblock %}
+                
+                {% block footmenu2 %}
+                <li><a href="{{ path('SettingsConfigBundle_homepage') }}">Configuration</a></li>
+                {% endblock %}
+                
+                {% block footmenu3 %}
+                <li><a href="{{ path('venture_users_list') }}">User</a></li>
+                {% endblock %}
+            </ul>
+            {% endblock %}
+        </div>
+
+        {% block popup %} {% endblock %}
+        
+    {% endblock %}
+    </div>
+  	
+    <div class="clear"></div>   
+</div>
+
+{% block javascripts %}
+    {% javascripts 'js/common_lib.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+</body>
+</html>

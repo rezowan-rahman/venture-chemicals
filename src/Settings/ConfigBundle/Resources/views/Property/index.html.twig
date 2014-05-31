@@ -1,0 +1,18 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Property Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+ <div class="cont font-check">
+	<h4 class="desc-cont">PROPERTY CONFIGURATION</h4>
+  	
+    {% include 'SettingsConfigBundle:Property:list.html.twig' with { 'properties': properties } %}
+        
+    <h4 class="desc-cont">Add Property:</h4>
+	<div class = "form_container">
+             {% render controller('SettingsConfigBundle:Property:create') %}
+	</div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{{ form_start(form) }}
+<table id="hor-minimalist-a">
+        <tbody>
+            <tr>
+                <td>{{ form_label(form.username) }}</td>
+                <td>
+                    {{ form_widget(form.username) }}
+                    {{ form_errors(form.username) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.email) }}</td>
+                <td>
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.plainPassword.first) }}</td>
+                <td>
+                    {{ form_widget(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.plainPassword.second) }}</td>
+                <td>
+                    {{ form_widget(form.plainPassword.second) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.firstName) }}</td>
+                <td>
+                    {{ form_widget(form.firstName) }}
+                    {{ form_errors(form.firstName) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.lastName) }}</td>
+                <td>
+                    {{ form_widget(form.lastName) }}
+                    {{ form_errors(form.lastName) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.phone) }}</td>
+                <td>
+                    {{ form_widget(form.phone) }}
+                    {{ form_errors(form.phone) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.location) }}</td>
+                <td>
+                    {{ form_widget(form.location) }}
+                    {{ form_errors(form.location) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(form.groups) }}</td>
+                <td>
+                    {{ form_widget(form.groups) }}
+                    {{ form_errors(form.groups) }}
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2">
+                    <input class="config_form_button" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{{ form_end(form) }}

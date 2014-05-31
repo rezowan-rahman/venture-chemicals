@@ -1,0 +1,32 @@
+  <table id="hor-minimalist-a">
+        <thead>
+            <th>Packaging Name</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for packaging in packagings %}
+            <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
+                <td>{{ packaging.name }}</td>
+                
+                <td>{% if packaging.approved %} 
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif %}
+                </td>
+
+                <td>{{ packaging.updated|date('F j, Y h:iA') }}</td>
+                <td>
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_packaging_update', {'id': packaging.id}) }}">Edit</a> | 
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_packaging_delete', {'id': packaging.id}) }}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="5">There is no packaging listed yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

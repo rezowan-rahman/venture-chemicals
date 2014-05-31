@@ -1,0 +1,7 @@
+parameters:
+#    venture_dash_board.example.class: Venture\DashBoardBundle\Example
+
+services:
+#    venture_dash_board.example:
+#        class: %venture_dash_board.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,27 @@
+VentureVendorBundle_vendor_list:
+    pattern:  /list/{type}
+    defaults: { _controller: VentureVendorBundle:Vendor:list }
+    requirements:
+        _method:  GET    
+
+
+VentureVendorBundle_vendor_add:
+    pattern:  /add/{id}
+    defaults: { _controller: VentureVendorBundle:Vendor:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+VentureVendorBundle_vendor_details:
+    pattern:  /details/{id}
+    defaults: { _controller: VentureVendorBundle:Vendor:view }
+    requirements:
+        _method:  GET
+        id: \d+        
+        
+VentureVendorBundle_vendor_remove:
+    pattern:  /delete/{id}
+    defaults: { _controller: VentureVendorBundle:Vendor:delete }
+    requirements:
+        _method:  GET
+        id: \d+

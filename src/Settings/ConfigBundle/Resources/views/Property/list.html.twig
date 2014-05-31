@@ -1,0 +1,25 @@
+    <table id="hor-minimalist-a">
+        <thead>
+            <th>Property</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for property in properties %}
+            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
+                <td>{{ property.name }}</td>
+                <td>{{ property.approved ? "Active" : "Inactive" }}</td>
+                <td>{{ property.updated|date('F j, Y h:iA') }}</td>
+                <td>
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_property_update', {'id': property.id}) }}">Edit</a> | 
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_property_delete', {'id': property.id}) }}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="5">There is no property entered yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

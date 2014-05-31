@@ -1,0 +1,130 @@
+{% extends 'VentureVendorBundle::layout.html.twig' %}
+
+{% block title %}Add Vendor{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+
+{{ form_start(form) }}
+<div class="cont font-check">
+    <h4 class="desc-cont">VENDORS: Add new / Edit</h4>
+    
+    <div class="property-cont border-bottom">
+        <div class= "form-element-controller smaller-width">
+            <p class="label">{{ form_label(form.name) }}</p>
+            <p>{{ form_errors(form.name) }}</p>
+            <p>{{ form_widget(form.name) }}</p>
+        </div>
+        
+        <div class= "form-element-controller smaller-width">
+            <p class="label">{{ form_label(form.supplier_since) }}</p>
+            <p>{{ form_errors(form.supplier_since) }}</p>
+            <p>{{ form_widget(form.supplier_since) }}</p>
+        </div>
+    </div>
+    
+    <div class="form-left-cloumn">
+        
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.street_1) }}</p>
+            <p>{{ form_errors(form.street_1) }}</p>
+            <p>{{ form_widget(form.street_1) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.street_2) }}</p>
+            <p>{{ form_errors(form.street_2) }}</p>
+            <p>{{ form_widget(form.street_2) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.city) }}</p>
+            <p>{{ form_errors(form.city) }}</p>
+            <p>{{ form_widget(form.city) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.state) }}</p>
+            <p>{{ form_errors(form.state) }}</p>
+            <p>{{ form_widget(form.state) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.zip_code) }}</p>
+            <p>{{ form_errors(form.zip_code) }}</p>
+            <p>{{ form_widget(form.zip_code) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.website) }}</p>
+            <p>{{ form_errors(form.website) }}</p>
+            <p>{{ form_widget(form.website) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.phone) }}</p>
+            <p>{{ form_errors(form.phone) }}</p>
+            <p>{{ form_widget(form.phone) }}</p>
+        </div>
+        
+    </div>
+    
+    <div class="form-right-cloumn">
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.contact_1) }}</p>
+            <p>{{ form_errors(form.contact_1) }}</p>
+            <p>{{ form_widget(form.contact_1) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.contact_1_email) }}</p>
+            <p>{{ form_errors(form.contact_1_email) }}</p>
+            <p>{{ form_widget(form.contact_1_email) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.contact_2) }}</p>
+            <p>{{ form_errors(form.contact_2) }}</p>
+            <p>{{ form_widget(form.contact_2) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.contact_2_email) }}</p>
+            <p>{{ form_errors(form.contact_2_email) }}</p>
+            <p>{{ form_widget(form.contact_2_email) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.children) }}</p>
+            <p>{{ form_errors(form.children) }}</p>
+            <p>{{ form_widget(form.children) }}</p>
+        </div>
+
+        <div class= "form-element-controller">
+            <p class="label">{{ form_label(form.note) }}</p>
+            <p>{{ form_errors(form.note) }}</p>
+            <p>{{ form_widget(form.note) }}</p>
+        </div>
+    
+    </div>
+    
+    <div class="property-cont-row-first">
+        <div class= "form-element-controller smaller-width">	
+            <p class="label">{{ form_label(form.active) }}</p>
+            <p>{{ form_errors(form.active) }}</p>
+            <p>{{ form_widget(form.active) }}</p>	 
+        </div>
+    </div>
+    
+    <div class="property-cont-row-first">	
+        <div class="button_place_holder">
+            <p><input type="submit" value="Save" class="vendor_form_button"></p>
+        </div>
+    </div>
+    
+    
+</div>
+{{ form_end(form) }}
+
+{% endblock %}  

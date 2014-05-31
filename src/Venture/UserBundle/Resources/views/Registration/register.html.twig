@@ -1,0 +1,12 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Register User{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">User Registration</h4>
+    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+</div>
+{% endblock %}

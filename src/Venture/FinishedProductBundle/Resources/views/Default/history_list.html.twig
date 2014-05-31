@@ -1,0 +1,38 @@
+{% extends 'VentureFinishedProductBundle::layout.html.twig' %}
+
+{% block title %}Finished Product History{% endblock%}
+
+
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont"> 
+        <h2 class="heading">FINISHED PRODUCTS: {{ finishedProduct.itemNumber | upper }}: HISTORY</h2>
+        
+        <div class="clear"></div>
+         
+        <table class="raw-materials-listing">
+            <thead>
+                <tr>
+                    <th width="33%">{{"date of revision" | upper}}</th>
+                    <th width="33%">{{"reason for change" | upper}}</th>
+                    <th width="33%">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for version in versions %}
+                <tr class="records">
+                    <td>{{ version.loggedAt|date('F j, Y h:iA')}}</td>
+                    <td>{{ version.reasonForChange }}</td>
+                    <td><a href="{{ path('venture_finished_product_history_details', {'id': version.id}) }}">VIEW</a></td>
+                </tr>
+                {% else %}
+                <tr class="records">
+                    <td colspan="3">No Records Found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+	
+{% endblock %}  

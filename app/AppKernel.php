@@ -16,6 +16,22 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Settings\ConfigBundle\SettingsConfigBundle(),
+            new Venture\VendorBundle\VentureVendorBundle(),
+            new Venture\RawMaterialsBundle\VentureRawMaterialsBundle(),
+            new Venture\DashBoardBundle\VentureDashBoardBundle(),
+            new Venture\PackagingBundle\VenturePackagingBundle(),
+            new Venture\CommonBundle\VentureCommonBundle(),
+            new Venture\FinishedProductBundle\VentureFinishedProductBundle(),
+            new Venture\IntermediateBundle\VentureIntermediateBundle(),
+            new Venture\CustomerBundle\VentureCustomerBundle(),
+            new Venture\CompetitiveProductBundle\VentureCompetitiveProductBundle(),
+            new Venture\AlternateRawMaterialBundle\VentureAlternateRawMaterialBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Venture\UserBundle\VentureUserBundle(),
+            new Venture\PipeLineBundle\VenturePipeLineBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

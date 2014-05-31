@@ -1,0 +1,50 @@
+<table id="hor-minimalist-a">
+    <tbody>
+        <tr>
+            <td>Username: </td>
+            <td>{{ user.username }}</td>
+        </tr>
+        
+        <tr>
+            <td>Name: </td>
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+        </tr>
+        
+        <tr>
+            <td>E-mail: </td>
+            <td>{{ user.email }}</td>
+        </tr>
+        
+        <tr>
+            <td>Phone No: </td>
+            <td>{{ user.phone }}</td>
+        </tr>
+        
+        <tr>
+            <td>Location: </td>
+            <td>{{ user.location.name }}</td>
+        </tr>
+        
+        <tr>
+            <td>Updated </td>
+            <td>{{ user.updated|date('F j, Y h:iA') }}</td>
+        </tr>
+        
+        <tr>
+            <td>User Type: </td>
+            <td>
+            {% for group in user.groups %}
+                {{ group.name }},
+            {% else %}
+                {{ "N/A" }}
+            {% endfor %}
+            </td>
+        </tr>
+        
+        
+        <tr class="empty">
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        
+    </tbody>
+</table>

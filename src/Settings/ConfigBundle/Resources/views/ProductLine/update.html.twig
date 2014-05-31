@@ -1,0 +1,16 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Product Line Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont font-check">
+    <h4 class="desc-cont">LOCATION CONFIGURATION</h4>
+    {% include 'SettingsConfigBundle:ProductLine:list.html.twig' with { 'productLines' : productLines } %}
+    <h4 class="desc-cont">Edit Location:</h4>
+    <div class = "form_container">
+    {% render controller('SettingsConfigBundle:ProductLine:create', {'id' : product_line_id}) %}
+    </div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

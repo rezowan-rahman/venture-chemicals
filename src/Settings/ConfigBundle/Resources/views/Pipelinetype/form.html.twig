@@ -1,0 +1,6 @@
+<form action="{{ path('SettingsConfigBundle_pipelinetype_add', {'id': id}) }}" method="post" {{ form_enctype(form) }} class="property">
+    {{ form_widget(form) }}
+    <p>
+        <input class="config_form_button" type="submit" value="Save">
+    </p>
+</form>

@@ -1,0 +1,80 @@
+{% extends 'VenturePackagingBundle::layout.html.twig' %}
+
+{% block title %}Packaging Details{% endblock%}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@VenturePackagingBundle/Resources/public/js/common.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h2 class="heading">Packaging: {{ packaging.ItemNumber }}: {{ packaging.ItemName }}</h2>
+    
+    <h4 class="desc-cont">Description: {{ packaging.description }}</h4>
+    
+    <div class="row-cont">
+        <div class="row">
+            <p class="left-side">Unit of measure: {{ packaging.unitOfMeasure.name }}</p>
+            
+            <p class="right-side">
+                Quoting cost: {{ quoting_cost }}
+            </p>
+            
+        </div>
+    
+        <div class="row">
+            <p class="left-side">Tags: {{ packaging.tags }}</p>
+            <p class="right-side">
+                Lowest cost: {{ lowest_cost }}
+            </p>
+        </div>
+            
+    </div>
+    
+    <div class="vendor-cont">
+        <h3 class="ven-label">Vendors:</h3>
+        
+        {% set venId = 0 %}
+        {% for det in shipping_details %}
+        <div class="property-cont no-brd">
+            {% if det.vendor.id != venId %}
+            <h4 class="desc-cont no-brd">
+                <a href="{{ path('VentureVendorBundle_vendor_details', {'id' : det.vendor.id}) }}">{{det.vendor.name}}</a>
+            </h4>
+            {% set venId = det.vendor.id %}
+            {% endif %}
+            <div class="property-row">
+                <p>{{det.shippingMethod.name}}</p>
+                <p>{{det.TotalCost}}</p>
+                <p>{{det.leadTime}}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="property-cont no-brd">
+            <div class="property-row">
+                <p>No vendors listed yet</p>
+            </div>
+        </div>
+        {% endfor %}
+    
+    </div>
+    
+    <div class="row-cont no-brd">
+        <h3 class="ven-label">Other Informations:</h3>
+        <div class="row">
+            <p class="left-side">Amount in stock: 0</p>
+            <p class="left-side">Amount on purchase order: 0</p>
+            <p class="left-side">Reorder point: {{ packaging.reorderPoint }}</p>            
+        </div> 
+        <button class="add-new edit target" location="{{ path('venture_packaging_edit',  {'id': id}) }}">Edit</button>
+        <button class="add-new edit target" location="{{ path('venture_packaging_delete',  {'id': id}) }}">Delete</button>
+    </div>
+    
+</div>
+
+{% endblock %} 

@@ -1,0 +1,102 @@
+{{ form_start(form) }}
+
+<div class="property-cont">
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.itemName) }}</p>
+        <p class="field">{{ form_widget(form.itemName) }}</p>
+        <p class="error">{{ form_errors(form.itemName) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.itemDescription) }}</p>
+        <p class="field">{{ form_widget(form.itemDescription) }}</p>
+        <p class="error">{{ form_errors(form.itemDescription) }}</p>
+    </div>
+    
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.tags) }}</p>
+        <p class="field">{{ form_widget(form.tags) }}</p>
+        <p class="error">{{ form_errors(form.tags) }}</p>
+    </div>
+</div>
+
+
+<div class="property-cont">
+    <div class= "form-element-controller">
+        <p class="label">{{ form_label(form.unitOfMeasure) }}</p>
+        <p class="field">{{ form_widget(form.unitOfMeasure) }}</p>
+        <p class="error">{{ form_errors(form.unitOfMeasure) }}</p>
+    </div>
+</div>
+
+
+<div class="property-cont">
+    <ul class="spec" data-prototype="{{ form_widget(form.properties.vars.prototype)|e }}">
+        {% for spec in form.properties %}
+        <li>
+            <div>
+                <div>
+                    {{ form_label(spec.property) }}
+                    {{ form_widget(spec.property) }}
+                    {{ form_errors(spec.property) }}
+                </div>
+                
+                <div>
+                    {{ form_label(spec.specificationMath) }}
+                    {{ form_widget(spec.specificationMath) }}
+                    {{ form_errors(spec.specificationMath) }}
+                </div>
+                
+                <div>
+                    {{ form_label(spec.specification) }}
+                    {{ form_widget(spec.specification) }}
+                    {{ form_errors(spec.specification) }}
+                </div>
+                
+                <div>
+                    {{ form_label(spec.testProcedure) }}
+                    {{ form_widget(spec.testProcedure) }}
+                    {{ form_errors(spec.testProcedure) }}
+                </div>
+            </div>
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+<div class="property-cont">
+    <ul class="shipping" data-prototype="{% filter escape %} {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:shipping_form.html.twig' with {'det': form.orderingDetails.vars.prototype} %} {% endfilter %}">
+        {% for det in form.orderingDetails %}
+        <li>
+            {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:shipping_form.html.twig' %}
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <ul class="shipping_bottom">
+        <li><a href="{{ path('VentureVendorBundle_vendor_add', {'id': 0}) }}" target="_blank">Vendor not here? Click to add</a></li>
+    </ul>
+</div>
+
+<div class="property-cont">
+    <div class="rows">
+        <div class= "form-element-controller four-items">
+            <p class="label">{{ form_label(form.isActive) }}</p>
+            <p class="field">{{ form_widget(form.isActive) }}</p>
+            <p class="error">{{ form_errors(form.isActive) }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="property-cont no-brd">
+    <div class="rows">
+        <div class= "form-element-controller four-items">
+            <p class="field"><button class="add-new" type="submit">Save</button></p>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

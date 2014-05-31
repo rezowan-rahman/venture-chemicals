@@ -1,0 +1,77 @@
+{{ form_start(form) }}
+        <div class="cont font-check">
+            <h4 class="desc-cont">Packaging: Entry</h4>
+            <div class="property-cont">
+                <div class= "form-element-controller">
+                    <p class="label">{{ form_label(form.item_number) }}</p>
+                    <p class="field">{{ form_widget(form.item_number) }}</p>
+                    <p class="error">{{ form_errors(form.item_number) }}</p>
+                </div>
+                <div class= "form-element-controller">
+                    <p class="label">{{ form_label(form.item_name) }}</p>
+                    <p class="field">{{ form_widget(form.item_name) }}</p>
+                    <p class="error">{{ form_errors(form.item_name) }}</p>
+                </div>
+                <div class= "form-element-controller">
+                    <p class="label">{{ form_label(form.description) }}</p>
+                    <p class="field">{{ form_widget(form.description) }}</p>
+                    <p class="error">{{ form_errors(form.description) }}</p>
+                </div>
+            </div>
+            <div class="property-cont">
+                <div class= "form-element-controller">
+                    <p class="label">{{ form_label(form.unit_of_measure) }}</p>
+                    <p class="field">{{ form_widget(form.unit_of_measure) }}</p>
+                    <p class="error">{{ form_errors(form.unit_of_measure) }}</p>
+                </div>
+                <div class= "form-element-controller">
+                    <p class="label">{{ form_label(form.tags) }}</p>
+                    <p class="field">{{ form_widget(form.tags) }}</p>
+                    <p class="error">{{ form_errors(form.tags) }}</p>
+                </div>
+            </div>
+            
+            <div class="property-cont">
+                <ul class="shipping" data-prototype="{% filter escape %} {% include 'VenturePackagingBundle:Packaging:shipping_form.html.twig' with {'det': form.shipping_details.vars.prototype} %} {% endfilter %}">
+                    {% for det in form.shipping_details %}
+                    <li>
+                        {% include 'VenturePackagingBundle:Packaging:shipping_form.html.twig' %}
+                        <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <ul class="shipping_bottom">
+                    <li><a href="{{ path('VentureVendorBundle_vendor_add', {'id': 0}) }}" target="_blank">Vendor not here? Click to add</a></li>
+                </ul>
+            </div>
+            
+            <div class="property-cont">
+                <div class="rows">
+                    <div class= "form-element-controller four-items">
+                        <p class="label">{{ form_label(form.reorder_point) }}</p>
+                        <p class="field">{{ form_widget(form.reorder_point) }}</p>
+                        <p class="error">{{ form_errors(form.reorder_point) }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="property-cont">
+                <div class="rows">
+                    <div class= "form-element-controller four-items">
+                        <p class="label">{{ form_label(form.is_active) }}</p>
+                        <p class="field">{{ form_widget(form.is_active) }}</p>
+                        <p class="error">{{ form_errors(form.is_active) }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="property-cont no-brd">
+                <div class="rows">
+                    <div class= "form-element-controller four-items">
+                        <p class="field">
+                            <button class="add-new" type="submit">Save</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {{ form_end(form) }}

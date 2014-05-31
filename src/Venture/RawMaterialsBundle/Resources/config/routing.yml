@@ -1,0 +1,30 @@
+venture_raw_materials_list:
+    pattern:  /list/{type}
+    defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:list }
+    requirements:
+        _method:  GET   
+        
+venture_raw_materials_details:
+    pattern:  /details/{id}
+    defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:view }
+    requirements:
+        _method:  GET 
+        id: \d+
+        
+venture_raw_materials_add:
+    pattern:  /add
+    defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:add }
+
+venture_raw_materials_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:update }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+venture_raw_materials_delete:
+    pattern:  /remove/{id}
+    defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:remove }
+    requirements:
+        _method:  GET 
+        id: \d+

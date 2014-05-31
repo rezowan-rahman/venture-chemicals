@@ -1,0 +1,67 @@
+{% extends 'VentureCompetitiveProductBundle::layout.html.twig' %}
+
+{% block title %}Competitive Product Details{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h2 class="heading">{{ "competitive product" | upper }}: {{ competitiveProduct.ItemName | upper }}</h2>
+    
+    <h4 class="desc-cont">Supplier: {{ competitiveProduct.ItemSupplier }}</h4>
+    
+    <h4 class="desc-cont">Description: {{ competitiveProduct.itemDescription }}</h4>
+    
+    <div class="row-cont">
+        <div class="row">
+            <p class="left-side">Packaging: {{ competitiveProduct.configPackaging.name }}</p>
+        </div>
+    
+        <div class="row">
+            <p class="left-side">Tags: {{ competitiveProduct.tags }}</p>
+        </div>
+            
+    </div>
+    
+    <div class="property-cont">
+        <h4 class="desc-cont no-brd">Sales Price:</h4>
+        
+        <div class="property-row">
+            <p>Standard Price</p>
+            <p>{{ competitiveProduct.standardCost }}</p>
+        </div>
+        
+        
+    </div>
+    
+    <div class="property-cont">
+        <h4 class="desc-cont no-brd">Properties:</h4>
+            {% for property in properties %}
+            <div class="property-row">
+                {% if property.property is empty %}
+                <p>N/A</p>
+                {% else %}
+                <p>{{ property.property.name}}</p>
+                {% endif %}
+                <p>{{ property.specification}}&nbsp;{{ property.specificationMath}}</p>
+                {% if property.testProcedure is empty %}
+                <p>N/A</p>
+                {% else %}
+                <p>{{ property.testProcedure.name}}</p>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="property-row">
+                <p class="single">There is no property listed</p>
+            </div>
+            {% endfor %}
+    </div>
+    
+    <div class="row-cont no-brd">
+        <button class="add-new edit target" data-location="{{ path("venture_competitive_product_update", {'id': competitiveProduct.id}) }}">Edit</button>
+        <button class="add-new edit target delete" data-location="{{ path("venture_competitive_product_delete", {'id': competitiveProduct.id}) }}">Delete</button>
+    </div>
+    
+</div>
+
+{% endblock %} 

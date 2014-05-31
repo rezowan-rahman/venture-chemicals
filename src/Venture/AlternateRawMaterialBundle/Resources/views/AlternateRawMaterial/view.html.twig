@@ -1,0 +1,118 @@
+{% extends 'VentureAlternateRawMaterialBundle::layout.html.twig' %}
+
+{% block title %}Alternate Raw Material Details{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h2 class="heading">ALTERNATE RAW MATERIALS: {{ alternateRawMaterial.ItemName }}</h2>
+    
+    <h4 class="desc-cont">Description: {{ alternateRawMaterial.itemDescription }}</h4>
+    
+    <div class="row-cont">
+        <div class="row">
+            <p class="left-side">Unit of measure: {{ alternateRawMaterial.unitOfMeasure.name }}</p>
+            <p class="right-side">
+                Quoting cost: {{ alternateRawMaterial.quotingCost }}
+            </p>
+        </div>
+    
+        <div class="row">
+            <p class="left-side">Tags: {{ alternateRawMaterial.tags }}</p>
+            
+            <p class="right-side">
+                Lowest cost: {{ alternateRawMaterial.lowestCost }}
+            </p>
+            
+        </div>
+            
+    </div>
+    
+    <div class="property-cont">
+        <h4 class="desc-cont no-brd">Properties:</h4>
+            {% for property in alternateRawMaterial.properties %}
+            <div class="property-row">
+                {% if property.property is empty %}
+                <p>N/A</p>
+                {% else %}
+                <p>{{ property.property.name}}</p>
+                {% endif %}
+                <p>{{ property.specification}}&nbsp;{{ property.specificationMath}}</p>
+                {% if property.testProcedure is empty %}
+                <p>N/A</p>
+                {% else %}
+                <p>{{ property.testProcedure.name}}</p>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="property-row">
+                <p>There is no property listed</p>
+            </div>
+            {% endfor %}
+    </div>
+    
+    <div class="vendor-cont">
+        <h3 class="ven-label">Vendors:</h3>
+        {% if alternateRawMaterial.orderingDetails | length > 0 %}
+        <div class="property-cont no-brd">
+            <div class="property-row">
+                <p>Vendor Name<p>
+                <p>Shipping Method</p>
+                <p>Pre-Freight Cost</p>
+                <p>Lead Time</p>
+                <p>Cost/{{ alternateRawMaterial.unitOfMeasure.name }}</p>
+            </div>
+        </div>
+        
+        {% for detail in alternateRawMaterial.orderingDetails %}
+        <div class="property-row">
+            <p class="link"><a href="{{ path('VentureVendorBundle_vendor_details', {'id': detail.vendor.id}) }}" target="_blank">{{detail.vendor.name}}</a></p>
+            <p>{{detail.shippingMethod.name}}</p>
+            <p>{{detail.preFreightCost}}</p>
+            <p>{{detail.leadTime}}</p>
+            <p>{{detail.costPerUnit}}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="property-row">
+            <p>No vendor info is listed</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="row-cont no-brd">
+        <h3 class="ven-label">Other Informations:</h3>
+        <div class="row">
+            <p class="left-side">Amount in stock: 0</p>
+            <p class="left-side">Amount on purchase order: 0</p>
+        </div> 
+        <button class="add-new edit popUpButton" data-location="#">Convert</button>
+        <button class="add-new edit target" data-location="{{ path('venture_edit_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}">Edit</button>
+        <button class="add-new edit confirm target" data-location="{{ path('venture_remove_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}" data-message = "Are you sure to delete this record?">Delete</button>
+    </div>
+</div>
+
+{% endblock %} 
+
+{% block popup %}
+    {{ parent() }}
+    <div id="popUp">
+        <span class="button b-close">
+            <span>X</span>
+        </span>
+        <div class="popUpContent">
+            {{ render(controller('VentureAlternateRawMaterialBundle:AlternateRawMaterial:convertToRawMaterials', { 'id': alternateRawMaterial.id })) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 
+        'js/lib/bPopUpLib.js' 
+        '@VentureAlternateRawMaterialBundle/Resources/public/js/custom.popup.js' 
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

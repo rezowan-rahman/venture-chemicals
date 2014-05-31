@@ -1,0 +1,18 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Sales Rep. Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+ <div class="cont font-check">
+	<h4 class="desc-cont">Sales Rep. CONFIGURATION</h4>
+  	
+    {% include 'SettingsConfigBundle:Salesrep:list.html.twig' with { 'allSalesRep': allSalesRep } %}
+        
+    <h4 class="desc-cont">Add Type:</h4>
+	<div class = "form_container">
+             {% render controller('SettingsConfigBundle:Salesrep:create') %}
+	</div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

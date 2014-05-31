@@ -1,0 +1,59 @@
+{% extends 'VenturePackagingBundle::layout.html.twig' %}
+
+{% block title %}Packaging Listing{% endblock%}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@VenturePackagingBundle/Resources/public/js/common.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont"> 
+        <h2 class="heading">PACKAGING</h2>
+        <button class="add-new target" location='{{ path('venture_packaging_add') }}'>Add new</button>
+        
+        <div class="listing-label">
+            <p class="label">List all active Packaging</p>
+            {% if status %} 
+            <p class="list-all">
+                <input type = "checkbox" onchange="window.location='{{ path('venture_packaging_list',  {'type': 'show_all'}) }}'"/> Show Inactive
+            </p>
+            {% else %}
+            <p class="list-all">
+                <input type = "checkbox" checked = "checked" onchange="window.location='{{ path('venture_packaging_list',  {'type': 'show_active'}) }}'"/> Show Inactive
+            </p>
+            {% endif %}            
+        </div>
+        
+        <div class="clear"></div>
+         
+        <table class="raw-materials-listing">
+            <thead>
+                <tr>
+                    <th width="15%">Item#</th>
+                    <th width="25%">Name</th>
+                    <th width="20%">Amount In Stock</th>
+                    <th width="40%">Amount on purchase order</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pack in packaging %}
+                <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
+                    <td><a href="{{ path('venture_packaging_details',  {'id': pack.id}) }}">{{ pack.ItemNumber }}</a></td>
+                    <td><a href="{{ path('venture_packaging_details',  {'id': pack.id}) }}">{{ pack.ItemName }}</a></td>
+                    <td><a href="{{ path('venture_packaging_details',  {'id': pack.id}) }}">0</a></td>
+                    <td><a href="{{ path('venture_packaging_details',  {'id': pack.id}) }}">0</a></td>
+                </tr>
+                {% else %}
+                <tr class="empty">
+                    <td colspan="5">There is no Packaging listed yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+	
+{% endblock %}  

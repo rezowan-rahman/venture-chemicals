@@ -1,0 +1,33 @@
+<table id="hor-minimalist-a">
+    <thead>
+        <th>Role</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+            {% for group in groups %}
+            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
+                <td>{{ group.name }}</td>
+                <td>
+                    <a class="my_custom_anchor" href="{{path("fos_user_group_show", {"groupname" : group.name})}}">Show</a> |
+                    <a class="my_custom_anchor" href="{{path("fos_user_group_edit", {"groupname" : group.name})}}">Edit</a> | 
+                    <a class="my_custom_anchor" href="{{path("fos_user_group_delete", {"groupname" : group.name})}}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="3">There are no Roles defined yet</td>
+            </tr>
+            {% endfor %}
+            <tr class="empty">
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr class="empty">
+                 <td colspan="3">
+                     <input type="button" 
+                            class="config_form_button target" 
+                            value="Add Role" 
+                            onclick="window.location = '{{ path("fos_user_group_new") }}'"/>
+                 </td>
+            </tr>
+        </tbody>
+    </table>

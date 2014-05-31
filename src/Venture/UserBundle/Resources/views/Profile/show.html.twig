@@ -1,0 +1,13 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Profile view{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">Profile View</h4>
+  	
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+</div>
+{% endblock %}

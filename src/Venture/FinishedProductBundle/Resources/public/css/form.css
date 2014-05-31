@@ -1,0 +1,37 @@
+ul.spec { float:left; display: block; list-style: none; padding: 0 0 10px 0; margin: 0; width: 100%}
+ul.spec li, ul.shipping li, ul.point li{ width:100%; float:left; display:block;}
+ul.spec li div, ul.shipping li div, ul.point li div{float:left}
+ul.spec li div div {width:25%; float:left; display:block;}
+ul.spec li select, ul.shipping li select, ul.point li select{ width:170px; margin-top:15px;}
+ul.spec li input, ul.shipping li input, ul.point li input{ width:170px; margin-top:15px;}
+ul.spec li a.del_prop, ul.shipping li a.del_prop, ul.point li a.del_prop {
+    display: block;
+    float: right;
+    font-size: 10px;
+    color: inherit;
+    padding-right: 17px;
+    text-decoration: none;
+}
+ul.spec li a.del_prop:hover, ul.shipping li a.del_prop:hover, ul.point li a.del_prop:hover{
+    font-weight: bold;
+}
+
+
+ul.shipping{ float:left; display: block; list-style: none; padding: 0 0 10px 0; margin: 0; width: 75%}
+ul.shipping li div div{width:33%; float:left; display:block;}
+
+ul.point{ float:left; display: block; list-style: none; padding: 0 0 10px 0; margin: 0; width: 75%}
+ul.point li{width:65%}
+ul.point li div div{width:50%; float:left; display:block;}
+
+div.horizontal_cont {display: block;float: left;height: 50px;width: 500px;}
+p.horizontal_pos {display: block;float: left;height: 35px;margin: 0;padding: 10px 0 0;width: 245px;}
+p.mod_width{width:135px}
+
+ul.standard_cost{float:left; display: block; list-style: none; padding: 0; margin: 0; width: 75%}
+ul.standard_cost li{width:65%}
+ul.standard_cost li div.standard_cost_wrapper{width:50%; float:left;}
+ul.standard_cost li div.standard_cost_wrapper input{width:170px;}
+div.top-space{margin-bottom: 10px; font-size: 14px; font-weight: bold;}
+ul.standard_cost li div.smaller_space{width: 47%}
+div.standard_cost_label{font-size: 14px; font-weight: bold;}

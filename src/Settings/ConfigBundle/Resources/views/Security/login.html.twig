@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Login to Venture</title>
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+  {% block stylesheets %}
+    {% stylesheets 'css/login_style.css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+</head>
+<body class="login basecamp">
+  
+<div class="container">
+  <div id="header">
+    
+  </div>
+
+  <div id="login_content" data-state="username" class="">
+    <div id="login_content_inner">
+      <div class="dialog_contents">
+
+        <div id="login_dialog" class="login_dialog clearfix">
+
+          <div class="form">
+            <form action="{{ path("_venture_security_check") }}" method="post" id="login">
+              
+              
+
+              <div id="user_name_login">
+                  <h1>Sign in to <strong>Venture Chemicals</strong></h1>
+                  {% if error %}
+                  <div class="error">{{ error.message }}</div>
+                  {% endif %}
+
+                <p>
+                    <input autocapitalize="off" autocomplete="on" autocorrect="off" class="overlayable" id="username" name="_username" placeholder="Username" type="text" value="{{ last_username }}"/>
+                </p>
+                <p>
+                    <input autocapitalize="off" autocomplete="on" autocorrect="off" class="overlayable" id="password" name="_password" placeholder="Password" type="password" />
+                </p>
+              </div>
+
+              <div id="login_loading">
+                  <h1>Signing in</h1>
+              </div>
+
+              <div id="remember_container">
+                <input checked="checked" id="remember_me" name="remember_me" type="checkbox" value="1" /> <label for="remember_me">Remember me on this computer</label>
+              </div>
+
+              <div id="signin_button">
+                <input type="submit" value="Sign in" class="imgClass"/>
+              </div>
+</form>
+            
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+</div>
+</body>
+</html>

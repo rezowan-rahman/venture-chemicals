@@ -1,0 +1,14 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block title %}Role Edit{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">Role Update</h4>
+  	
+    {% include "FOSUserBundle:Group:edit_content.html.twig" %}
+    
+</div>
+{% endblock %}

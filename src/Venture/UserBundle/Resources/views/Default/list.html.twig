@@ -1,0 +1,63 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block title %}User List{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h4 class="desc-cont">Users</h4>
+  	
+    <table id="hor-minimalist-a">
+    <thead>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+            {% for user in users %}
+            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
+                <td>{{ user.username }}</td>
+                <td>
+                    {% for group in user.groups %}
+                        {{ group.name }},
+                    {% else %}
+                        {{ "N/A" }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {{ user.location ? user.location.name : "N/A" }}
+                </td>
+                <td>
+                    {{ user.phone }}
+                </td>
+                <td>
+                    <a class="my_custom_anchor" href="{{ path("venture_user_view", {"id":user.id}) }}">Show</a> |
+                    <a class="my_custom_anchor" href="{{ path("venture_user_update", {"id":user.id}) }}">Edit</a> | 
+                    <a class="my_custom_anchor" href="{{ path("venture_user_remove", {"id":user.id}) }}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="3">There are no Users in the system yet</td>
+            </tr>
+            {% endfor %}
+            <tr class="empty">
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr class="empty">
+                 <td colspan="3">
+                     <input type="button" 
+                            class="config_form_button target" 
+                            value="Add User" 
+                            onclick="window.location = '{{ path('fos_user_registration_register') }}'"/>
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+</div>
+{% endblock %}

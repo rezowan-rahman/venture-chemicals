@@ -1,0 +1,16 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Sales Price Point Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont font-check">
+    <h4 class="desc-cont">SALES PRICE POINT CONFIGURATION</h4>
+    {% include 'SettingsConfigBundle:SalesPricePoint:list.html.twig' with { 'salesPricePoints': salesPricePoints } %}
+    <h4 class="desc-cont">Edit Sales Price Point:</h4>
+    <div class = "form_container">
+    {% render controller('SettingsConfigBundle:SalesPricePoint:create', {'id' : salesPricePoint_id}) %}
+    </div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

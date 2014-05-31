@@ -1,0 +1,46 @@
+{% extends 'VentureDashBoardBundle::layout.html.twig' %}
+
+{% block title %}Dashboard Module Listing{% endblock%}
+
+
+
+{% block main %}
+    {{ parent() }}
+
+    <div class="cont">
+        <h2 class="heading">DASHBOARD</h2>
+        <div class="property-cont">
+            <div class="property-row">
+                <h5>Items That need to be Ordered:</h5>
+                <p> &nbsp; List all items that are below their Re-order Amount in stock</p>
+            </div>
+            <div class="property-row">
+                <h5>Items on Purchase Order:</h5>
+                <p>&nbsp;  List all items that we have open Purchase Orders For</p>                
+            </div>
+        </div>
+        
+        <div class="property-cont">
+            <div class="property-row">
+                <h5>Work Orders Scheduled for Today:</h5>
+                <p>&nbsp;List all Work Orders that should be completed today</p>
+            </div>
+            <div class="property-row">
+                <h5>Work Orders Completed Yesterday:</h5>
+                <p>&nbsp;List all Work Orders that were completed yesterday</p>                
+            </div>
+        </div>
+        
+        <div class="property-cont no-brd">
+            <div class="property-row">
+                <h5>Materials Shipped Yesterday:</h5>
+                <p>&nbsp;List everything that shipped out yesterday</p>
+            </div>
+            <div class="property-row">
+                <h5>Materials Received Yesterday:</h5>
+                <p>&nbsp;List everything that received out yesterday</p>                
+            </div>
+        </div>
+    </div>
+	
+{% endblock %}  

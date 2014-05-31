@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Login to Venture</title>
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+  {% block stylesheets %}
+    {% stylesheets 'css/login_style.css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+</head>
+<body class="login basecamp">
+  
+<div class="container">
+  <div id="header">
+    
+  </div>
+
+  <div id="login_content" data-state="username" class="">
+    <div id="login_content_inner">
+      <div class="dialog_contents">
+
+        <div id="login_dialog" class="login_dialog clearfix">
+
+          <div class="form">
+            <form action="{{ path("fos_user_security_check") }}" method="post" id="login">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+              
+              
+
+              <div id="user_name_login">
+                  <h1>Sign in to <strong>Venture Chemicals</strong></h1>
+                  
+                  {% if error %}
+                  <div class="error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+                  {% endif %}
+
+                <p>
+                    <input type="text" id="username" class="overlayable" name="_username" value="{{ last_username }}" required="required" placeholder="Username" />
+                </p>
+                <p>
+                    <input type="password" class="overlayable" id="password" name="_password" required="required" placeholder="Password"/>
+                </p>
+              </div>
+              
+
+              <div id="remember_container">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+              </div>
+
+              <div id="signin_button">
+                <input type="submit" class="imgClass" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+              </div>
+</form>
+            
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+</div>
+</body>
+</html>
+

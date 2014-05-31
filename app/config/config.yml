@@ -1,10 +1,13 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
+    - { resource: "@SettingsConfigBundle/Resources/config/config.yml" }
+    - { resource: "@VentureUserBundle/Resources/config/services.yml" }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,7 +36,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [SettingsConfigBundle, VentureVendorBundle, VentureRawMaterialsBundle, VentureDashBoardBundle, VenturePackagingBundle, VentureFinishedProductBundle, VentureIntermediateBundle, VentureCustomerBundle, VentureCompetitiveProductBundle, VentureAlternateRawMaterialBundle, FOSUserBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -67,3 +70,19 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Venture\UserBundle\Entity\User
+    
+    group:
+        group_class: Venture\UserBundle\Entity\Group
+        form:
+            type: venture_user_group
+            handler: venture_user.group.form.handler.default
+
+            
+    registration:
+        form:
+            type: venture_user_registration

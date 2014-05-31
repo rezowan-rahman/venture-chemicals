@@ -1,0 +1,32 @@
+    <table id="hor-minimalist-a">
+        <thead>
+            <th>Sales Price Point</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for salesPricePoint in salesPricePoints %}
+            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
+                <td>{{ salesPricePoint.salesCostPoint }}</td>
+                
+                <td>{% if salesPricePoint.approved %} 
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif %}
+                </td>
+
+                <td>{{ salesPricePoint.updated|date('F j, Y h:iA') }}</td>
+                <td>
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_sales_price_point_update', {'id': salesPricePoint.id}) }}">Edit</a> | 
+                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_sales_price_point_delete', {'id': salesPricePoint.id}) }}" onclick="return confirmDel();">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="5">There are no price point entered yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

@@ -1,0 +1,3 @@
+_dashboard:
+    pattern:  /
+    defaults: {_controller: VentureDashBoardBundle:Index:summary}

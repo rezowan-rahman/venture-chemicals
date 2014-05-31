@@ -1,0 +1,71 @@
+{% extends 'VentureIntermediateBundle::layout.html.twig' %}
+
+{% block title %}Intermediate Details{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+
+<div class="cont font-check">
+    <h2 class="heading"> {{ "intermediates"| upper }}: {{ intermediate['itemNumber'] | upper }}: {{ intermediate['itemName'] | upper }}</h2>
+    
+    <h4 class="desc-cont">Description: {{ intermediate['itemDescription'] }}</h4>
+    
+    <div class="row-cont">
+        <div class="row">
+            <p class="left-side">Unit of measure: {{ intermediate['unitOfMeasure'] }}</p>
+            <p class="right-side">Quoting cost: {{ intermediate['quotingCost'] }}</p>
+        </div>
+    
+        <div class="row">
+            <p class="left-side">Tags: {{ intermediate['tags'] }}</p>
+            <p class="right-side">Lowest cost: {{ intermediate['lowestCost'] }}</p>
+        </div>
+            
+    </div>
+    
+    <div class="property-cont">
+        <h4 class="desc-cont no-brd">Properties:</h4>
+            {% for property in intermediate['properties'] %}
+            <div class="property-row">
+                <p>{{ property['property']}}</p>
+                <p>{{ property['specification'] }}&nbsp;{{ property['specificationMath'] }}</p>
+                <p>{{ property['testProcedure'] }}</p>
+            </div>
+            {% else %}
+            <div class="property-row">
+                <p class="single">There is no property listed</p>
+            </div>
+            {% endfor %}
+    </div>
+    
+    <div class="property-cont">
+        <h4 class="desc-cont no-brd">Formula:</h4>
+            {% for formula in intermediate['formulas'] %}
+            <div class="property-row">
+                {% if formula['rawMaterial'] is defined %}
+                <p>{{ formula['rawMaterial'] }}</p>
+                {% elseif formula['intermediate'] is defined %}
+                <p>{{ formula['intermediate'] }}</p>
+                {% else %}
+                <p>{{ formula['intermediate'] }} - {{ formula['rawMaterial'] }}</p>
+                {% endif %}
+                <p>{{ formula['amount'] }} %</p>
+            </div>
+            {% else %}
+            <div class="property-row">
+                <p class="single">There is no formula listed</p>
+            </div>
+            {% endfor %}
+    </div>
+    
+    <div class="row-cont no-brd">
+        <h3 class="ven-label">Other Informations:</h3>
+        <div class="row">
+            <p class="left-side">Reason For Change: {{ intermediate['reasonForChange'] }}</p>
+            <p class="left-side">Amount in stock: {{ intermediate['amountInStock'] }}</p>
+        </div> 
+    </div>
+    
+</div>
+
+{% endblock %} 

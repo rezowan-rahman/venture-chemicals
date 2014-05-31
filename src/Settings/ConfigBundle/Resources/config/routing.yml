@@ -1,0 +1,313 @@
+SettingsConfigBundle_homepage:
+    pattern:  /
+    defaults: { _controller: SettingsConfigBundle:Page:list }
+    requirements:
+        _method:  GET
+
+        
+SettingsConfigBundle_property_list:
+    pattern:  /property
+    defaults: { _controller: SettingsConfigBundle:Property:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_property_add:
+    pattern:  /property/add/{id}
+    defaults: { _controller: SettingsConfigBundle:Property:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_property_update:
+    pattern:  /property/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:Property:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_property_delete:
+    pattern:  /property/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:Property:delete }
+    requirements:
+        _method:  GET     
+        id: \d+
+        
+        
+SettingsConfigBundle_test_procedure_list:
+    pattern:  /test-procedure
+    defaults: { _controller: SettingsConfigBundle:TestProcedure:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_test_procedure_add:
+    pattern:  /test-procedure/add/{id}
+    defaults: { _controller: SettingsConfigBundle:TestProcedure:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_test_procedure_update:
+    pattern:  /test-procedure/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:TestProcedure:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_test_procedure_delete:
+    pattern:  /test-procedure/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:TestProcedure:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+        
+        
+SettingsConfigBundle_shipping_method_list:
+    pattern:  /shipping-method
+    defaults: { _controller: SettingsConfigBundle:ShippingMethod:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_shipping_method_add:
+    pattern:  /shipping-method/add/{id}
+    defaults: { _controller: SettingsConfigBundle:ShippingMethod:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_shipping_method_update:
+    pattern:  /shipping-method/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:ShippingMethod:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_shipping_method_delete:
+    pattern:  /shipping-method/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:ShippingMethod:delete }
+    requirements:
+        _method:  GET     
+        id: \d+    
+
+        
+SettingsConfigBundle_packaging_list:
+    pattern:  /packaging
+    defaults: { _controller: SettingsConfigBundle:Packaging:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_packaging_add:
+    pattern:  /packaging/add/{id}
+    defaults: { _controller: SettingsConfigBundle:Packaging:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_packaging_update:
+    pattern:  /packaging/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:Packaging:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_packaging_delete:
+    pattern:  /packaging/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:Packaging:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+        
+        
+SettingsConfigBundle_unit_of_measure_list:
+    pattern:  /unit-of-measure
+    defaults: { _controller: SettingsConfigBundle:UnitOfMeasure:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_unit_of_measure_add:
+    pattern:  /unit-of-measure/add/{id}
+    defaults: { _controller: SettingsConfigBundle:UnitOfMeasure:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_unit_of_measure_update:
+    pattern:  /unit-of-measure/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:UnitOfMeasure:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_unit_of_measure_delete:
+    pattern:  /unit-of-measure/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:UnitOfMeasure:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+
+_venture_secured:
+    resource: "@SettingsConfigBundle/Controller/SecurityController.php"
+    type:     annotation
+
+SettingsConfigBundle_sales_price_point_list:
+    pattern:  /sales-price-point
+    defaults: { _controller: SettingsConfigBundle:SalesPricePoint:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_sales_price_point_add:
+    pattern:  /sales-price-point/add/{id}
+    defaults: { _controller: SettingsConfigBundle:SalesPricePoint:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_sales_price_point_update:
+    pattern:  /sales-price-point/edit/{id}
+    defaults: { _controller: SettingsConfigBundle:SalesPricePoint:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_sales_price_point_delete:
+    pattern:  /sales-price-point/delete/{id}
+    defaults: { _controller: SettingsConfigBundle:SalesPricePoint:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+        
+
+SettingsConfigBundle_location_list:
+    pattern:  /location
+    defaults: { _controller: SettingsConfigBundle:Location:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_location_add:
+    pattern:  /location/{id}/add
+    defaults: { _controller: SettingsConfigBundle:Location:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_location_update:
+    pattern:  /location/{id}/edit
+    defaults: { _controller: SettingsConfigBundle:Location:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_location_delete:
+    pattern:  /location/{id}/delete
+    defaults: { _controller: SettingsConfigBundle:Location:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+        
+SettingsConfigBundle_product_line_list:
+    pattern:  /product-line
+    defaults: { _controller: SettingsConfigBundle:ProductLine:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_product_line_add:
+    pattern:  /product-line/{id}/add
+    defaults: { _controller: SettingsConfigBundle:ProductLine:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_product_line_update:
+    pattern:  /product-line/{id}/edit
+    defaults: { _controller: SettingsConfigBundle:ProductLine:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_product_line_delete:
+    pattern:  /product-line/{id}/delete
+    defaults: { _controller: SettingsConfigBundle:ProductLine:delete }
+    requirements:
+        _method:  GET     
+        id: \d+        
+        
+SettingsConfigBundle_stage_list:
+    pattern:  /stage
+    defaults: { _controller: SettingsConfigBundle:Stage:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_stage_add:
+    pattern:  /stage/{id}/add
+    defaults: { _controller: SettingsConfigBundle:Stage:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_stage_update:
+    pattern:  /stage/{id}/edit
+    defaults: { _controller: SettingsConfigBundle:Stage:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_stage_delete:
+    pattern:  /stage/{id}/delete
+    defaults: { _controller: SettingsConfigBundle:Stage:delete }
+    requirements:
+        _method:  GET     
+        id: \d+      
+        
+        
+SettingsConfigBundle_pipelinetype_list:
+    pattern:  /pipelinetype
+    defaults: { _controller: SettingsConfigBundle:Pipelinetype:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_pipelinetype_add:
+    pattern:  /pipelinetype/{id}/add
+    defaults: { _controller: SettingsConfigBundle:Pipelinetype:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_pipelinetype_update:
+    pattern:  /pipelinetype/{id}/edit
+    defaults: { _controller: SettingsConfigBundle:Pipelinetype:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_pipelinetype_delete:
+    pattern:  /pipelinetype/{id}/delete
+    defaults: { _controller: SettingsConfigBundle:Pipelinetype:delete }
+    requirements:
+        _method:  GET     
+        id: \d+         
+        
+SettingsConfigBundle_salesrep_list:
+    pattern:  /sales-rep
+    defaults: { _controller: SettingsConfigBundle:Salesrep:index }
+    requirements:
+        _method:  GET
+        
+SettingsConfigBundle_salesrep_add:
+    pattern:  /sales-rep/{id}/add
+    defaults: { _controller: SettingsConfigBundle:Salesrep:create }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+SettingsConfigBundle_salesrep_update:
+    pattern:  /sales-rep/{id}/edit
+    defaults: { _controller: SettingsConfigBundle:Salesrep:update }
+    requirements:
+        _method:  GET|POST    
+        id: \d+
+
+SettingsConfigBundle_salesrep_delete:
+    pattern:  /sales-rep/{id}/delete
+    defaults: { _controller: SettingsConfigBundle:Salesrep:delete }
+    requirements:
+        _method:  GET     
+        id: \d+                    

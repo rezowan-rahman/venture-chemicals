@@ -1,0 +1,57 @@
+{% extends 'VentureVendorBundle::layout.html.twig' %}
+
+{% block title %}Vendors Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+<div class="cont">
+    <div> 
+		<h2 class="heading">VENDORS</h2>
+		<!--<hr>
+		<div class="configmain_title_header">VENDORS</div>
+		<hr> -->
+		<div>
+            <button class="vendor_form_button" onclick="window.location='{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}'">Add new</button>
+		</div>
+		<br>
+		<div class="listing-label">
+            <p class="label">List of all active vendors</p>                        
+					{% if status %} 
+					<p class="list-all">
+						<input type = "checkbox" onchange="window.location='{{ path('VentureVendorBundle_vendor_list',  {'type': 'show_all'}) }}'"/> Show Inactive
+					</p>
+					{% else %}
+					<p class="list-all">
+						<input type = "checkbox" checked = "checked" onchange="window.location='{{ path('VentureVendorBundle_vendor_list',  {'type': 'show_active'}) }}'"/> Show Inactive
+					</p>
+					{% endif %}                       
+        </div>		
+   </div>
+	<div class="clear"></div>
+    <table id="hor-minimalist-a">
+        <thead>
+            <th>Vendor Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Contact</th>
+        </thead>
+        <tbody>
+            {% for vendor in vendors %}
+            <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
+                <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.name }}</a></td>
+                <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.phone }}</a></td>
+                <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.contact1Email }}</a></td>
+                <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.contact1 }}</a></td>
+            </tr>
+            {% else %}
+            <tr class="empty">
+                <td colspan="5">There is no Vendor listed yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	</div>
+{% endblock %}  
+
+
+ 

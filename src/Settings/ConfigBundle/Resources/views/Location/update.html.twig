@@ -1,0 +1,16 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Location Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont font-check">
+    <h4 class="desc-cont">LOCATION CONFIGURATION</h4>
+    {% include 'SettingsConfigBundle:Location:list.html.twig' with { 'locations' : locations } %}
+    <h4 class="desc-cont">Edit Location:</h4>
+    <div class = "form_container">
+    {% render controller('SettingsConfigBundle:Location:create', {'id' : location_id}) %}
+    </div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

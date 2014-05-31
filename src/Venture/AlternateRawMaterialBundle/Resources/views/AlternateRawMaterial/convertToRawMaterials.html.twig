@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+	
+	<div class="cont fix-width">
+		<h2 class="heading">Convert to Raw Materials</h2>
+		
+		<div class="form-element-controller full-width">
+            <p>{{ form_label(form.itemNumber) }}</p>
+            <p>{{ form_widget(form.itemNumber) }}</p>
+            <p>{{ form_errors(form.itemNumber) }}</p>    
+        </div>
+
+        <div class="form-element-controller full-width">
+        	<p>{{ form_label(form.reorderPoint) }}</p>
+        	<p>{{ form_widget(form.reorderPoint) }}</p>
+        	<p>{{ form_errors(form.reorderPoint) }}</p>    
+        </div>
+
+	    <div class="form-element-controller full-width">
+	    	<p>{{ form_label(form.convert) }}</p>
+	        <p>{{ form_widget(form.convert) }}</p>
+	    </div>
+	<div>
+
+{{ form_end(form) }}

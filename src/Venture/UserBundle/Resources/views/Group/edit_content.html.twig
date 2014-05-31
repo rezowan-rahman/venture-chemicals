@@ -1,0 +1,34 @@
+{{ form_start(form )}}
+<table id="hor-minimalist-a">
+    <tbody>
+        <tr>
+            <td>{{ form_label(form.name) }}</td>
+            <td>
+                {{ form_widget(form.name) }}
+                <p>{{ form_errors(form.name) }}</p>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>{{ form_label(form.description) }}</td>
+            <td>
+                {{ form_widget(form.description) }}
+                <p>{{ form_errors(form.description) }}</p>
+            </td>
+        </tr>
+        
+        {#<tr>
+            <td>{{ form_label(form.roles) }}</td>
+            <td>
+                {{ form_widget(form.roles) }}
+                <p>{{ form_errors(form.roles) }}</p>
+            </td>
+        </tr>#}
+        
+        <tr>
+            <td colspan="2"><input class="config_form_button" type="submit" value="Update"></td>
+        </tr>
+        
+    </tbody>
+</table>
+{{ form_end(form )}}

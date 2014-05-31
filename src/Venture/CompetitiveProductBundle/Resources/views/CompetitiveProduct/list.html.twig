@@ -1,0 +1,54 @@
+{% extends 'VentureCompetitiveProductBundle::layout.html.twig' %}
+
+{% block title %}Competitive Product Listing{% endblock%}
+
+
+
+{% block main %}
+    {{ parent() }}
+    <div class="cont"> 
+        <h2 class="heading">{{ "competitive product" | upper }}</h2>
+        <button class="add-new target" data-location="{{ path('venture_competitive_product_add') }}">Add new</button>
+        
+        <div class="listing-label">
+            <p class="label">List All Active Competitive Products</p>
+            {% if status %} 
+            <p class="list-all">
+                <input class="target" type = "checkbox" data-location="{{ path('venture_competitive_product_list',  {'type': 'show_all'}) }}"/> Show Inactive
+            </p>
+            {% else %}
+            <p class="list-all">
+                <input class="target" type = "checkbox" checked = "checked" data-location="{{ path('venture_competitive_product_list',  {'type': 'show_active'}) }}"/> Show Inactive
+            </p>
+            {% endif %}            
+        </div>
+        
+        <div class="clear"></div>
+         
+        <table class="raw-materials-listing">
+            <thead>
+                <tr>
+                    <th width="15%">Item#</th>
+                    <th width="25%">Supplier</th>
+                    <th width="20%">Amount In Stock</th>
+                    <th width="40%">Amount on Sales order</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in competitiveProducts %}
+                <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
+                    <td><a href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">{{ product.ItemName }}</a></td>
+                    <td><a href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">{{ product.ItemSupplier }}</a></td>
+                    <td><a href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">0</a></td>
+                    <td><a href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">0</a></td>
+                </tr>
+                {% else %}
+                <tr class="empty">
+                    <td colspan="5">There Is No Competitive Product Found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   </div>
+	
+{% endblock %}  

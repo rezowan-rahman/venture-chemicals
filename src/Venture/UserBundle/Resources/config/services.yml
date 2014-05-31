@@ -1,0 +1,18 @@
+services:
+    venture_user.registration.form.type:
+        class: Venture\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: venture_user_registration }
+            
+    venture_user.group.form.type:
+        class: Venture\UserBundle\Form\Type\GroupFormType
+        arguments: [%fos_user.model.group.class%]
+        tags:
+            - { name: form.type, alias: venture_user_group }
+
+    venture_user.group.form.handler.default:
+        class: Venture\UserBundle\Form\Handler\GroupFormHandler
+        arguments: ["@fos_user.group.form", "@request", "@fos_user.group_manager"]
+        scope: request
+        public: false

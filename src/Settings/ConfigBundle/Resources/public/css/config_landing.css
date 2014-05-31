@@ -1,0 +1,49 @@
+/* 
+    Document   : config_landing
+    Created on : Aug 30, 2013, 1:58:32 PM
+    Author     : rezowan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div.splitcont ul { 
+    display: block; 
+    list-style: none; 
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+div.splitcont ul li {
+        float:left; 
+        height:220px;
+        width: 160px;
+        margin: 10px 35px 20px 0;
+        background: url("../images/smalllogo.png") #FFFFFF 95% 5% no-repeat;
+        background-color: #FFFFFF;
+        border: 0 solid;
+        box-shadow: 0 1px 4px 0 #888888;  
+        padding: 30px;
+}
+
+div.splitcont ul li p{
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    text-align: left;
+}
+
+div.splitcont ul li p a{
+    text-decoration: none;
+    color: burlywood;
+}
+
+div.splitcont ul li h3 {
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+div.splitcont ul li h3 a{
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,17 @@
+{% extends 'SettingsConfigBundle::layout.html.twig' %}
+
+{% block title %}Unit Of Measure Listing{% endblock%}
+
+{% block main %}
+    {{ parent() }}
+	<div class="cont font-check">
+    <h4 class="desc-cont">UNIT OF MEASURE CONFIGURATION</h4>
+	
+    {% include 'SettingsConfigBundle:UnitOfMeasure:list.html.twig' with { 'units': units } %}
+    <h4 class="desc-cont">Add Unit of Measure: </h4>
+    <div class = "form_container">        
+        {% render controller('SettingsConfigBundle:UnitOfMeasure:create') %}
+    </div>
+</div>
+<div style="padding-bottom:40px;clear:both;"></div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'VentureFinishedProductBundle::layout.html.twig' %}
+
+
+{% block title %} 
+    Finished Product Settings
+{% endblock%}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@VentureFinishedProductBundle/Resources/public/js/finished_product_form.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+        
+
+{% block main %}
+    {{ parent() }}
+        {% include 'VentureFinishedProductBundle:Default:form.html.twig' %}
+{% endblock %}  

@@ -1,0 +1,112 @@
+{% extends '::venture.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'bundles/settingsconfig/css/config_landing.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Configuraton{% endblock%}
+
+
+{% block footmenu2 %}
+    <li class="activeMenu"><a href="{{ path('SettingsConfigBundle_homepage') }}">Configuration</a></li>
+{% endblock %}
+
+{% block middle %}
+    {{ parent() }}
+    <div class = "splitcont">
+        {% block main %} 
+
+        <ul>
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_unit_of_measure_list') }}">Configure Units of Measure</a></h3>
+                <p>
+                    <a href="{{ path('SettingsConfigBundle_unit_of_measure_list') }}">
+                        Units of Measure for use in Raw materials. Intermediates and Finished Products. Example: lbs, gallons
+                    </a>
+                </p>
+            </li>
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_property_list') }}">Configure Properties</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_property_list') }}">
+                    Configure properties of Raw Materials, Intermediates and Finished products. Example: color, pH, Partical Size
+                </a></p>
+            </li>
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_test_procedure_list') }}">Configure Test Procedures</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_test_procedure_list') }}">
+                    Configure test procedures used for our Raw Materials, Intermediates and Finished Products. Example: Fann Rheology, pH, Partical Size Analysis
+                </a></p>
+            </li>
+
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_packaging_list') }}">Configure Packaging Type</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_packaging_list') }}">
+                    Configure what type of packaging a Raw Material or Finished Product is in. Example: Supersack, 55 Gallon Drum, 275 Gallon Tote, 25 lb Bag, 50 lb Bag
+                </a></p>
+            </li>
+        
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_shipping_method_list') }}">Configure Shipping Methods</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_shipping_method_list') }}">
+                    Shipping Methods for receiving Raw materials. Example: Rail, Truck
+                </a></p>
+            </li>         
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_sales_price_point_list') }}">Sales Price Points</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_sales_price_point_list') }}">
+                    Set sales price points for various vendors or sizes of order: LTL, 2-3TL, 4-5TL, etc. 
+                </a></p>
+            </li>         
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_location_list') }}">Configure Locations</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_location_list') }}">
+                    Configure locations for database users
+                </a></p>
+            </li>        
+            
+            <li>
+                <h3><a href="{{ path('fos_user_group_list') }}">Configure Roles</a></h3>
+                <p><a href="{{ path('fos_user_group_list') }}">
+                    Configure roles for database users
+                </a></p>
+            </li>
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_product_line_list') }}">Product Line</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_product_line_list') }}">
+                    Configure Product Line
+                </a></p>
+            </li>
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_salesrep_list') }}">Configure Sales Rep.</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_salesrep_list') }}">
+                    Configure Sales Rep.
+                </a></p>
+            </li>        
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_pipelinetype_list') }}">Configure PipeLine Type</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_pipelinetype_list') }}">
+                    Configure PipeLine Type
+                </a></p>
+            </li>
+            
+            <li>
+                <h3><a href="{{ path('SettingsConfigBundle_stage_list') }}">Product Stage</a></h3>
+                <p><a href="{{ path('SettingsConfigBundle_stage_list') }}">
+                    Configure Stage
+                </a></p>
+            </li>            
+        </ul>
+
+    {% endblock %} 
+   </div>    
+{% endblock %}
