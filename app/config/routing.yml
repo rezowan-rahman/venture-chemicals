@@ -58,11 +58,6 @@ venture_vendor:
 settings_config:
     resource: "@SettingsConfigBundle/Resources/config/routing.yml"
     prefix:   /config
-
-blogger_blog:
-    resource: "@BloggerBlogBundle/Resources/config/routing.yml"
-    prefix:   /
-    
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
