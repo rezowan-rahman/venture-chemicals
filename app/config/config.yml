@@ -36,7 +36,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [SettingsConfigBundle, VentureVendorBundle, VentureRawMaterialsBundle, VentureDashBoardBundle, VenturePackagingBundle, VentureFinishedProductBundle, VentureIntermediateBundle, VentureCustomerBundle, VentureCompetitiveProductBundle, VentureAlternateRawMaterialBundle, FOSUserBundle]
+    bundles:        [SettingsConfigBundle, VentureVendorBundle, VentureRawMaterialsBundle, VentureDashBoardBundle, VenturePackagingBundle, VentureFinishedProductBundle, VentureIntermediateBundle, VentureCustomerBundle, VentureCompetitiveProductBundle, VentureAlternateRawMaterialBundle, FOSUserBundle, VenturePipeLineBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

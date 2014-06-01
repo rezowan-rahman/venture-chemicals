@@ -114,6 +114,11 @@
                 {% block menu14 %}
                 <li><a href="{{ path('venture_list_alternate_raw_material', {'type': 'show_all'}) }}">Alternate Raw Materials</a></li>
                 {% endblock %}
+
+                {% block menu15 %}
+                    <li><a href="{{ path('venture_pipeline_list', {'type': 'show_all'}) }}">Pipeline</a></li>
+                {% endblock %}
+
             </ul>
         {% endblock %}
         </div>
