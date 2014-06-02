@@ -77,6 +77,18 @@
         <p class="widget"> {{ form_widget(form.potential) }}</p>
         {{ form_errors(form.potential) }}
     </div>
-
 </div>
+
+<div class="property-cont">
+    <p>Pipeline</p>
+    <ul class="shipping" data-prototype="{% filter escape %} {% include 'VenturePipeLineBundle:Default:year_sales_form.html.twig' with {'yearSale': form.yearSales.vars.prototype} %} {% endfilter %}">
+        {% for yearSale in form.yearSales %}
+            <li>
+                {% include 'VenturePipeLineBundle:Default:year_sales_form.html.twig' %}
+                <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
 {{ form_end(form) }}

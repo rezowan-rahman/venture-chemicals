@@ -15,17 +15,17 @@ class PipeLineYearSaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('year', null, array(
+            ->add('year', 'choice', array(
                 "label" => false,
-                "attr" => array(
-                    "placeholder" => "Year",
-                )
+                "choices" => range(date('Y'), (date('Y')-5)),
+                "empty_value" => "Choose A Year"
             ))
 
             ->add('firstQt', 'number', array(
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "1st Qtr",
+                    "class" => "firstQt"
                 )
             ))
 
@@ -33,6 +33,7 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "2nd Qtr",
+                    "class" => "secondQt"
                 )
             ))
 
@@ -40,6 +41,7 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "3rd Qtr",
+                    "class" => "thirdQt"
                 )
             ))
 
@@ -47,13 +49,16 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "4th Qtr",
+                    "class" => "fourthQt"
                 )
             ))
 
             ->add('total', 'number', array(
                 "label" => false,
                 "attr" => array(
-                    "placeholder" => "Sum of quarters",
+                    "placeholder" => "Summation",
+                    "readonly" => true,
+                    "class" => "total"
                 )
             ))
         ;

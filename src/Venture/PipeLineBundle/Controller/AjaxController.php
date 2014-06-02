@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\CustomerBundle\Controller;
+namespace Venture\PipeLineBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,7 +13,7 @@ class AjaxController extends Controller
     /**
      * Finds and displays a Customer entity.
      *
-     * @Route("/pipe-line-customer", name="venture_customer_details_from_pipe_line", options={"expose"=true})
+     * @Route("/customer-data", name="venture_customer_details_from_pipe_line", options={"expose"=true})
      * @Method("POST")
      */
     public function getCustomerDetailAction(Request $request) {
@@ -40,4 +40,35 @@ class AjaxController extends Controller
         return $response;
     }
 
+    /**
+     * Finds and displays a Customer entity.
+     *
+     * @Route("/stage-data", name="venture_stage_details_from_pipe_line", options={"expose"=true})
+     * @Method("POST")
+     */
+
+    public function getStageDetailAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $request->get('stageId');
+
+        $entity = $em->getRepository('SettingsConfigBundle:Stage')->find($id);
+
+        if (!$entity) {
+            return new \Symfony\Component\HttpFoundation\Response();
+        }
+
+        $output = array();
+        $output['name'] = $this->calculate($entity->getName());
+
+        $response = new \Symfony\Component\HttpFoundation\Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent(json_encode($output));
+
+        return $response;
+    }
+
+    public function calculate($name) {
+        return preg_replace('/[a-zA-Z ()\%]/', '', $name);
+    }
 }

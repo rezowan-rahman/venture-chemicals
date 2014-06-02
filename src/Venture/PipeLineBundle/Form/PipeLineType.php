@@ -104,10 +104,15 @@ class PipeLineType extends AbstractType
                 "label" => "Stage"
             ))                
                             
-            ->add('probability', null, array("label" => "Probability (%)"))
+            ->add('probability', null, array(
+                "label" => "Probability (%)",
+                'attr' => array(
+                    "readonly" => true,
+                )))
             ->add('projected', null, array("label" => "Projected (Annual $)"))
             ->add('expectedAnnualGrowth', null, array("label" => "Expected Annual Growth (%)"))
             ->add('potential', null, array("label" => "Potential ($)"))
+
             ->add('yearSales', 'collection', array(
                 "type"      => new \Venture\PipeLineBundle\Form\PipeLineYearSaleType(),
                 "allow_add" => true,
