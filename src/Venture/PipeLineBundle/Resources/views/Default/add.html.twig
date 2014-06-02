@@ -1,13 +1,16 @@
 {% extends 'VenturePipeLineBundle::layout.html.twig' %}
 
-
 {% block title %}
     Pipe Line Settings
 {% endblock%}
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@VentureAlternateRawMaterialBundle/Resources/public/js/alternate_raw_material_form.js' %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts '@VenturePipeLineBundle/Resources/public/js/form.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

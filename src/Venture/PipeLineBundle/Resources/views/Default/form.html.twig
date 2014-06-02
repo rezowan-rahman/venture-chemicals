@@ -1,3 +1,82 @@
 {{ form_start(form) }}
+<div class="form-left-cloumn">
 
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.customer) }}</p>
+        <p class="widget"> {{ form_widget(form.customer) }}</p>
+        {{ form_errors(form.customer) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.productLine) }}</p>
+        <p class="widget"> {{ form_widget(form.productLine) }}</p>
+        {{ form_errors(form.productLine) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.contact) }}</p>
+        <p class="widget"> {{ form_widget(form.contact) }}</p>
+        {{ form_errors(form.contact) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.email) }}</p>
+        <p class="widget"> {{ form_widget(form.email) }}</p>
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.probability) }}</p>
+        <p class="widget"> {{ form_widget(form.probability) }}</p>
+        {{ form_errors(form.probability) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.expectedAnnualGrowth) }}</p>
+        <p class="widget"> {{ form_widget(form.expectedAnnualGrowth) }}</p>
+        {{ form_errors(form.expectedAnnualGrowth) }}
+    </div>
+
+</div>
+
+<div class="form-right-cloumn">
+    <div class="form-element-controller">
+        <div class="form-element-controller">
+            <p class="label"> {{ form_label(form.type) }}</p>
+            <p class="widget"> {{ form_widget(form.type) }}</p>
+            {{ form_errors(form.type) }}
+        </div>
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.salesRep) }}</p>
+        <p class="widget"> {{ form_widget(form.salesRep) }}</p>
+        {{ form_errors(form.salesRep) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.phone) }}</p>
+        <p class="widget"> {{ form_widget(form.phone) }}</p>
+        {{ form_errors(form.phone) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.stage) }}</p>
+        <p class="widget"> {{ form_widget(form.stage) }}</p>
+        {{ form_errors(form.stage) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.projected) }}</p>
+        <p class="widget"> {{ form_widget(form.projected) }}</p>
+        {{ form_errors(form.projected) }}
+    </div>
+
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.potential) }}</p>
+        <p class="widget"> {{ form_widget(form.potential) }}</p>
+        {{ form_errors(form.potential) }}
+    </div>
+
+</div>
 {{ form_end(form) }}

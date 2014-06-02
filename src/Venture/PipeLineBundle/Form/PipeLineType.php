@@ -27,7 +27,7 @@ class PipeLineType extends AbstractType
                     },
                 "empty_value" => "Choose a Customer",
                 "property" => "name",
-                "label" => "Customer Name"
+                "label" => "Customer Name",
             )) 
                             
             ->add('type', 'entity', array(
@@ -68,7 +68,7 @@ class PipeLineType extends AbstractType
                 "property" => "name",
                 "label" => "Sales Rep"
             ))                 
-            
+
             ->add('contact', null, array(
                 "mapped" => false, 
                 "attr" => array(
@@ -88,7 +88,8 @@ class PipeLineType extends AbstractType
                 "attr" => array(
                     "readonly" => true, 
                     "id" =>"customer_email")
-                ))               
+                ))
+
                             
             ->add('stage', 'entity', array(
                 "class" => 'SettingsConfigBundle:Stage',
@@ -103,13 +104,21 @@ class PipeLineType extends AbstractType
                 "label" => "Stage"
             ))                
                             
-            ->add('probability')
-            ->add('projected')
-            ->add('expectedAnnualGrowth')
-            ->add('potential')
-            ->add('goal')
+            ->add('probability', null, array("label" => "Probability (%)"))
+            ->add('projected', null, array("label" => "Projected (Annual $)"))
+            ->add('expectedAnnualGrowth', null, array("label" => "Expected Annual Growth (%)"))
+            ->add('potential', null, array("label" => "Potential ($)"))
+            ->add('yearSales', 'collection', array(
+                "type"      => new \Venture\PipeLineBundle\Form\PipeLineYearSaleType(),
+                "allow_add" => true,
+                'allow_delete' => true,
+                "by_reference" => false,
+                "label" => false
+            ))
         ;
     }
+
+
     
     /**
      * @param OptionsResolverInterface $resolver

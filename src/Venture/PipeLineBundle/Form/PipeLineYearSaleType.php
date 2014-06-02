@@ -15,12 +15,47 @@ class PipeLineYearSaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('year')
-            ->add('firstQt', null, array())
-            ->add('secondQt', null, array())
-            ->add('thirdQt', null, array())
-            ->add('fourthQt', null, array())
-            ->add('total', null, array())
+            ->add('year', null, array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "Year",
+                )
+            ))
+
+            ->add('firstQt', 'number', array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "1st Qtr",
+                )
+            ))
+
+            ->add('secondQt', 'number', array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "2nd Qtr",
+                )
+            ))
+
+            ->add('thirdQt', 'number', array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "3rd Qtr",
+                )
+            ))
+
+            ->add('fourthQt', 'number', array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "4th Qtr",
+                )
+            ))
+
+            ->add('total', 'number', array(
+                "label" => false,
+                "attr" => array(
+                    "placeholder" => "Sum of quarters",
+                )
+            ))
         ;
     }
     
