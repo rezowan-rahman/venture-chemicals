@@ -37,7 +37,7 @@
         {{ form_errors(form.expectedAnnualGrowth) }}
     </div>
 
-    {% if hasGoal %}
+    {% if form.vars.value.goal %}
     <div class="form-element-controller">
         <p class="label"> {{ form_label(form.goal) }}</p>
         <p class="widget"> {{ form_widget(form.goal) }}</p>

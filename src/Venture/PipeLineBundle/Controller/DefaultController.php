@@ -53,7 +53,6 @@ class DefaultController extends Controller
 
         return array(
             'form' => $form->createView(),
-            "hasGoal" => false
         );
     }
 
@@ -122,8 +121,7 @@ class DefaultController extends Controller
 
         return array(
             'form' => $form->createView(),
-            'id' => $id,
-            'hasGoal' => true
+            'id' => $id
         );
     }
 
