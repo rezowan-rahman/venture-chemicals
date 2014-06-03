@@ -153,6 +153,7 @@ class PipeLineType extends AbstractType
                     "label" => "Goal (Calculated)",
                     "attr" => array(
                         "placeholder" => "Only number",
+                        "readonly" => true
                     )));
             }
         });

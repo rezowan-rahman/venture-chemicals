@@ -23,8 +23,10 @@ class AjaxController extends Controller
 
         $entity = $em->getRepository('VentureCustomerBundle:Customer')->find($id);
 
+        $response = new \Symfony\Component\HttpFoundation\Response();
+
         if (!$entity) {
-            return new \Symfony\Component\HttpFoundation\Response();
+            return $response;
         }
 
         $output = array();
@@ -33,7 +35,6 @@ class AjaxController extends Controller
         $output['phone']    = $entity->getPhoneNumber();
         $output['email']    = $entity->getContact1Email();
 
-        $response = new \Symfony\Component\HttpFoundation\Response();
         $response->headers->set('Content-Type', 'application/json');
         $response->setContent(json_encode($output));
 
@@ -54,14 +55,15 @@ class AjaxController extends Controller
 
         $entity = $em->getRepository('SettingsConfigBundle:Stage')->find($id);
 
+        $response = new \Symfony\Component\HttpFoundation\Response();
+
         if (!$entity) {
-            return new \Symfony\Component\HttpFoundation\Response();
+            return $response;
         }
 
         $output = array();
         $output['name'] = $this->calculate($entity->getName());
 
-        $response = new \Symfony\Component\HttpFoundation\Response();
         $response->headers->set('Content-Type', 'application/json');
         $response->setContent(json_encode($output));
 
