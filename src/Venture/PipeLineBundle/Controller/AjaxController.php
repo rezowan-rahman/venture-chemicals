@@ -69,6 +69,8 @@ class AjaxController extends Controller
     }
 
     public function calculate($name) {
-        return preg_replace('/[a-zA-Z ()\%]/', '', $name);
+        $modName = preg_replace('/[a-zA-Z ()\%]/', '', $name);
+        $modFloatName = floatval($modName);
+        return ($modFloatName/100);
     }
 }

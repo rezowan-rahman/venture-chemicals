@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 use Doctrine\ORM\EntityRepository;
 
 class PipeLineType extends AbstractType
@@ -141,6 +144,19 @@ class PipeLineType extends AbstractType
                 "label" => false,
             ))
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $pipeLine = $event->getData();
+            $form = $event->getForm();
+
+            if ($pipeLine->getId()) {
+                $form->add('goal', 'number', array(
+                    "label" => "Goal (Calculated)",
+                    "attr" => array(
+                        "placeholder" => "Only number",
+                    )));
+            }
+        });
     }
 
 

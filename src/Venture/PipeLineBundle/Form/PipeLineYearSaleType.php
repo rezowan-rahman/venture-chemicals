@@ -17,7 +17,7 @@ class PipeLineYearSaleType extends AbstractType
         $builder
             ->add('year', 'choice', array(
                 "label" => false,
-                "choices" => range(date('Y'), (date('Y')-5)),
+                "choices" => $this->getYears(date("Y"), 5),
                 "empty_value" => "Year"
             ))
 
@@ -62,6 +62,14 @@ class PipeLineYearSaleType extends AbstractType
                 )
             ))
         ;
+    }
+
+    public function getYears($curYr, $diff) {
+        $output = array();
+        for($i = $curYr; $i>=$curYr - $diff; $i--) {
+            $output[$i] = $i;
+        }
+        return $output;
     }
     
     /**
