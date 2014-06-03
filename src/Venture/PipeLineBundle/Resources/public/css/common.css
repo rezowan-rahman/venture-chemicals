@@ -244,12 +244,13 @@ div.border-bottom{border-bottom: 1px solid #999999; margin-bottom: 10px;}
 /*pipe-line css*/
 p.widget select{ width: 234px;}
 
-ul.shipping{margin: 0; padding: 0; list-style: none; float: left;}
-ul.shipping li {}
-ul.shipping li div.total{ float: left; height:35px; width: 100%}
-ul.shipping li div.total div{float:left; margin-right: 7px;}
-ul.shipping li div.total div select{width:80px;}
+ul.shipping, ul.spec{margin: 0; padding: 0; list-style: none; float: left;}
+ul.shipping li, ul.spec li {}
+ul.shipping li div.total, ul.spec li div.total{ float: left; height:35px; width: 100%}
+ul.shipping li div.total div, ul.spec li div.total div{float:left; margin-right: 7px;}
+ul.shipping li div.total div select, ul.spec li div.total div select{width:80px;}
 ul.shipping li div.total div input{width:90px;}
+ul.spec li div.total div input {width:607px;}
 
 a.del_prop {
     display: block;
@@ -262,3 +263,9 @@ a.del_prop {
 a.del_prop:hover {
     font-weight: bold;
 }
+
+button.add_ship,
+button.add_prop,
+button.add-new { width: 150px;}
+
+div.upper-border{border-top:1px solid silver}

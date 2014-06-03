@@ -18,7 +18,7 @@ class PipeLineYearSaleType extends AbstractType
             ->add('year', 'choice', array(
                 "label" => false,
                 "choices" => range(date('Y'), (date('Y')-5)),
-                "empty_value" => "Choose A Year"
+                "empty_value" => "Year"
             ))
 
             ->add('firstQt', 'number', array(

@@ -79,8 +79,8 @@
     </div>
 </div>
 
-<div class="property-cont">
-    <p>Pipeline</p>
+<div class="property-cont upper-border">
+    <p>Pipe Line</p>
     <ul class="shipping" data-prototype="{% filter escape %} {% include 'VenturePipeLineBundle:Default:year_sales_form.html.twig' with {'yearSale': form.yearSales.vars.prototype} %} {% endfilter %}">
         {% for yearSale in form.yearSales %}
             <li>
@@ -89,6 +89,26 @@
             </li>
         {% endfor %}
     </ul>
+</div>
+
+<div class="property-cont upper-border">
+    <p>Note</p>
+    <ul class="spec" data-prototype="{% filter escape %} {% include 'VenturePipeLineBundle:Default:notes_form.html.twig' with {'note': form.notes.vars.prototype} %} {% endfilter %}">
+        {% for note in form.notes %}
+            <li>
+                {% include 'VenturePipeLineBundle:Default:notes_form.html.twig' %}
+                <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="property-cont upper-border">
+    <div class="rows">
+        <div class= "form-element-controller four-items">
+            <p class="field"><button class="add-new" type="submit">Save</button></p>
+        </div>
+    </div>
 </div>
 
 {{ form_end(form) }}

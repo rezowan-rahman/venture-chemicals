@@ -66,7 +66,7 @@ function getStageData() {
 var $collectionHolder;
 
 // setup an "add a tag" link
-var $addTagLink = $('<button type="button" class="add_prop">Add Properties</button> ');
+var $addTagLink = $('<button type="button" class="add_prop">Add Note</button> ');
 var $newLinkLi = $('<li></li>').append($addTagLink);
 
 var $addTagLink2 = $('<button type="button" class="add_ship">Add sales year</button> ');

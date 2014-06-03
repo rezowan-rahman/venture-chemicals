@@ -104,21 +104,41 @@ class PipeLineType extends AbstractType
                 "label" => "Stage"
             ))                
                             
-            ->add('probability', null, array(
+            ->add('probability', 'number', array(
                 "label" => "Probability (%)",
                 'attr' => array(
                     "readonly" => true,
+                    "placeholder" => "Only number"
                 )))
-            ->add('projected', null, array("label" => "Projected (Annual $)"))
-            ->add('expectedAnnualGrowth', null, array("label" => "Expected Annual Growth (%)"))
-            ->add('potential', null, array("label" => "Potential ($)"))
+            ->add('projected', 'number', array(
+                "label" => "Projected (Annual $)",
+                "attr" => array(
+                    "placeholder" => "Only number",
+                )))
+            ->add('expectedAnnualGrowth', 'number', array(
+                "label" => "Expected Annual Growth (%)",
+                "attr" => array(
+                    "placeholder" => "Only number",
+                )))
+            ->add('potential', 'number', array("label" => "Potential ($)",
+                "attr" => array(
+                    "placeholder" => "Only number"
+                )))
 
             ->add('yearSales', 'collection', array(
                 "type"      => new \Venture\PipeLineBundle\Form\PipeLineYearSaleType(),
                 "allow_add" => true,
                 'allow_delete' => true,
                 "by_reference" => false,
-                "label" => false
+                "label" => false,
+            ))
+
+            ->add('notes', 'collection', array(
+                "type"      => new \Venture\PipeLineBundle\Form\PipeLineNoteType(),
+                "allow_add" => true,
+                'allow_delete' => true,
+                "by_reference" => false,
+                "label" => false,
             ))
         ;
     }
