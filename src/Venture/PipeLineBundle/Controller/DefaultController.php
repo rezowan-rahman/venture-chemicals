@@ -51,7 +51,10 @@ class DefaultController extends Controller
             }
         }
 
-        return array('form' => $form->createView());
+        return array(
+            'form' => $form->createView(),
+            "hasGoal" => false
+        );
     }
 
     /**
@@ -117,7 +120,11 @@ class DefaultController extends Controller
             }
         }
 
-        return array('form' => $form->createView());
+        return array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'hasGoal' => true
+        );
     }
 
     public function calculateGoal(\Venture\PipeLineBundle\Entity\PipeLine $pipeLine) {

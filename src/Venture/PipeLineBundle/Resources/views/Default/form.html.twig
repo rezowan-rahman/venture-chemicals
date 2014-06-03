@@ -37,6 +37,14 @@
         {{ form_errors(form.expectedAnnualGrowth) }}
     </div>
 
+    {% if hasGoal %}
+    <div class="form-element-controller">
+        <p class="label"> {{ form_label(form.goal) }}</p>
+        <p class="widget"> {{ form_widget(form.goal) }}</p>
+        {{ form_errors(form.goal) }}
+    </div>
+    {% endif %}
+
 </div>
 
 <div class="form-right-cloumn">
