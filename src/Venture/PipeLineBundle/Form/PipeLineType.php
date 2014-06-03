@@ -110,7 +110,6 @@ class PipeLineType extends AbstractType
             ->add('probability', 'number', array(
                 "label" => "Probability (%)",
                 'attr' => array(
-                    "readonly" => true,
                     "placeholder" => "Only number"
                 )))
             ->add('projected', 'number', array(

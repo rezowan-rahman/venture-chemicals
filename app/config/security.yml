@@ -58,3 +58,4 @@ security:
         - { path: ^/vendor, roles: ROLE_USER }
         - { path: ^/customer, roles: ROLE_USER }
         - { path: ^/alternate-raw-material, roles: ROLE_USER }
+        - { path: ^/pipe-line, roles: ROLE_USER }
