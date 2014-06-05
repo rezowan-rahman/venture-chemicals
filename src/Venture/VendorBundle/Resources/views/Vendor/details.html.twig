@@ -2,162 +2,250 @@
 
 {% block title %}Vendors Details{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
 
-<div class="cont font-check">
-	<h2 class="heading">Vendors: {{ vendor.name }}</h2>	
-	 <div class="property-cont">
-        <p>
-	<h4 class="desc-cont">Vendor Since: {{ vendor.supplierSince }}</h4>
-	</p>
-	</div>
-	
-	<div class="style_vendor_details">
-		<div>
-                   <h4 class="desc-cont">Raw materials:</h4>
-                    <table class="rawListing">
-                        <thead>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Vendors: {{ vendor.name }}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Vendor Since: {{ vendor.supplierSince }}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Raw materials</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Item #</th>
+                        <th>Name</th>
+                        <th>Amount in stock</th>
+                        <th>Amount in PO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set rawId = 0 %}
+                    {% set printed = 0 %}
+                    {% for ship in shipping %}
+                    {% if ship.rawMaterial is not null %}
+                    {% if ship.rawMaterial.id != rawId %}
+                    <tr>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">{{ ship.rawMaterial.itemNumber }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">{{ ship.rawMaterial.itemName }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">0</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">0</a></td>
+                    </tr>
+                    {% set rawId = ship.rawMaterial.id %}
+                    {% set printed = 1 %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if printed == 0 %}
+                    <tr>
+                        <td colspan="4">No Data found yet for Raw materials</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Packaging</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Item #</th>
+                    <th>Name</th>
+                    <th>Amount in stock</th>
+                    <th>Amount in PO</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set packId = 0 %}
+                {% set printed = 0 %}
+                {% for pack in shipping %}
+                    {% if pack.venturePackaging is not null %}
+                        {% if pack.venturePackaging.id != packId %}
                             <tr>
-                                <th>Item #</th>
-                                <th>Name</th>
-                                <th>Amount in stock</th>
-                                <th>Amount in PO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% set rawId = 0 %}
-                            {% set printed = 0 %}    
-                            {% for ship in shipping %}
-                            {% if ship.rawMaterial is not null %}
-                            {% if ship.rawMaterial.id != rawId %}
-                            <tr>
-                                <td><a href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">{{ ship.rawMaterial.itemNumber }}</a></td>
-                                <td><a href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">{{ ship.rawMaterial.itemName }}</a></td>
-                                <td><a href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">0</a></td>
-                                <td><a href="{{ path('venture_raw_materials_details',  {'id': ship.rawMaterial.id}) }}">0</a></td>
-                            </tr>
-                            {% set rawId = ship.rawMaterial.id %}
-                            {% set printed = 1 %}
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            
-                            {% if printed == 0 %}
-                            <tr>
-                                <td colspan="4">No Data found yet for Raw materials</td>
-                            </tr>
-                            {% endif %}
-                        </tbody>
-                        <tfoot></tfoot>
-                    </table>
-                    
-                    <h4 class="desc-cont">Packaging:</h4>
-                    <table class="rawListing">
-                        <thead>
-                            <tr>
-                                <th>Item #</th>
-                                <th>Name</th>
-                                <th>Amount in stock</th>
-                                <th>Amount in PO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% set packId = 0 %}
-                            {% set printed = 0 %}    
-                            {% for pack in shipping %}
-                            {% if pack.venturePackaging is not null %}
-                            {% if pack.venturePackaging.id != packId %}
-                            <tr>
-                                <td><a href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">{{ pack.venturePackaging.itemNumber }}</a></td>
-                                <td><a href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">{{ pack.venturePackaging.itemName }}</a></td>
-                                <td><a href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">0</a></td>
-                                <td><a href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">0</a></td>
+                                <td><a class="my_custom_anchor" href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">{{ pack.venturePackaging.itemNumber }}</a></td>
+                                <td><a class="my_custom_anchor" href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">{{ pack.venturePackaging.itemName }}</a></td>
+                                <td><a class="my_custom_anchor" href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">0</a></td>
+                                <td><a class="my_custom_anchor" href="{{ path('venture_packaging_details',  {'id': pack.venturePackaging.id}) }}">0</a></td>
                             </tr>
                             {% set packId = pack.venturePackaging.id %}
                             {% set printed = 1 %}
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            
-                            {% if printed == 0 %}
-                            <tr>
-                                <td colspan="4">No Data found yet for Packaging</td>
-                            </tr>
-                            {% endif %}
-                        </tbody>
-                        <tfoot></tfoot>
-                    </table>
-		</div>
-            
-            <div class="thin_liner"></div>
-		
-		<p>
-			{{ vendor.street1 }}
-			<br>
-			{{ vendor.street2 }}
-			<br>
-			{{ vendor.city }}, {{ vendor.state }} &nbsp;&nbsp;&nbsp; {{ vendor.zipCode }}
-			<br> <br>
-			{{ vendor.website }}
-			<br> </br>
-			{{ vendor.phone }}
-			
-		</p>
-		<div class="thin_liner"></div>
-
-		<p>{{ vendor.contact1 }}, {{ vendor.contact1Email }}</p>
-		<p>{{ vendor.contact2 }}, {{ vendor.contact2Email }}</p>
-                
-                {% if vendor.note is defined %}
-                <p> {{ vendor.note }}</p>
-                {% endif %}
-		
-		<div class="thin_liner"></div>
-	
-    <p>
-        <h4 class="desc-cont">Affiliated Companies:</h4> <br/>
-        <table class="rawListing">
-            <thead>
-                <th>Company Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Contact</th>
-            </thead>
-            <tbody>
-                {% for company in companies %}
-                {% if company.active %} 
-                <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
-                    <td>{{ company.name }}</td>
-                    <td>{{ company.phone }}</td>
-                    <td>{{ company.contact1Email }}</td>
-                    <td>{{ company.contact1 }}</td>
-                </tr>
-                {% endif %}
-                {% else %}
-                <tr class="empty">
-                    <td colspan="4">There is no Affiliated company listed yet</td>
-                </tr>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
-            </tbody>
-            <tfoot></tfoot>
-        </table>
-        
-    </p>
-	<div class="thin_liner"></div>
-	<div style="padding-bottom:10px;"></div>
-	<div class="clear"></div>
-	
-	<div class="button_place_holder">
-        <button class="vendor_form_button" onclick="window.location='{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}'">Edit</button>
-        <div style="float:left;padding-left:40px"><form action="{{ path('VentureVendorBundle_vendor_remove',  {'id': id}) }}" onsubmit="return confirmDel();">
-            <button class="vendor_form_button" type="submit">Delete</button>
-        </form>
-        </div>     
-        <div style="padding-bottom:40px;"></div>
-	</div>
-	
-	</div>	
 
-</div>
-{% endblock %}  
+                {% if printed == 0 %}
+                    <tr>
+                        <td colspan="4">No Data found yet for Packaging</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-6">
+            <address>
+                <strong>{{ vendor.website }}</strong><br>
+                {{ vendor.street1 }}<br>
+                {{ vendor.street2 }}<br>
+                {{ vendor.city }}, {{ vendor.state }} {{ vendor.zipCode }}<br>
+                <abbr title="Phone">P:</abbr> {{ vendor.phone }}
+            </address>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <address>
+                        <strong>{{ vendor.contact1 }}</strong><br>
+                        <a href="mailto:{{ vendor.contact1Email }}">{{ vendor.contact1Email }}</a>
+                    </address>
+                </div>
+            </div>
+
+            {% if vendor.contact2 %}
+            <div class="row">
+                <div class="col-md-12">
+                    <address>
+                        <strong>{{ vendor.contact2 }}</strong><br>
+                        <a href="mailto:{{ vendor.contact2Email }}">{{ vendor.contact2Email }}</a>
+                    </address>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Affiliated Companies</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    {% if company.active %}
+                    <tr>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.phone }}</td>
+                        <td>{{ company.contact1Email }}</td>
+                        <td>{{ company.contact1 }}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% else %}
+                    <tr>
+                        <td colspan="4">There is no Affiliated company listed yet</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top space-bottom">
+        <div class="col-md-1">
+            <button
+                    class="btn btn-default btn-sm"
+                    type="button"
+                    onclick="window.location='{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}'">
+                Update
+            </button>
+        </div>
+        <div class="col-md-1">
+            <button
+                    class="btn btn-default btn-sm"
+                    type="button"
+                    onclick="{{ path('VentureVendorBundle_vendor_remove',  {'id': id}) }}">
+                Delete
+            </button>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+{% endblock %}
