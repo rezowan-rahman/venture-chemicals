@@ -146,12 +146,12 @@ jQuery(document).ready(function(e) {
 
     $addNotesLink.on('click', function(e) {
         e.preventDefault();
-        addTagForm($collectionHolder);
+        addTagForm($collectionHolder, "note");
     });
 
     $addYearSalesLink.on('click', function(e) {
         e.preventDefault();
-        addTagForm($collectionHolder2);
+        addTagForm($collectionHolder2, "year-sale");
     });
 
 });
@@ -169,20 +169,17 @@ function addTagFormDeleteLink($tagFormLi) {
     });
 }
 
-function addTagForm($collectionHolder) {
+function addTagForm($collectionHolder, $container) {
     var prototype = $collectionHolder.data('prototype');
 
-    var index = $collectionHolder.data('index');
-    alert(index);
-
+    var index = jQuery("div."+$container).length;
 
     var newForm = prototype.replace(/__name__/g, index);
 
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = jQuery('<div class="row"></div>').append(newForm);
+    var str = "<div class='row "+$container+"'></div>";
+    var $newFormLi = jQuery(str).append(newForm);
     $collectionHolder.before($newFormLi);
     addTagFormDeleteLink($newFormLi);
 }
