@@ -1,33 +1,17 @@
-{% extends '::venture.html.twig' %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets
-        '@VenturePipeLineBundle/Resources/public/css/common.css'
-    %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />    
-    {% endstylesheets %}
-    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
-{% endblock %}
-
+{% extends '::venture-boot.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts '@VenturePipeLineBundle/Resources/public/js/form.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 
-{% block middle %}
-    {{ parent() }}
-    <div class = "maincont">
-        {% block main %} 
-            {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div class="notice"> {{ flashMessage }} </div>
-            {% endfor %}
-        {% endblock %} 
-   </div>    
-{% endblock %}
-        
-{% block menu15 %}
-        <li class="activeMenu"><a href="{{ path('venture_pipeline_list', {'type': 'show_all'}) }}">Pipeline</a></li>
+{% block menu13 %}
+    <li><a href="{{ path('venture_pipeline_list', {'type': 'show_all'}) }}" class="active">Pipeline</a></li>
 {% endblock %}

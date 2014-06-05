@@ -1,7 +1,7 @@
-<div class= total>
-    <div>
+<div class="col-md-12">
+    <div class="form-group">
         {{ form_label(note.body) }}
-        {{ form_widget(note.body) }}
+        {{ form_widget(note.body, {'attr': {'class' : 'form-control input-sm'} }) }}
         {{ form_errors(note.body) }}
     </div>
 </div>

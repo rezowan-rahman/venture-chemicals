@@ -24,8 +24,7 @@ class PipeLineYearSaleType extends AbstractType
             ->add('firstQt', 'number', array(
                 "label" => false,
                 "attr" => array(
-                    "placeholder" => "1st Qtr",
-                    "class" => "firstQt"
+                    "placeholder" => "1st Qtr"
                 )
             ))
 
@@ -33,7 +32,6 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "2nd Qtr",
-                    "class" => "secondQt"
                 )
             ))
 
@@ -41,7 +39,6 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "3rd Qtr",
-                    "class" => "thirdQt"
                 )
             ))
 
@@ -49,7 +46,6 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "4th Qtr",
-                    "class" => "fourthQt"
                 )
             ))
 
@@ -57,8 +53,6 @@ class PipeLineYearSaleType extends AbstractType
                 "label" => false,
                 "attr" => array(
                     "placeholder" => "Summation",
-                    "readonly" => true,
-                    "class" => "total"
                 )
             ))
         ;

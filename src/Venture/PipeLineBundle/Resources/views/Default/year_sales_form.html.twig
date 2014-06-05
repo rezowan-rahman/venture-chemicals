@@ -1,38 +1,45 @@
-<div class= total>
-    <div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.year) }}
-        {{ form_widget(yearSale.year) }}
+        {{ form_widget(yearSale.year, {'attr': {'class' : 'form-control input-sm'} }) }}
         {{ form_errors(yearSale.year) }}
     </div>
-
-    <div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.firstQt) }}
-        {{ form_widget(yearSale.firstQt) }}
+        {{ form_widget(yearSale.firstQt, {'attr': {'class' : 'form-control input-sm firstQt'} }) }}
         {{ form_errors(yearSale.firstQt) }}
     </div>
-
-    <div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.secondQt) }}
-        {{ form_widget(yearSale.secondQt) }}
+        {{ form_widget(yearSale.secondQt, {'attr': {'class' : 'form-control input-sm secondQt'} }) }}
         {{ form_errors(yearSale.secondQt) }}
     </div>
-
-    <div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.thirdQt) }}
-        {{ form_widget(yearSale.thirdQt) }}
+        {{ form_widget(yearSale.thirdQt, {'attr': {'class' : 'form-control input-sm thirdQt'} }) }}
         {{ form_errors(yearSale.thirdQt) }}
     </div>
-
-    <div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.fourthQt) }}
-        {{ form_widget(yearSale.fourthQt) }}
+        {{ form_widget(yearSale.fourthQt, {'attr': {'class' : 'form-control input-sm fourthQt'} }) }}
         {{ form_errors(yearSale.fourthQt) }}
     </div>
-
-    <div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
         {{ form_label(yearSale.total) }}
-        {{ form_widget(yearSale.total) }}
+        {{ form_widget(yearSale.total, {'attr': {
+            'class' : 'form-control input-sm total',
+            'readonly' : 'readonly'
+        } }) }}
         {{ form_errors(yearSale.total) }}
     </div>
-
 </div>

@@ -72,27 +72,9 @@ class PipeLineType extends AbstractType
                 "label" => "Sales Rep"
             ))                 
 
-            ->add('contact', null, array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_contact")
-                ))
-                            
-            ->add('phone', null, array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_phone")
-                ))
-            
-            ->add('email', 'email', array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_email")
-                ))
-
+            ->add('contact', null, array("mapped" => false))
+            ->add('phone', null, array("mapped" => false))
+            ->add('email', 'email', array("mapped" => false))
                             
             ->add('stage', 'entity', array(
                 "class" => 'SettingsConfigBundle:Stage',
@@ -110,7 +92,7 @@ class PipeLineType extends AbstractType
             ->add('probability', 'number', array(
                 "label" => "Probability (%)",
                 'attr' => array(
-                    "placeholder" => "Only number"
+                    "placeholder" => "Auto calculated percentage of the selected stage"
                 )))
             ->add('projected', 'number', array(
                 "label" => "Projected (Annual $)",
@@ -153,7 +135,6 @@ class PipeLineType extends AbstractType
                     "label" => "Goal (Calculated)",
                     "attr" => array(
                         "placeholder" => "Only number",
-                        "readonly" => true
                     )));
             }
         });

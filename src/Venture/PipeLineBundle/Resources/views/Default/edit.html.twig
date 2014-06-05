@@ -1,25 +1,21 @@
 {% extends 'VenturePipeLineBundle::layout.html.twig' %}
 
-{% block title %}
-    Pipe Line Settings
-{% endblock%}
+{% block title %} Pipe Line Settings {% endblock%}
 
-{% block javascripts %}
+{% block middle %}
     {{ parent() }}
-
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
-    {% javascripts '@VenturePipeLineBundle/Resources/public/js/form.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
-
-
-{% block main %}
-    {{ parent() }}
-    <div class="cont font-check">
-        <h4 class="desc-cont">PipeLine: Review/Update</h4>
-        {% include 'VenturePipeLineBundle:Default:form.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Pipe Line: Review/Update</h4>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'VenturePipeLineBundle:Default:form.html.twig' %}
+
 {% endblock %}

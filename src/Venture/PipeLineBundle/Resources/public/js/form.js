@@ -4,6 +4,7 @@ function delTHis(obj){
     return true;
 }
 
+/*
 function addTagForm($collectionHolder, $newLinkLi) {
     // Get the data-prototype explained earlier
     var prototype = $collectionHolder.data('prototype');
@@ -23,7 +24,8 @@ function addTagForm($collectionHolder, $newLinkLi) {
     $newLinkLi.before($newFormLi);
     addTagFormDeleteLink($newFormLi);
 }
-
+*/
+/*
 function addTagFormDeleteLink($tagFormLi) {
     var $removeFormA = $('<a href="#" class="del_prop">Delete</a>');
     $tagFormLi.append($removeFormA);
@@ -35,7 +37,7 @@ function addTagFormDeleteLink($tagFormLi) {
         // remove the li for the tag form
         $tagFormLi.remove();
     });
-}
+}*/
 
 
 function getCustomerData() {
@@ -63,6 +65,7 @@ function getStageData() {
 }
 
 
+/*
 var $collectionHolder;
 
 // setup an "add a tag" link
@@ -113,6 +116,8 @@ jQuery(document).ready(function() {
     getStageData();
 });
 
+*/
+
 jQuery(document).on("focus","input.total", function(e) {
     var index = jQuery("input.total").index(jQuery(this));
 
@@ -123,3 +128,61 @@ jQuery(document).on("focus","input.total", function(e) {
 
     jQuery("input.total").eq(index).val(value1+value2+value3+value4);
 });
+
+
+var $collectionHolder;
+var $collectionHolder2;
+
+var $addNotesLink = jQuery("button#add-notes")
+var $addYearSalesLink = jQuery("button#add-year-sales")
+
+
+jQuery(document).ready(function(e) {
+    getCustomerData();
+    getStageData();
+
+    $collectionHolder = jQuery('div.add-notes');
+    $collectionHolder2 = jQuery('div.add-year-sales');
+
+    $addNotesLink.on('click', function(e) {
+        e.preventDefault();
+        addTagForm($collectionHolder);
+    });
+
+    $addYearSalesLink.on('click', function(e) {
+        e.preventDefault();
+        addTagForm($collectionHolder2);
+    });
+
+});
+
+
+function addTagFormDeleteLink($tagFormLi) {
+    var $removeFormA = jQuery('<div class="row"><div class="col-md-10"></div><div class="col-md-2"><a class="del_prop" href="#">Delete</a></div></div>');
+    $tagFormLi.after($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        e.preventDefault();
+
+        $tagFormLi.remove();
+        $removeFormA.remove();
+    });
+}
+
+function addTagForm($collectionHolder) {
+    var prototype = $collectionHolder.data('prototype');
+
+    var index = $collectionHolder.data('index');
+    alert(index);
+
+
+    var newForm = prototype.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = jQuery('<div class="row"></div>').append(newForm);
+    $collectionHolder.before($newFormLi);
+    addTagFormDeleteLink($newFormLi);
+}
