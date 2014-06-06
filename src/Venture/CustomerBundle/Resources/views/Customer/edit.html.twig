@@ -2,14 +2,21 @@
 
 {% block title %}Update Existing Customer{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
 
-<div class="cont font-check">
-    <h4 class="desc-cont">CUSTOMER: UPDATE</h4>
-    
-    {% include 'VentureCustomerBundle:Customer:form.html.twig' %}
-    
-</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Customer: Update</h4>
+        </div>
+    </div>
 
-{% endblock %}  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'VentureCustomerBundle:Customer:form.html.twig' %}
+
+{% endblock %}
