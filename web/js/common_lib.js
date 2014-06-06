@@ -7,11 +7,17 @@ function confirmDel() {
     return confirm("Are you sure you want to delete this");
 }
 
-function blank(a) { 
-    if(a.value == a.defaultValue) a.value = ""; 
-}
-function unblank(a) { 
-    if(a.value == "") a.value = a.defaultValue; 
-}   
+jQuery(document).on("click", "button.target", function(e) {
+    var obj = jQuery(this);
+    var url = obj.data("path");
+
+    if(obj.hasClass('confirm')) {
+        if(!confirm("Are you sure you want to delete ?")) {
+            return false;
+        }
+    }
+
+    window.location = url;
+});
 
 

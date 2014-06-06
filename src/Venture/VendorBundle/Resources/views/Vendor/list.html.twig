@@ -20,8 +20,8 @@
     <div class="row space-top">
         <div class="col-md-2">
             <button type="button"
-                    class="btn btn-default btn-sm"
-                    onclick="window.location='{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}'">Add New</button>
+                    data-path="{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}"
+                    class="btn btn-default btn-sm target">Add New</button>
         </div>
         <div class="col-md-10"></div>
     </div>

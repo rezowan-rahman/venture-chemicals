@@ -232,19 +232,17 @@
     <div class="row space-top space-bottom">
         <div class="col-md-1">
             <button
-                    class="btn btn-default btn-sm"
-                    type="button"
-                    onclick="window.location='{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}'">
+                    class="btn btn-default btn-sm target"
+                    data-path="{{ path('VentureVendorBundle_vendor_add',  {'id': id}) }}"
+                    type="button">
                 Update
             </button>
         </div>
         <div class="col-md-1">
             <button
-                    class="btn btn-default btn-sm"
-                    type="button"
-                    onclick="{{ path('VentureVendorBundle_vendor_remove',  {'id': id}) }}">
-                Delete
-            </button>
+                    class="btn btn-default btn-sm target confirm"
+                    data-path="{{ path('VentureVendorBundle_vendor_remove',  {'id': id}) }}"
+                    type="button">Delete</button>
         </div>
         <div class="col-md-10"></div>
     </div>
