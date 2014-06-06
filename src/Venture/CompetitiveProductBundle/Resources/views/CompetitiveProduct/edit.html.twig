@@ -1,22 +1,30 @@
 {% extends 'VentureCompetitiveProductBundle::layout.html.twig' %}
 
-
 {% block title %} Competitive Product Settings {% endblock%}
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@VentureCompetitiveProductBundle/Resources/public/js/competitive_product_form.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% javascripts '@VentureCompetitiveProductBundle/Resources/public/js/form.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
-        
 
-{% block main %}
+
+{% block middle %}
     {{ parent() }}
-        <div class="cont font-check">
-            <h4 class="desc-cont">{{ "competitive product: update" | upper }}</h4>
-            
-            {% include 'VentureCompetitiveProductBundle:CompetitiveProduct:form.html.twig' %}
-            
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Competitive Product: Update</h4>
         </div>
-{% endblock %}  
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'VentureCompetitiveProductBundle:CompetitiveProduct:form.html.twig' %}
+
+{% endblock %}

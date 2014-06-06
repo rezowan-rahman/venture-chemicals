@@ -2,6 +2,129 @@
 
 {% block title %}Competitive Product Details{% endblock%}
 
+{% block middle %}
+    {{ parent() }}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Competitive Product: {{ competitiveProduct.ItemName }}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Supplier: {{ competitiveProduct.ItemSupplier }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Description: {{ competitiveProduct.itemDescription }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p>Packaging: {{ competitiveProduct.configPackaging ? competitiveProduct.configPackaging.name: "N/A" }}</p>
+        </div>
+
+        <div class="col-md-6">
+            <p>Tags: {{ competitiveProduct.tags }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>Standard Price : {{ competitiveProduct.standardCost }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Properties:</h5>
+        </div>
+    </div>
+
+    {% for property in properties %}
+    <div class="row">
+        <div class="col-md-3">{{ property.property? property.property.name: "N/A" }} (Property)</div>
+        <div class="col-md-3">{{ property.specification }} (Specification)</div>
+        <div class="col-md-3">{{ property.specificationMath }} (Specification Math)</div>
+        <div class="col-md-3">{{ property.testProcedure? property.testProcedure.name: "N/A" }} (Procedure)</div>
+    </div>
+    {% else %}
+    <div class="row space-top">
+        <div class="col-md-12">There is no property listed</div>
+    </div>
+    {% endfor %}
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top space-bottom">
+        <div class="col-md-12">
+            <ul class="list-inline">
+                <li>
+                    <button type="button"
+                            data-path="{{ path("venture_competitive_product_update", {'id': competitiveProduct.id}) }}"
+                            class="btn btn-default btn-sm target">Update</button>
+                </li>
+                <li>
+                    <button type="button"
+                            data-path="{{ path("venture_competitive_product_delete", {'id': competitiveProduct.id}) }}"
+                            class="btn btn-default btn-sm target confirm">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% block main %}
     {{ parent() }}
 

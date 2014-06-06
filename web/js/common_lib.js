@@ -20,4 +20,10 @@ jQuery(document).on("click", "button.target", function(e) {
     window.location = url;
 });
 
+function delTHis(obj){
+    if(!confirm("Are you sure you want to delete?")) return false;
+    jQuery(obj).parent().remove();
+    return true;
+}
+
 
