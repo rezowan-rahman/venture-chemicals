@@ -61,7 +61,7 @@
 
 {% for property in form.properties %}
     <div class="row property">
-        {% include 'VentureCompetitiveProductBundle:CompetitiveProduct:properties_form.html.twig' %}
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' %}
     </div>
 
     <div class="row">
@@ -74,7 +74,7 @@
 
 <div class="row add-properties"
      data-prototype="{% filter escape %}
-        {% include 'VentureCompetitiveProductBundle:CompetitiveProduct:properties_form.html.twig' with {'property': form.properties.vars.prototype} %}
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' with {'property': form.properties.vars.prototype} %}
         {% endfilter %}">
     <div class="col-md-2">
         <button type="button" class="btn btn-default btn-xs" id="add-properties">Add Property</button>
