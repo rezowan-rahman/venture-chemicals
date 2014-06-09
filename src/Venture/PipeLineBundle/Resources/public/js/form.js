@@ -59,31 +59,3 @@ jQuery(document).ready(function(e) {
     });
 
 });
-
-
-function addTagFormDeleteLink($tagFormLi) {
-    var $removeFormA = jQuery('<div class="row"><div class="col-md-10"></div><div class="col-md-2"><a class="del_prop" href="#">Delete</a></div></div>');
-    $tagFormLi.after($removeFormA);
-
-    $removeFormA.on('click', function(e) {
-        e.preventDefault();
-
-        $tagFormLi.remove();
-        $removeFormA.remove();
-    });
-}
-
-function addTagForm($collectionHolder, $container) {
-    var prototype = $collectionHolder.data('prototype');
-
-    var index = jQuery("div."+$container).length;
-
-    var newForm = prototype.replace(/__name__/g, index);
-
-
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var str = "<div class='row "+$container+"'></div>";
-    var $newFormLi = jQuery(str).append(newForm);
-    $collectionHolder.before($newFormLi);
-    addTagFormDeleteLink($newFormLi);
-}

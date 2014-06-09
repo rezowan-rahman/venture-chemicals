@@ -25,21 +25,11 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                {{ form_label(shipping.configPackaging) }}
-                {{ form_widget(shipping.configPackaging, {'attr': {'class' : 'form-control input-sm'} }) }}
-                {{ form_errors(shipping.configPackaging) }}
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
                 {{ form_label(shipping.amount_shipped) }}
                 {{ form_widget(shipping.amount_shipped, {'attr': {'class' : 'form-control input-sm amount_shipped'} }) }}
                 {{ form_errors(shipping.amount_shipped) }}
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 {{ form_label(shipping.pre_freight_cost) }}
@@ -47,21 +37,25 @@
                 {{ form_errors(shipping.pre_freight_cost) }}
             </div>
         </div>
-        <div class="col-md-3">
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
             <div class="form-group">
                 {{ form_label(shipping.freight_cost) }}
                 {{ form_widget(shipping.freight_cost, {'attr': {'class' : 'form-control input-sm freight_cost'} }) }}
                 {{ form_errors(shipping.freight_cost) }}
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 {{ form_label(shipping.total_cost) }}
                 {{ form_widget(shipping.total_cost, {'attr': {'class' : 'form-control input-sm total_cost'} }) }}
                 {{ form_errors(shipping.total_cost) }}
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
                 {{ form_label(shipping.cost_per_unit) }}
                 {{ form_widget(shipping.cost_per_unit, {'attr': {'class' : 'form-control input-sm cost_per_unit'} }) }}
