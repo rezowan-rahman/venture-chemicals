@@ -23,7 +23,7 @@ class FinishedProductType extends AbstractType
             ->add('reasonForChange', 'text', array("label" => "Reason for Change", "required" => true))
             ->add('tags', 'text', array("label" => "Tags, Keywords: Seperate by Comma", "required" => true)) 
             ->add('reorderPoint', 'text', array("label" => "Recommended Stock Level", "required" => true))
-            ->add('standardCost', 'text', array("label" => false, "required" => true))
+            ->add('standardCost', 'text', array("label" => 'Standard Price', "required" => true))
             ->add('isActive', 'checkbox', array("label" => "Active", "required" => false))
             ->add('configPackaging', 'entity', array(
                 "class" => 'SettingsConfigBundle:Packaging',
