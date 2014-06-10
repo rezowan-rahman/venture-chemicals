@@ -67,3 +67,4 @@ div.rounded-border{
 button.my-btn{ margin-top: 10px; margin-bottom: 10px; color: #666666;}
 .no-margin{ margin-top: 0}
 a.my_custom_anchor{ color: #666666;}
+a.del_prop {float: right; font-size: 10px;}
