@@ -1,25 +1,32 @@
-    <table id="hor-minimalist-a">
-        <thead>
-            <th>Product Line</th>
-            <th>Status</th>
-            <th>Updated</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Product Line</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for productLine in productLines %}
-            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
-                <td>{{ productLine.name }}</td>
-                <td>{{ (productLine.isActive)?"Active":"Inactive" }}</td>
-                <td>{{ productLine.updated|date('F j, Y h:iA') }}</td>
-                <td>
-                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_product_line_update', {'id': productLine.id}) }}">Edit</a> | 
-                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_product_line_delete', {'id': productLine.id}) }}" onclick="return confirmDel();">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ productLine.name }}</td>
+                    <td>{{ productLine.isActive?'Active':'Inactive' }}</td>
+                    <td>{{ productLine.updated|date('F j, Y h:iA') }}</td>
+                    <td>
+                        <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_product_line_update', {'id': productLine.id}) }}">Edit</a> |
+                        <a class="my_custom_anchor delete" href="{{ path('SettingsConfigBundle_product_line_delete', {'id': productLine.id}) }}" >Delete</a>
+                    </td>
+                </tr>
             {% else %}
-            <tr class="empty">
-                <td colspan="5">There are no product line entered yet</td>
-            </tr>
+                <tr>
+                    <td colspan="4">There are no product line entered yet</td>
+                </tr>
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>
