@@ -49,5 +49,12 @@ function addTagForm($collectionHolder, $container) {
     addTagFormDeleteLink($newFormLi);
 }
 
+jQuery(document).on("click", "a.delete", function(e) {
+    if(!confirm("Are you sure you want to delete ?")) {
+        e.preventDefault();
+        return false;
+    }
 
+    return true;
+});
 

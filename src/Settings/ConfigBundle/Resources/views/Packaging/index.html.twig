@@ -1,16 +1,41 @@
-{% extends 'SettingsConfigBundle::layout.html.twig' %}
+{% extends 'SettingsConfigBundle::layout.new.html.twig' %}
 
 {% block title %}Packagings Listing{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
-        <div class="cont font-check">
-        <h4 class="desc-cont">PACKAGING CONFIGURATION</h4>
-        {% include 'SettingsConfigBundle:Packaging:list.html.twig' with { 'packagings': packagings } %}
-        <h4 class="desc-cont">Add Packaging:</h4>
-         <div class = "form_container">        
-        {% render controller('SettingsConfigBundle:Packaging:create') %}
-        </div>         
-  </div>
-<div style="padding-bottom:40px;clear:both;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>PACKAGING CONFIGURATION</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'SettingsConfigBundle:Packaging:list.html.twig' with { 'packagings': packagings } %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Add Packaging:</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% render controller('SettingsConfigBundle:Packaging:create') %}
+
 {% endblock %}

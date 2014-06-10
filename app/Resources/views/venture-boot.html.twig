@@ -139,17 +139,17 @@
                     </div>
 
                     {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="notice">{{ flashMessage }}</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="text-success text-center">{{ flashMessage }}</h4>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="border"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="border"></div>
+                            </div>
                         </div>
-                    </div>
 
                     {% endfor %}
 

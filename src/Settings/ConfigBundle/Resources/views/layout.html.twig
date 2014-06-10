@@ -2,12 +2,12 @@
 
 {% block stylesheets %}
     {{ parent() }}
-	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
     {% stylesheets
-        '@SettingsConfigBundle/Resources/public/css/common.css'
+    '@SettingsConfigBundle/Resources/public/css/common.css'
     %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
-		
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+
     {% endstylesheets %}
 
 
@@ -17,14 +17,14 @@
 {% block middle %}
     {{ parent() }}
     <div class = "maincont">
-        {% block main %} 
+        {% block main %}
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="notice"> {{ flashMessage }} </div>
             {% endfor %}
-        {% endblock %} 
-   </div>    
+        {% endblock %}
+    </div>
 {% endblock %}
-        
+
 {% block footmenu2 %}
     <li class="activeMenu"><a href="{{ path('SettingsConfigBundle_homepage') }}">Configuration</a></li>
-{% endblock %}        
+{% endblock %}
