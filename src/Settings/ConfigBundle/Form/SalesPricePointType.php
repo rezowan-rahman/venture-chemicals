@@ -16,7 +16,7 @@ class SalesPricePointType extends AbstractType
     {
         $builder
             ->add('salesCostPoint', 'text', array('label' => "Sales Price Point", 'required' => true))
-            ->add('description', 'text', array('label' => "Description", 'required' => true))
+            ->add('description', 'textarea', array('label' => "Description", 'required' => true))
             ->add('approved', 'checkbox', array('required' => false))
         ;
     }
