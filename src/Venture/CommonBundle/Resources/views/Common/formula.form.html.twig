@@ -1,0 +1,26 @@
+<div class="col-md-4">
+    <div class="form-group">
+        {{ form_label(formula.rawMaterial) }}
+        {{ form_widget(formula.rawMaterial, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(formula.rawMaterial) }}
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        {{ form_label(formula.ingredient) }}
+        {{ form_widget(formula.ingredient, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(formula.ingredient) }}
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        {{ form_label(formula.amount) }}
+        {{ form_widget(formula.amount, {'attr': {
+            'class' : 'form-control input-sm',
+            'placeholder': 'As Percentage'
+        } }) }}
+        {{ form_errors(formula.amount) }}
+    </div>
+</div>

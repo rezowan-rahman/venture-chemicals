@@ -44,8 +44,9 @@ class ShippingDetailsType extends AbstractType
                 "required" => true
             )) 
             ->add('lead_time', "text", array("label" => "Lead time", "required" => true))
-            ->add('amount_shipped', "number", array("label" => "Amount Shipped(UoM)" , "required" => true, "attr" => array(
-                "class" => "amount_shipped"
+            ->add('amount_shipped', "number", array("label" => "Amount Shipped" , "required" => true, "attr" => array(
+                "class" => "amount_shipped",
+                "placeholder" => "UOM"
             )))
             ->add('pre_freight_cost', "number", array("label" => "Pre - Freight Cost", "required" => true, "attr" => array(
                 "class" => "pre_freight_cost"

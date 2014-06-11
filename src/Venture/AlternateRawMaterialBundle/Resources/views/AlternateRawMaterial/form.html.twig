@@ -1,102 +1,130 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
 
-<div class="property-cont">
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.itemName) }}</p>
-        <p class="field">{{ form_widget(form.itemName) }}</p>
-        <p class="error">{{ form_errors(form.itemName) }}</p>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.itemName) }}
+            {{ form_widget(form.itemName, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemName) }}
+        </div>
     </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.itemDescription) }}</p>
-        <p class="field">{{ form_widget(form.itemDescription) }}</p>
-        <p class="error">{{ form_errors(form.itemDescription) }}</p>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.itemDescription) }}
+            {{ form_widget(form.itemDescription, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemDescription) }}
+        </div>
     </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.tags) }}</p>
-        <p class="field">{{ form_widget(form.tags) }}</p>
-        <p class="error">{{ form_errors(form.tags) }}</p>
-    </div>
-</div>
-
-
-<div class="property-cont">
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.unitOfMeasure) }}</p>
-        <p class="field">{{ form_widget(form.unitOfMeasure) }}</p>
-        <p class="error">{{ form_errors(form.unitOfMeasure) }}</p>
-    </div>
-</div>
-
-
-<div class="property-cont">
-    <ul class="spec" data-prototype="{{ form_widget(form.properties.vars.prototype)|e }}">
-        {% for spec in form.properties %}
-        <li>
-            <div>
-                <div>
-                    {{ form_label(spec.property) }}
-                    {{ form_widget(spec.property) }}
-                    {{ form_errors(spec.property) }}
-                </div>
-                
-                <div>
-                    {{ form_label(spec.specificationMath) }}
-                    {{ form_widget(spec.specificationMath) }}
-                    {{ form_errors(spec.specificationMath) }}
-                </div>
-                
-                <div>
-                    {{ form_label(spec.specification) }}
-                    {{ form_widget(spec.specification) }}
-                    {{ form_errors(spec.specification) }}
-                </div>
-                
-                <div>
-                    {{ form_label(spec.testProcedure) }}
-                    {{ form_widget(spec.testProcedure) }}
-                    {{ form_errors(spec.testProcedure) }}
-                </div>
-            </div>
-            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-
-<div class="property-cont">
-    <ul class="shipping" data-prototype="{% filter escape %} {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:shipping_form.html.twig' with {'det': form.orderingDetails.vars.prototype} %} {% endfilter %}">
-        {% for det in form.orderingDetails %}
-        <li>
-            {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:shipping_form.html.twig' %}
-            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
-    
-    <ul class="shipping_bottom">
-        <li><a href="{{ path('VentureVendorBundle_vendor_add', {'id': 0}) }}" target="_blank">Vendor not here? Click to add</a></li>
-    </ul>
-</div>
-
-<div class="property-cont">
-    <div class="rows">
-        <div class= "form-element-controller four-items">
-            <p class="label">{{ form_label(form.isActive) }}</p>
-            <p class="field">{{ form_widget(form.isActive) }}</p>
-            <p class="error">{{ form_errors(form.isActive) }}</p>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.tags) }}
+            {{ form_widget(form.tags, {'attr': {
+            'class' : 'form-control input-sm',
+            'placeholder' : 'tag-1, tag-2'
+            } }) }}
+            {{ form_errors(form.tags) }}
         </div>
     </div>
 </div>
 
-<div class="property-cont no-brd">
-    <div class="rows">
-        <div class= "form-element-controller four-items">
-            <p class="field"><button class="add-new" type="submit">Save</button></p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.unitOfMeasure) }}
+            {{ form_widget(form.unitOfMeasure, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.unitOfMeasure) }}
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+</div>
+
+<div class="row space-bottom">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+{% for property in form.properties %}
+    <div class="row property">
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row add-properties"
+     data-prototype="{% filter escape %}
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' with {'property': form.properties.vars.prototype} %}
+        {% endfilter %}">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-xs" id="add-properties">Add Property</button>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+<div class="row space-top space-bottom">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+{% for shipping in form.orderingDetails %}
+    <div class="row shipping">
+        {% include 'VentureCommonBundle:Common:shipping.form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row add-shipping"
+     data-prototype="{% filter escape %}
+        {% include 'VentureCommonBundle:Common:shipping.form.html.twig' with {'shipping': form.orderingDetails.vars.prototype} %}
+        {% endfilter %}">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-xs" id="add-shipping">Add Ordering Details</button>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="checkbox">
+            {{ form_label(form.isActive) }}
+            {{ form_widget(form.isActive) }}
+            {{ form_errors(form.isActive) }}
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-2">
+        <div class="form-group">
+            <button type="Submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
 {{ form_end(form) }}

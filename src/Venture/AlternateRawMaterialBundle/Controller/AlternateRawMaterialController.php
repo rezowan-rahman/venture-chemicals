@@ -31,13 +31,15 @@ class AlternateRawMaterialController extends Controller
      */
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
+
+        $condition = array();
+        $condition['isConvertedToRawMaterial'] = false;
+        if($active) $condition["isActive"] = $active;
+
         $em = $this->initDoctrine();
         $alternateRawMaterials = $em
             ->getRepository('VentureAlternateRawMaterialBundle:AlternateRawMaterial')
-            ->findBy(array(
-                "isConvertedToRawMaterial" => false,
-                "isActive" => $active
-            ),array(
+            ->findBy($condition, array(
                 "updated" => "DESC",
             ));
         

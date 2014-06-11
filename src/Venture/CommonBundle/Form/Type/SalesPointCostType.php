@@ -27,10 +27,10 @@ class SalesPointCostType extends AbstractType
                     },
                 "empty_value" => "Select a Price Point",
                 "property" => "salesCostPoint",
-                "label" => false,
+                "label" => "Price Point",
                 "required" => false
             )) 
-            ->add('cost', "text", array("required" => true, "label" => false))
+            ->add('cost', "text", array("required" => true, "label" => "Price"))
         ;
     }
     

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %} - venturechemicals</title>
+    {% block stylesheets %}
+        {% stylesheets 'css/bootstrap.min.css' 'css/custom.css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body class="color">
+    <div class="container">
+        <div class="row">
+            {% block left %}
+            <div class="col-md-2">
+                <div class="margin-top">
+                    <img src="{{ asset('images/logo.png') }}" class="img-responsive" alt="Responsive image">
+                </div>
+            </div>
+            {% endblock %}
+
+            {% block center %}
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        {% block welcome_menu %}
+                        <ul class="nav navbar-nav mynavbar-nav float-right nav-divider">
+
+                            {% block welcome_menu_1 %}
+                            <li class="border-right">
+                                <a href="#">Welcome: <strong>{{ app.user ? app.user.username : 'Anonymous' }}</strong></a>
+                            </li>
+                            {% endblock %}
+
+                            {% block welcome_menu_2 %}
+                            <li class="border-right">
+                                <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+                            </li>
+                            {% endblock %}
+
+                            {% block welcome_menu_3 %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                            </li>
+                            {% endblock %}
+                        </ul>
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="row space-top">
+                    <div class="col-md-8"></div>
+
+                    {% block search %}
+                    <div class="col-md-4">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control search-bg" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                    {% endblock %}
+
+                </div>
+
+                <div class="row">
+                    {% block menu %}
+                    <ul class="nav navbar-nav mynavbar-nav">
+                        {% block menu1 %}
+                        <li><a href="{{ path('_dashboard')}}">Dashboard</a></li>
+                        {% endblock %}
+
+                        {% block menu2 %}
+                        <li><a href="{{ path('venture_raw_materials_list', {'type': 'show_all'}) }}">Raw Materials</a></li>
+                        {% endblock %}
+
+                        {% block menu3 %}
+                        <li><a href="{{ path('venture_packaging_list', {'type': 'show_all'}) }}">Packaging</a></li>
+                        {% endblock %}
+
+                        {% block menu4 %}
+                        <li><a href="{{ path('venture_intermediate_list', {'type': 'show_all'}) }}">Intermediates</a></li>
+                        {% endblock %}
+
+                        {% block menu5 %}
+                        <li><a href="{{ path('venture_finished_product_list', {'type': 'show_all'}) }}">Finished Products</a></li>
+                        {% endblock %}
+
+                        {% block menu6 %}
+                        <li><a href="#">Samples</a></li>
+                        {% endblock %}
+
+                        {% block menu7 %}
+                        <li><a href="{{ path('venture_competitive_product_list', {'type': 'show_all'}) }}">Competitive Products</a></li>
+                        {% endblock %}
+
+                        {% block menu8 %}
+                        <li><a href="{{ path('VentureVendorBundle_vendor_list', {'type': 'show_all'}) }}">Vendors</a></li>
+                        {% endblock %}
+
+                        {% block menu9 %}
+                        <li><a href="{{ path('venture_customer_list', {'type': 'show_all'}) }}">Customers</a></li>
+                        {% endblock %}
+
+                        {% block menu10 %}
+                        <li><a href="#">PO</a></li>
+                        {% endblock %}
+
+                        {% block menu11 %}
+                        <li><a href="#">Sales Orders</a></li>
+                        {% endblock %}
+
+                        {% block menu12 %}
+                        <li><a href="#">Production</a></li>
+                        {% endblock %}
+
+                        {% block menu13 %}
+                        <li><a href="{{ path('venture_pipeline_add') }}">Pipeline</a></li>
+                        {% endblock %}
+
+                        {% block menu14 %}
+                        <li><a href="{{ path('venture_list_alternate_raw_material', {'type': 'show_all'}) }}">Alternate Raw Materials</a></li>
+                        {% endblock %}
+                    </ul>
+                    {% endblock %}
+                </div>
+
+                {% block middleContainer %}
+                <div class="row white rounded-border">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="border"></div>
+                        </div>
+                    </div>
+
+                    {% block msgBlock %}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="text-success text-center">{{ flashMessage }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="border"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% endblock %}
+
+                    {% block middle %} {% endblock %}
+                </div>
+                {% endblock %}
+
+                <div class="row">
+                    {% block footer_menu %}
+                    <ul class="nav navbar-nav mynavbar-nav no-margin">
+                        {% block footer_menu1 %}
+                        <li><a href="#">Administration</a></li>
+                        {% endblock %}
+
+                        {% block footer_menu2 %}
+                        <li><a href="{{ path('SettingsConfigBundle_homepage') }}">Configuration</a></li>
+                        {% endblock %}
+
+                        {% block footer_menu3 %}
+                        <li><a href="{{ path('venture_users_list') }}">User</a></li>
+                        {% endblock %}
+                    </ul>
+                    {% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+
+            {% block popup %} {% endblock %}
+
+            {% block right %}
+            <div class="col-md-2"></div>
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        {% javascripts 'js/bootstrap.min.js' 'js/common_lib.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+
+</body>
+</html>

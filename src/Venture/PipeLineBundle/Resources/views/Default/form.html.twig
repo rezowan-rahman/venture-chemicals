@@ -1,0 +1,187 @@
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
+    <div class="row space-top">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.customer) }}
+                {{ form_widget(form.customer, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.customer) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.productLine) }}
+                {{ form_widget(form.productLine, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.productLine) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.contact) }}
+                {{ form_widget(form.contact, {'attr': {
+                    'class' : 'form-control input-sm',
+                    'disabled':'disabled',
+                    'placeholder': 'contact of the selected customer'
+                } }) }}
+                {{ form_errors(form.contact) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {
+                    'class' : 'form-control input-sm',
+                    'disabled':'disabled',
+                    'placeholder': 'e-mail of the selected customer'
+                } }) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.probability) }}
+                {{ form_widget(form.probability, {'attr': {
+                    'class' : 'form-control input-sm'
+                } }) }}
+                {{ form_errors(form.probability) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.expectedAnnualGrowth) }}
+                {{ form_widget(form.expectedAnnualGrowth, {'attr': {
+                'class' : 'form-control input-sm'
+                } }) }}
+                {{ form_errors(form.expectedAnnualGrowth) }}
+            </div>
+
+            {% if form.vars.value.goal %}
+            <div class="form-group">
+                {{ form_label(form.goal) }}
+                {{ form_widget(form.goal, {'attr': {
+                    'class' : 'form-control input-sm',
+                    'disabled' : 'disabled'
+                } }) }}
+                {{ form_errors(form.goal) }}
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.type) }}
+                {{ form_widget(form.type, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.type) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.salesRep) }}
+                {{ form_widget(form.salesRep, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.salesRep) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone, {'attr': {
+                'class' : 'form-control input-sm',
+                'disabled':'disabled',
+                'placeholder': 'Phone no of the selected customer'
+                } }) }}
+                {{ form_errors(form.phone) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.stage) }}
+                {{ form_widget(form.stage, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.stage) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.projected) }}
+                {{ form_widget(form.projected, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.projected) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.potential) }}
+                {{ form_widget(form.potential, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.potential) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <label>Pipe Line</label>
+        </div>
+    </div>
+
+    {% for yearSale in form.yearSales %}
+    <div class="row year-sale">
+        {% include 'VenturePipeLineBundle:Default:year_sales_form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row add-year-sales" data-prototype="{% filter escape %} {% include 'VenturePipeLineBundle:Default:year_sales_form.html.twig' with {'yearSale': form.yearSales.vars.prototype} %} {% endfilter %}">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default btn-xs" id="add-year-sales">Add PipeLine</button>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <label>Notes</label>
+        </div>
+    </div>
+
+    {% for note in form.notes %}
+    <div class="row note">
+        {% include 'VenturePipeLineBundle:Default:notes_form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row add-notes" data-prototype="{% filter escape %} {% include 'VenturePipeLineBundle:Default:notes_form.html.twig' with {'note': form.notes.vars.prototype} %} {% endfilter %}">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default btn-xs" id="add-notes">Add Notes</button>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-2">
+            <div class="form-group">
+                <button type="Submit" class="btn btn-default">Save</button>
+            </div>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+
+{{ form_end(form) }}

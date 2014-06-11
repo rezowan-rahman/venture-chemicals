@@ -15,7 +15,7 @@ class PipeLineNoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body',"textarea", array("label" => "Notes"))
+            ->add('body',"text", array("label" => false))
         ;
     }
     

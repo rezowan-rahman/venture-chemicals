@@ -1,16 +1,41 @@
-{% extends 'SettingsConfigBundle::layout.html.twig' %}
+{% extends 'SettingsConfigBundle::layout.new.html.twig' %}
 
 {% block title %}Stage Listing{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
-    <div class="cont font-check">
-    <h4 class="desc-cont">Stage CONFIGURATION</h4>
-    {% include 'SettingsConfigBundle:Stage:list.html.twig' with { 'stages' : stages } %}
-    <h4 class="desc-cont">Edit Stage:</h4>
-    <div class = "form_container">
-    {% render controller('SettingsConfigBundle:Stage:create', {'id' : stage_id}) %}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>STAGE CONFIGURATION</h4>
+        </div>
     </div>
-</div>
-<div style="padding-bottom:40px;clear:both;"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'SettingsConfigBundle:Stage:list.html.twig' with { 'stages': stages } %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Edit Stage:</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% render controller('SettingsConfigBundle:Stage:create', {'id' : stage_id}) %}
+
 {% endblock %}

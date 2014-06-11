@@ -1,0 +1,21 @@
+{% extends 'VenturePipeLineBundle::layout.html.twig' %}
+
+{% block title %} Pipe Line Settings {% endblock%}
+
+{% block middle %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Pipe Line: Add</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'VenturePipeLineBundle:Default:form.html.twig' %}
+
+{% endblock %}

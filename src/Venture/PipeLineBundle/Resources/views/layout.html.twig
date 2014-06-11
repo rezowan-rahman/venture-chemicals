@@ -1,0 +1,17 @@
+{% extends '::venture-boot.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts '@VenturePipeLineBundle/Resources/public/js/form.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% block menu13 %}
+    <li><a href="{{ path('venture_pipeline_add') }}" class="active">Pipeline</a></li>
+{% endblock %}

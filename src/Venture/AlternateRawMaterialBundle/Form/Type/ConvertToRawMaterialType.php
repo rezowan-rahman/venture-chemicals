@@ -19,7 +19,6 @@ class ConvertToRawMaterialType extends AbstractType
         $builder
             ->add('itemNumber', 'text', array("label" => "Item Number", "mapped" => false, "required" => true))
             ->add('reorderPoint', 'text', array("label" => "Reorder Point", "mapped" => false, "required" => true))
-            ->add('convert', 'submit', array("attr" => array("class" => "add-new")))
         ;
     }
     

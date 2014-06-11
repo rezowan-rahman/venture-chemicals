@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 use Doctrine\ORM\EntityRepository;
 
 class PipeLineType extends AbstractType
@@ -27,7 +30,7 @@ class PipeLineType extends AbstractType
                     },
                 "empty_value" => "Choose a Customer",
                 "property" => "name",
-                "label" => "Customer Name"
+                "label" => "Customer Name",
             )) 
                             
             ->add('type', 'entity', array(
@@ -68,27 +71,10 @@ class PipeLineType extends AbstractType
                 "property" => "name",
                 "label" => "Sales Rep"
             ))                 
-            
-            ->add('contact', null, array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_contact")
-                ))
-                            
-            ->add('phone', null, array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_phone")
-                ))
-            
-            ->add('email', 'email', array(
-                "mapped" => false, 
-                "attr" => array(
-                    "readonly" => true, 
-                    "id" =>"customer_email")
-                ))               
+
+            ->add('contact', null, array("mapped" => false))
+            ->add('phone', null, array("mapped" => false))
+            ->add('email', 'email', array("mapped" => false))
                             
             ->add('stage', 'entity', array(
                 "class" => 'SettingsConfigBundle:Stage',
@@ -103,13 +89,58 @@ class PipeLineType extends AbstractType
                 "label" => "Stage"
             ))                
                             
-            ->add('probability')
-            ->add('projected')
-            ->add('expectedAnnualGrowth')
-            ->add('potential')
-            ->add('goal')
+            ->add('probability', 'number', array(
+                "label" => "Probability (%)",
+                'attr' => array(
+                    "placeholder" => "Auto calculated percentage of the selected stage"
+                )))
+            ->add('projected', 'number', array(
+                "label" => "Projected (Annual $)",
+                "attr" => array(
+                    "placeholder" => "Only number",
+                )))
+            ->add('expectedAnnualGrowth', 'number', array(
+                "label" => "Expected Annual Growth (%)",
+                "attr" => array(
+                    "placeholder" => "Only number",
+                )))
+            ->add('potential', 'number', array("label" => "Potential ($)",
+                "attr" => array(
+                    "placeholder" => "Only number"
+                )))
+
+            ->add('yearSales', 'collection', array(
+                "type"      => new \Venture\PipeLineBundle\Form\PipeLineYearSaleType(),
+                "allow_add" => true,
+                'allow_delete' => true,
+                "by_reference" => false,
+                "label" => false,
+            ))
+
+            ->add('notes', 'collection', array(
+                "type"      => new \Venture\PipeLineBundle\Form\PipeLineNoteType(),
+                "allow_add" => true,
+                'allow_delete' => true,
+                "by_reference" => false,
+                "label" => false,
+            ))
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $pipeLine = $event->getData();
+            $form = $event->getForm();
+
+            if ($pipeLine->getId()) {
+                $form->add('goal', 'number', array(
+                    "label" => "Goal (Calculated)",
+                    "attr" => array(
+                        "placeholder" => "Only number",
+                    )));
+            }
+        });
     }
+
+
     
     /**
      * @param OptionsResolverInterface $resolver

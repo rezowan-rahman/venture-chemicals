@@ -1,24 +1,30 @@
-{% extends 'VentureAlternateRawMaterialBundle::layout.html.twig' %}
+{% extends 'VentureAlternateRawMaterialBundle::layout.new.html.twig' %}
 
-
-{% block title %} 
-    Alternate Raw Material Settings
-{% endblock%}
+{% block title %} Alternate Raw Material Settings {% endblock%}
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@VentureAlternateRawMaterialBundle/Resources/public/js/alternate_raw_material_form.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% javascripts '@VentureAlternateRawMaterialBundle/Resources/public/js/form.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
-        
 
-{% block main %}
+
+{% block middle %}
     {{ parent() }}
-        <div class="cont font-check">
-            <h4 class="desc-cont">ALTERNATE RAW MATERIALS: Edit</h4>
-            
-            {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:form.html.twig' %}
-            
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Alternate Raw Materials: Edit</h4>
         </div>
-{% endblock %}  
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% include 'VentureAlternateRawMaterialBundle:AlternateRawMaterial:form.html.twig' %}
+
+{% endblock %}

@@ -43,7 +43,7 @@ class FormulaType extends AbstractType
                 "label" => "Formulation(Intermediate)",
                 "required" => false
             )) 
-            ->add('amount', "text", array("label" => "Amount(As Percentage)" , "required" => true))
+            ->add('amount', "text", array("label" => "Amount" , "required" => true))
         ;
     }
     

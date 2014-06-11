@@ -1,123 +1,171 @@
-{{ form_start(form) }}
-        <div class="cont font-check">
-            <h4 class="desc-cont">RAW MATERIALS: Entry</h4>
-            <div class="property-cont">
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.item_number) }}</p>
-                    <p class="field">{{ form_widget(form.item_number) }}</p>
-                    <p class="error">{{ form_errors(form.item_number) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.item_name) }}</p>
-                    <p class="field">{{ form_widget(form.item_name) }}</p>
-                    <p class="error">{{ form_errors(form.item_name) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.description) }}</p>
-                    <p class="field">{{ form_widget(form.description) }}</p>
-                    <p class="error">{{ form_errors(form.description) }}</p>
-                </div>
-            </div>
-            <div class="property-cont">
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.unit_of_measure) }}</p>
-                    <p class="field">{{ form_widget(form.unit_of_measure) }}</p>
-                    <p class="error">{{ form_errors(form.unit_of_measure) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.tags) }}</p>
-                    <p class="field">{{ form_widget(form.tags) }}</p>
-                    <p class="error">{{ form_errors(form.tags) }}</p>
-                </div>
-            </div>
-            
-            <div class="property-cont">
-                <ul class="spec" data-prototype="{{ form_widget(form.specs.vars.prototype)|e }}">
-                    {% for spec in form.specs %}
-                    <li>
-                        <div>
-                            <div>
-                                {{ form_label(spec.property) }}
-                                {{ form_widget(spec.property) }}
-                                {{ form_errors(spec.property) }}
-                            </div>
-                            
-                            <div>
-                                {{ form_label(spec.specificationMath) }}
-                                {{ form_widget(spec.specificationMath) }}
-                                {{ form_errors(spec.specificationMath) }}
-                            </div>
-                                
-                            <div>
-                                {{ form_label(spec.specification) }}
-                                {{ form_widget(spec.specification) }}
-                                {{ form_errors(spec.specification) }}
-                            </div>
-                                
-                            <div>
-                                {{ form_label(spec.testProcedure) }}
-                                {{ form_widget(spec.testProcedure) }}
-                                {{ form_errors(spec.testProcedure) }}
-                            </div>
-                        </div>
-                        <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="property-cont">
-                <ul class="shipping" data-prototype="{% filter escape %} {% include 'VentureRawMaterialsBundle:RawMaterials:shipping_form.html.twig' with {'det': form.shipping_details.vars.prototype} %} {% endfilter %}">
-                    {% for det in form.shipping_details %}
-                    <li>
-                        {% include 'VentureRawMaterialsBundle:RawMaterials:shipping_form.html.twig' %}
-                        <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <ul class="shipping_bottom">
-                    <li><a href="{{ path('VentureVendorBundle_vendor_add', {'id': 0}) }}" target="_blank">Vendor not here? Click to add</a></li>
-                </ul>
-            </div>
-            
-            <div class="property-cont">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="label">{{ form_label(form.reorder_point) }}</p>
-                        <p class="field">{{ form_widget(form.reorder_point) }}</p>
-                        <p class="error">{{ form_errors(form.reorder_point) }}</p>
-                    </div>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Raw Materials: Entry</h4>
+    </div>
+</div>
 
-            <div class="property-cont">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="label">{{ form_label(form.alternateRawMaterials) }}</p>
-                        <p class="field">{{ form_widget(form.alternateRawMaterials) }}</p>
-                        <p class="error">{{ form_errors(form.alternateRawMaterials) }}</p>
-                    </div>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
 
-            <div class="property-cont">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="label">{{ form_label(form.is_active) }}</p>
-                        <p class="field">{{ form_widget(form.is_active) }}</p>
-                        <p class="error">{{ form_errors(form.is_active) }}</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="property-cont no-brd">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="field">
-                            <button class="add-new" type="submit">Save</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.item_number) }}
+            {{ form_widget(form.item_number, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.item_number) }}
         </div>
-       {{ form_end(form) }}
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.item_name) }}
+            {{ form_widget(form.item_name, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.item_name) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.unit_of_measure) }}
+            {{ form_widget(form.unit_of_measure, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.unit_of_measure) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.tags) }}
+            {{ form_widget(form.tags, {'attr': {
+                'class' : 'form-control input-sm',
+                'placeholder' : 'tag-1, tag-2'
+            } }) }}
+            {{ form_errors(form.tags) }}
+        </div>
+    </div>
+</div>
+
+<div class="row space-bottom">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+{% for property in form.specs %}
+    <div class="row property">
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row add-properties"
+     data-prototype="{% filter escape %}
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' with {'property': form.specs.vars.prototype} %}
+        {% endfilter %}">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-xs" id="add-properties">Add Property</button>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+<div class="row space-top space-bottom">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+{% for shipping in form.shipping_details %}
+    <div class="row shipping">
+        {% include 'VentureCommonBundle:Common:shipping.form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row add-shipping"
+     data-prototype="{% filter escape %}
+        {% include 'VentureCommonBundle:Common:shipping.form.html.twig' with {'shipping': form.shipping_details.vars.prototype} %}
+        {% endfilter %}">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-xs" id="add-shipping">Add Ordering Details</button>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.reorder_point) }}
+            {{ form_widget(form.reorder_point, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.reorder_point) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.alternateRawMaterials) }}
+            {{ form_widget(form.alternateRawMaterials, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.alternateRawMaterials) }}
+        </div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="checkbox">
+            {{ form_label(form.is_active) }}
+            {{ form_widget(form.is_active) }}
+            {{ form_errors(form.is_active) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-2">
+        <div class="form-group">
+            <button type="Submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+{{ form_end(form) }}

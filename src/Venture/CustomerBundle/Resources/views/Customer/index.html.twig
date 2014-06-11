@@ -1,55 +1,87 @@
 {% extends 'VentureCustomerBundle::layout.html.twig' %}
 
-{% block title %}Customer Listing{% endblock%}
+{% block title %} Customer Listing {% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
-<div class="cont">
-    <div> 
-		<h2 class="heading">CUSTOMER</h2>
-		
-		<div>
-            <button class="vendor_form_button" onclick="window.location='{{ path('venture_new_customer') }}'">Add new</button>
-		</div>
-		<br>
-		<div class="listing-label">
-            <p class="label">List of all active customers</p>                        
-					{% if status %} 
-					<p class="list-all">
-						<input type = "checkbox" onchange="window.location='{{ path('venture_customer_list',  {'type': 'show_all'}) }}'"/> Show Inactive
-					</p>
-					{% else %}
-					<p class="list-all">
-						<input type = "checkbox" checked = "checked" onchange="window.location='{{ path('venture_customer_list',  {'type': 'show_active'}) }}'"/> Show Inactive
-					</p>
-					{% endif %}                       
-        </div>		
-   </div>
-	<div class="clear"></div>
-    <table id="hor-minimalist-a">
-        <thead>
-            <th>Customer Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Contact</th>
-        </thead>
-        <tbody>
-            {% for entity in entities %}
-            <tr class="records {{ cycle(['odd', 'even'], loop.index0) }}">
-                <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.name }}</a></td>
-                <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.phoneNumber }}</a></td>
-                <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.contact1Email }}</a></td>
-                <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.contact1 }}</a></td>
-            </tr>
-            {% else %}
-            <tr class="empty">
-                <td colspan="5">There is no Customer listed yet</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-	</div>
-{% endblock %}  
 
+    <div class="row">
+        <div class="col-md-12">
+            <h4>CUSTOMERS</h4>
+        </div>
+    </div>
 
- 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-2">
+            <button type="button"
+                    data-path="{{ path('venture_new_customer') }}"
+                    class="btn btn-default btn-sm target">Add New</button>
+        </div>
+        <div class="col-md-10"></div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="space-top">List of all active customers</div>
+        </div>
+        <div class="col-md-6">
+            <div class="checkbox float-right">
+                <label>
+                    {% if status %}
+                        <input type = "checkbox" onchange="window.location='{{ path('venture_customer_list',  {'type': 'show_all'}) }}'"/> Show Inactive
+                    {% else %}
+                        <input type = "checkbox" checked = "checked" onchange="window.location='{{ path('venture_customer_list',  {'type': 'show_active'}) }}'"/> Show Inactive
+                    {% endif %}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>E-mail</th>
+                    <th>Contact</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.name }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.phoneNumber }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.contact1Email }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_customer_details',  {'id': entity.id}) }}">{{ entity.contact1 }}</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">There is no Customer listed yet</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,6 +1,35 @@
-<form action="{{ path('SettingsConfigBundle_salesrep_add', {'id': id}) }}" method="post" {{ form_enctype(form) }} class="property">
-    {{ form_widget(form) }}
-    <p>
-        <input class="config_form_button" type="submit" value="Save">
-    </p>
-</form>
+<div class="row space-top">
+    <div class="col-md-10">
+        {{ form_start(form, {
+        'action': path('SettingsConfigBundle_salesrep_add', {'id': id}),
+        'attr': {
+        'class' : 'form-horizontal',
+        'role' :'form'
+        }
+        }) }}
+        <div class="form-group">
+            {{ form_label(form.name, null, {'label_attr': {'class' : 'col-sm-4 control-label'} }) }}
+            <div class="col-sm-8">
+                {{ form_widget(form.name, {'attr': {'class' : 'form-control input-sm'} }) }}
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    {{ form_label(form.isActive) }}
+                    {{ form_widget(form.isActive) }}
+                    {{ form_errors(form.isActive) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="col-md-2"></div>
+</div>

@@ -1,0 +1,70 @@
+body.color {
+    background-color: #F6F2E9;
+    font-family: 'Varela',"Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    src: local('Varela'), url(http://themes.googleusercontent.com/static/fonts/varela/v5/_yYHMt_E4smqfVTA22m7TQ.woff) format('woff');
+    font-size: 12px;
+}
+ul.float-right, div.float-right {float:right;}
+
+.mynavbar-nav {
+    margin-top: 5px;
+}
+
+.mynavbar-nav > li > a {
+    padding-bottom: 2px;
+    padding-top: 2px;
+    font-size: 12px;
+    color: #666666;
+}
+
+.mynavbar-nav > li > a.active {
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+
+.mynavbar-nav > li.border-right {
+    border-right: 1px solid #C0C0C0;
+}
+
+div.white {
+    background-color: #ffffff;
+    padding: 10px 10px 0 10px;
+    box-shadow: 0 1px 4px 0 #888888;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #666666;
+}
+div.border {
+    border-bottom: 1px solid #c0c0c0;
+}
+
+div.space-top, table.space-top {
+    margin-top: 10px;
+}
+
+div.space-bottom, table.space-bottom {
+    margin-bottom: 10px;
+}
+
+.my-checkbox {
+    float: right;
+    margin-top: 0;
+}
+div.margin-top { margin-top: 42%;}
+
+input.search-bg{
+    background: url('/images/search_icon.jpg') no-repeat #ffffff 2px ;
+    padding-left: 10%;
+    box-shadow: 0 1px 4px 0 #888888;
+}
+
+div.rounded-border{
+    border-radius: 12px;
+}
+
+button.my-btn{ margin-top: 10px; margin-bottom: 10px; color: #666666;}
+.no-margin{ margin-top: 0}
+a.my_custom_anchor{ color: #666666;}
+a.del_prop {float: right; font-size: 10px;}

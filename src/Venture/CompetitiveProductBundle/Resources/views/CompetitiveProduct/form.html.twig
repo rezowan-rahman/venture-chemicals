@@ -1,97 +1,118 @@
-{{ form_start(form) }}
-            
-            <div class="property-cont">
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.itemName) }}</p>
-                    <p class="field">{{ form_widget(form.itemName) }}</p>
-                    <p class="error">{{ form_errors(form.itemName) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.itemDescription) }}</p>
-                    <p class="field">{{ form_widget(form.itemDescription) }}</p>
-                    <p class="error">{{ form_errors(form.itemDescription) }}</p>
-                </div>
-                
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.itemSupplier) }}</p>
-                    <p class="field">{{ form_widget(form.itemSupplier) }}</p>
-                    <p class="error">{{ form_errors(form.itemSupplier) }}</p>
-                </div>
-            </div>
-            
-            <div class="property-cont">
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.configPackaging) }}</p>
-                    <p class="field">{{ form_widget(form.configPackaging) }}</p>
-                    <p class="error">{{ form_errors(form.configPackaging) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.tags) }}</p>
-                    <p class="field">{{ form_widget(form.tags) }}</p>
-                    <p class="error">{{ form_errors(form.tags) }}</p>
-                </div>
-                <div class= "form-element-controller">
-                    <p class="label">{{ form_label(form.standardCost) }}</p>
-                    <p class="field">{{ form_widget(form.standardCost) }}</p>
-                    <p class="error">{{ form_errors(form.standardCost) }}</p>
-                </div>
-            </div>
-            
-            
-            
-            <div class="property-cont">
-                <ul class="spec" data-prototype="{{ form_widget(form.properties.vars.prototype)|e }}">
-                    {% for prop in form.properties %}
-                    <li>
-                        <div>
-                            <div>
-                                {{ form_label(prop.property) }}
-                                {{ form_widget(prop.property) }}
-                                {{ form_errors(prop.property) }}
-                            </div>
-                            
-                            <div>
-                                {{ form_label(prop.specificationMath) }}
-                                {{ form_widget(prop.specificationMath) }}
-                                {{ form_errors(prop.specificationMath) }}
-                            </div>
-                                
-                            <div>
-                                {{ form_label(prop.specification) }}
-                                {{ form_widget(prop.specification) }}
-                                {{ form_errors(prop.specification) }}
-                            </div>
-                                
-                            <div>
-                                {{ form_label(prop.testProcedure) }}
-                                {{ form_widget(prop.testProcedure) }}
-                                {{ form_errors(prop.testProcedure) }}
-                            </div>
-                        </div>
-                        <a class="del_prop deleteParentElement" href="#">Delete</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="property-cont">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="label">{{ form_label(form.isActive) }}</p>
-                        <p class="field">{{ form_widget(form.isActive) }}</p>
-                        <p class="error">{{ form_errors(form.isActive) }}</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="property-cont no-brd">
-                <div class="rows">
-                    <div class= "form-element-controller four-items">
-                        <p class="field">
-                            <button class="add-new" type="submit">Save</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        
-       {{ form_end(form) }}
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
+
+<div class="row space-top">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.itemName) }}
+            {{ form_widget(form.itemName, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemName) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.itemDescription) }}
+            {{ form_widget(form.itemDescription, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemDescription) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.itemSupplier) }}
+            {{ form_widget(form.itemSupplier, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemSupplier) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.configPackaging) }}
+            {{ form_widget(form.configPackaging, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.configPackaging) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.tags) }}
+            {{ form_widget(form.tags, {'attr': {
+                'class' : 'form-control input-sm',
+                'placeholder' : 'tag-1, tag-2'
+            } }) }}
+            {{ form_errors(form.tags) }}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_label(form.standardCost) }}
+            {{ form_widget(form.standardCost, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.standardCost) }}
+        </div>
+    </div>
+</div>
+
+<div class="row space-bottom">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+
+{% for property in form.properties %}
+    <div class="row property">
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a class="del_prop" href="#" onclick="delTHis(this)">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row add-properties"
+     data-prototype="{% filter escape %}
+        {% include 'VentureCommonBundle:Common:properties.form.html.twig' with {'property': form.properties.vars.prototype} %}
+        {% endfilter %}">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-xs" id="add-properties">Add Property</button>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="checkbox">
+            {{ form_label(form.isActive) }}
+            {{ form_widget(form.isActive) }}
+            {{ form_errors(form.isActive) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-2">
+        <div class="form-group">
+            <button type="Submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
+{{ form_end(form) }}

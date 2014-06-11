@@ -26,7 +26,7 @@ class PipeLineYearSale
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="year", type="date")
+     * @ORM\Column(name="year", type="string", length=30)
      */
     private $year;
 
@@ -35,28 +35,28 @@ class PipeLineYearSale
      *
      * @ORM\Column(name="firstQt", type="string", length=30)
      */
-    private $firstQt;
+    private $firstQt = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="secondQt", type="string", length=30)
      */
-    private $secondQt;
+    private $secondQt = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="thirdQt", type="string", length=30)
      */
-    private $thirdQt;
+    private $thirdQt = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="fourthQt", type="string", length=30)
      */
-    private $fourthQt;
+    private $fourthQt = 0;
 
     /**
      * @var string
@@ -93,7 +93,7 @@ class PipeLineYearSale
     /**
      * Set year
      *
-     * @param \DateTime $year
+     * @param string $year
      * @return PipeLineYearSale
      */
     public function setYear($year)
@@ -106,7 +106,7 @@ class PipeLineYearSale
     /**
      * Get year
      *
-     * @return \DateTime 
+     * @return string
      */
     public function getYear()
     {
@@ -213,8 +213,12 @@ class PipeLineYearSale
      */
     public function setTotal($total)
     {
-        $this->total = $total;
-    
+        //$this->total = $total;
+        $this->total = $this->firstQt +
+            $this->secondQt +
+            $this->thirdQt +
+            $this->fourthQt;
+
         return $this;
     }
 

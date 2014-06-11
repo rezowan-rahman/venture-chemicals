@@ -1,99 +1,149 @@
 {% extends 'VentureFinishedProductBundle::layout.html.twig' %}
 
-{% block title %}Finished Product Details{% endblock%}
+{% block title %}Finished Product History Details{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
 
-<div class="cont font-check">
-    <h2 class="heading"> {{ "finished products"| upper }}: {{ finishedProduct['itemNumber'] | upper }}: {{ finishedProduct['itemName'] | upper }}</h2>
-    
-    <h4 class="desc-cont">Description: {{ finishedProduct['itemDescription'] }}</h4>
-    
-    <div class="row-cont">
-        <div class="row">
-            <p class="left-side">Packaging: {{ finishedProduct['configPackaging'] }}</p>
-            <p class="right-side">Quoting cost: {{ finishedProduct['quotingCost'] }}</p>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Finished Products:
+                <small>{{ finishedProduct['itemNumber'] is defined?finishedProduct['itemNumber']:"N/A" }}: </small>
+                <small>{{ finishedProduct['itemName'] is defined?finishedProduct['itemName']:"N/A" }}:</small>
+            </h4>
         </div>
-    
-        <div class="row">
-            <p class="left-side">Tags: {{ finishedProduct['tags'] }}</p>
-            <p class="right-side">Lowest cost: {{ finishedProduct['lowestCost'] }}</p>
-        </div>
-            
     </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Sales Price Points:</h4>
-        
-        <div class="property-row">
-            <p>Standard Price</p>
-            {% if finishedProduct['standardCost'] is defined %}
-            <p>{{ finishedProduct['standardCost'] }}</p>
-            {% else %}
-            <p>0.00</p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Description: {{ finishedProduct['itemDescription'] is defined?finishedProduct['itemDescription']:"N/A" }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-6">
+            <p>Packaging: {{ finishedProduct['configPackaging'] is defined?finishedProduct['configPackaging']:"N/A" }}</p>
+            <p>Tags: {{ finishedProduct['tags'] is defined?finishedProduct['tags']:'N/A' }}</p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">Quoting cost: {{ finishedProduct['quotingCost'] is defined?finishedProduct['quotingCost']:"N/A" }}</p>
+            <p class="text-right">Lowest cost: {{ finishedProduct['lowestCost'] is defined?finishedProduct['lowestCost']:"N/A" }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Sales Price Points:</h5>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-6">
+            <p>Standard Price: {{ finishedProduct['standardCost'] is defined?finishedProduct['standardCost']:"N/A" }}</p>
+        </div>
+        <div class="col-md-6">
+            {% if finishedProduct['salesPointCosts'] is defined %}
+            {% for spCost in finishedProduct['salesPointCosts'] %}
+                <p class="text-right">
+                    {{ spCost['salesCostPoint'] is defined?spCost['salesCostPoint']:"N/A" }} :
+                    {{ spCost['cost'] is defined?spCost['cost']:"N/A" }}</p>
+            {% endfor %}
             {% endif %}
         </div>
-        
-        {% if finishedProduct['salesPointCosts'] is defined %}
-        {% for spCost in finishedProduct['salesPointCosts'] %}
-        <div class="property-row">
-            <p>{{ spCost['salesCostPoint'] }}</p>
-            <p>{{ spCost['cost'] }}</p>
-        </div>
-        {% else %}
-        <div class="property-row">
-            <p class="single">There are no special price points listed</p>
-        </div>
-        {% endfor %}
-        {% endif %}
     </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Properties:</h4>
-            {% for property in finishedProduct['properties'] %}
-            <div class="property-row">
-                <p>{{ property['property']}}</p>
-                <p>{{ property['specification'] }}&nbsp;{{ property['specificationMath'] }}</p>
-                <p>{{ property['testProcedure'] }}</p>
-            </div>
-            {% else %}
-            <div class="property-row">
-                <p class="single">There is no property listed</p>
-            </div>
-            {% endfor %}
-    </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Formula:</h4>
-            {% for formula in finishedProduct['formulas'] %}
-            <div class="property-row">
-                {% if formula['rawMaterial'] is defined %}
-                <p>{{ formula['rawMaterial'] }}</p>
-                {% elseif formula['intermediate'] is defined %}
-                <p>{{ formula['intermediate'] }}</p>
-                {% else %}
-                <p>{{ formula['intermediate'] }} - {{ formula['rawMaterial'] }}</p>
-                {% endif %}
-                <p>{{ formula['amount'] }} %</p>
-            </div>
-            {% else %}
-            <div class="property-row">
-                <p class="single">There is no formula listed</p>
-            </div>
-            {% endfor %}
-    </div>
-    
-    <div class="row-cont no-brd">
-        <h3 class="ven-label">Other Informations:</h3>
-        <div class="row">
-            <p class="left-side">Reason for change: {{ finishedProduct['reasonForChange'] }}</p>
-            <p class="left-side">Amount in stock: {{ finishedProduct['amountInStock'] }}</p>
-            <p class="left-side">Amount on Sales Order: {{ finishedProduct['amountInPurchaseOrder'] }} </p>
-            <p class="left-side">Recommended Stock Level: {{ finishedProduct['reorderPoint'] }}</p>            
-        </div> 
-    </div>
-    
-</div>
 
-{% endblock %} 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% if finishedProduct['properties'] is defined and finishedProduct['properties'] | length > 0 %}
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Properties</h5>
+        </div>
+    </div>
+
+    {% for property in finishedProduct['properties'] %}
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    <li>{{ property['property'] is defined?property['property']:"N/A" }}</li>
+                    <li>{{ property['specification'] is defined?property['specification']:"N/A" }}</li>
+                    <li>{{ property['specificationMath'] is defined?property['specificationMath']:"N/A" }}</li>
+                    <li>{{ property['testProcedure'] is defined?property['testProcedure']:"N/A" }}</li>
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if finishedProduct['formulas'] is defined and finishedProduct['formulas'] | length > 0 %}
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Formulas</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <dl class="dl-horizontal">
+                    {% for formula in finishedProduct['formulas'] %}
+                        <dt>
+                            {{ formula['intermediate'] is defined ? formula['intermediate']:"" }}
+                            {{ formula['rawMaterial'] is defined?formula['rawMaterial']:"" }}
+                        </dt>
+                        <dd>{{ formula['amount'] is defined?formula['amount']:"N/A" }}%</dd>
+                    {% endfor %}
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="border"></div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Other Informations</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>Reason for change: {{ finishedProduct['reasonForChange'] is defined?finishedProduct['reasonForChange']:"N/A" }}</p>
+            <p>Amount in stock: {{ finishedProduct['amountInStock'] is defined? finishedProduct['amountInStock']:"N/A" }}</p>
+            <p>Amount on Sales Order: {{ finishedProduct['amountInPurchaseOrder'] is defined?finishedProduct['amountInPurchaseOrder']:"N/A" }} </p>
+            <p>Recommended Stock Level: {{ finishedProduct['reorderPoint'] is defined?finishedProduct['reorderPoint']:"N/A" }}</p>
+        </div>
+    </div>
+
+{% endblock %}

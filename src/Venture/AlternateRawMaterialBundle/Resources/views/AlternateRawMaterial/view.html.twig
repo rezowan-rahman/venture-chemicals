@@ -1,99 +1,172 @@
-{% extends 'VentureAlternateRawMaterialBundle::layout.html.twig' %}
+{% extends 'VentureAlternateRawMaterialBundle::layout.new.html.twig' %}
 
 {% block title %}Alternate Raw Material Details{% endblock%}
 
-{% block main %}
-    {{ parent() }}
 
-<div class="cont font-check">
-    <h2 class="heading">ALTERNATE RAW MATERIALS: {{ alternateRawMaterial.ItemName }}</h2>
-    
-    <h4 class="desc-cont">Description: {{ alternateRawMaterial.itemDescription }}</h4>
-    
-    <div class="row-cont">
-        <div class="row">
-            <p class="left-side">Unit of measure: {{ alternateRawMaterial.unitOfMeasure.name }}</p>
-            <p class="right-side">
-                Quoting cost: {{ alternateRawMaterial.quotingCost }}
-            </p>
+{% block middle %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>ALTERNATE RAW MATERIALS: <small>{{ alternateRawMaterial.ItemName }}</small></h4>
         </div>
-    
-        <div class="row">
-            <p class="left-side">Tags: {{ alternateRawMaterial.tags }}</p>
-            
-            <p class="right-side">
-                Lowest cost: {{ alternateRawMaterial.lowestCost }}
-            </p>
-            
-        </div>
-            
     </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Properties:</h4>
-            {% for property in alternateRawMaterial.properties %}
-            <div class="property-row">
-                {% if property.property is empty %}
-                <p>N/A</p>
-                {% else %}
-                <p>{{ property.property.name}}</p>
-                {% endif %}
-                <p>{{ property.specification}}&nbsp;{{ property.specificationMath}}</p>
-                {% if property.testProcedure is empty %}
-                <p>N/A</p>
-                {% else %}
-                <p>{{ property.testProcedure.name}}</p>
-                {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Description: <small>{{ alternateRawMaterial.itemDescription }}</small></h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-6">
+            <p>Unit of measure: {{ alternateRawMaterial.unitOfMeasure?alternateRawMaterial.unitOfMeasure.name:"N/A" }}</p>
+            <p>Tags: {{ alternateRawMaterial.tags }}</p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">Quoting cost: {{ alternateRawMaterial.quotingCost }}</p>
+            <p class="text-right">Lowest cost: {{ alternateRawMaterial.lowestCost }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Properties</h5>
+        </div>
+    </div>
+
+    {% for property in alternateRawMaterial.properties %}
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    <li>{{ property.property? property.property.name: "N/A" }}</li>
+                    <li>{{ property.specification }}</li>
+                    <li>{{ property.specificationMath }}</li>
+                    <li>{{ property.testProcedure? property.testProcedure.name: "N/A" }}</li>
+                </ul>
             </div>
-            {% else %}
-            <div class="property-row">
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-12">
                 <p>There is no property listed</p>
             </div>
-            {% endfor %}
-    </div>
-    
-    <div class="vendor-cont">
-        <h3 class="ven-label">Vendors:</h3>
-        {% if alternateRawMaterial.orderingDetails | length > 0 %}
-        <div class="property-cont no-brd">
-            <div class="property-row">
-                <p>Vendor Name<p>
-                <p>Shipping Method</p>
-                <p>Pre-Freight Cost</p>
-                <p>Lead Time</p>
-                <p>Cost/{{ alternateRawMaterial.unitOfMeasure.name }}</p>
-            </div>
         </div>
-        
-        {% for detail in alternateRawMaterial.orderingDetails %}
-        <div class="property-row">
-            <p class="link"><a href="{{ path('VentureVendorBundle_vendor_details', {'id': detail.vendor.id}) }}" target="_blank">{{detail.vendor.name}}</a></p>
-            <p>{{detail.shippingMethod.name}}</p>
-            <p>{{detail.preFreightCost}}</p>
-            <p>{{detail.leadTime}}</p>
-            <p>{{detail.costPerUnit}}</p>
-        </div>
-        {% endfor %}
-        {% else %}
-        <div class="property-row">
-            <p>No vendor info is listed</p>
-        </div>
-        {% endif %}
-    </div>
-    
-    <div class="row-cont no-brd">
-        <h3 class="ven-label">Other Informations:</h3>
-        <div class="row">
-            <p class="left-side">Amount in stock: 0</p>
-            <p class="left-side">Amount on purchase order: 0</p>
-        </div> 
-        <button class="add-new edit popUpButton" data-location="#">Convert</button>
-        <button class="add-new edit target" data-location="{{ path('venture_edit_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}">Edit</button>
-        <button class="add-new edit confirm target" data-location="{{ path('venture_remove_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}" data-message = "Are you sure to delete this record?">Delete</button>
-    </div>
-</div>
+    {% endfor %}
 
-{% endblock %} 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Vendors</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Vendor Name</th>
+                    <th>Shipping Method</th>
+                    <th>Pre Freight Cost</th>
+                    <th>Lead Time</th>
+                    <th>Cost/{{ alternateRawMaterial.unitOfMeasure.name }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for detail in alternateRawMaterial.orderingDetails %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('VentureVendorBundle_vendor_details', {'id': detail.vendor.id}) }}"
+                               target="_blank">{{detail.vendor.name}}
+                            </a>
+                        </td>
+                        <td>{{detail.shippingMethod.name}}</td>
+                        <td>{{detail.preFreightCost}}</td>
+                        <td>{{detail.leadTime}}</td>
+                        <td>{{detail.costPerUnit}}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No vendor info is listed</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Other Informations</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>Amount in stock: 0</p>
+            <p>Amount on purchase order: 0</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top space-bottom">
+        <div class="col-md-12">
+            <ul class="list-inline">
+                <li>
+                    <button type="button"
+                            class="btn btn-default btn-sm popUpButton" data-path="#">Convert</button>
+                </li>
+                <li>
+                    <button type="button"
+                            data-path="{{ path('venture_edit_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}"
+                            class="btn btn-default btn-sm target">Update</button>
+                </li>
+                <li>
+                    <button type="button"
+                            data-path="{{ path('venture_remove_alternate_raw_material',  {'id': alternateRawMaterial.id}) }}"
+                            class="btn btn-default btn-sm target confirm">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
 
 {% block popup %}
     {{ parent() }}
@@ -109,10 +182,18 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts 
-        'js/lib/bPopUpLib.js' 
-        '@VentureAlternateRawMaterialBundle/Resources/public/js/custom.popup.js' 
+    {% javascripts
+    'js/lib/bPopUpLib.js'
+    '@VentureAlternateRawMaterialBundle/Resources/public/js/custom.popup.js'
     %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@VentureAlternateRawMaterialBundle/Resources/public/css/common.css' %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+

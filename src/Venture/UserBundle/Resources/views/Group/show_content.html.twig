@@ -1,46 +1,53 @@
-<table id="hor-minimalist-a">
-    <tbody>
-        <tr>
-            <td>Name: </td>
-            <td>{{ group.name }}</td>
-        </tr>
-        
-        <tr>
-            <td>Description: </td>
-            <td>{{ group.description }}</td>
-        </tr>
-        
-        <tr>
-            <td>Role: </td>
-            <td>
+<form class="form-horizontal" role="form">
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Name:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static">{{ group.name }}</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Description: </label>
+        <div class="col-sm-9">
+            <p class="form-control-static">{{ group.description }}</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Updated:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static">{{ group.updated|date('F j, Y h:iA') }}</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Role:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static">
                 {% for role in group.roles %}
-                <span> {{ role }},</span>
+                    {{ role }}
                 {% endfor %}
-            </td>
-        </tr>
-        
-        <tr>
-            <td>Updated </td>
-            <td>{{ group.updated|date('F j, Y h:iA') }}</td>
-        </tr>
-        
-        
-        <tr class="empty">
-            <td colspan="2">&nbsp;</td>
-        </tr>
-        
-        <tr class="empty">
-            <td colspan="2">
-                <input type="button" 
-                       class="config_form_button target" 
-                       value="Update" 
-                       onclick="window.location='{{ path("fos_user_group_edit", {"groupname" : group.name}) }}'" />
-                
-                <input type="button" 
-                       class="config_form_button target" 
-                       value="Delete" 
-                       onclick="window.location='{{ path("fos_user_group_delete", {"groupname" : group.name}) }}'" />
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="form-group space-top">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="button"
+                    data-path="{{ path("fos_user_group_edit", {"groupname" : group.name}) }}"
+                    class="btn btn-default btn-sm target">Update</button>
+
+            <button type="button"
+                    data-path="{{ path("fos_user_group_delete", {"groupname" : group.name}) }}"
+                    class="btn btn-default btn-sm target confirm">Delete</button>
+        </div>
+    </div>
+
+</form>

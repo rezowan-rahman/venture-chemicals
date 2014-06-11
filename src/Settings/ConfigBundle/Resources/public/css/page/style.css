@@ -1,0 +1,32 @@
+ul.config-list li {
+    float:left;
+    height:280px;
+    width: 28%;
+    margin: 10px 35px 20px 0;
+    background: url("/images/smalllogo.png") #FFFFFF 95% 5% no-repeat;
+    background-color: #FFFFFF;
+    border: 0 solid;
+    box-shadow: 0 1px 4px 0 #888888;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+ul.config-list li p{
+    font-size: 13px;
+    text-align: left;
+}
+
+ul.config-list li p a{
+    text-decoration: none;
+    color: burlywood;
+}
+
+ul.config-list li h4 {
+    font-weight: bold;
+    color: black;
+}
+
+ul.config-list li h4 a{
+    text-decoration: none;
+    color: black;
+}

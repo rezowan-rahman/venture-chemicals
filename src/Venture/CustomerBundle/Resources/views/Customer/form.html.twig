@@ -1,108 +1,124 @@
-{{ form_start(form) }}
-<div class="property-cont border-bottom">
-    <div class= "form-element-controller smaller-width">
-        <p class="label">{{ form_label(form.name) }}</p>
-        <p>{{ form_errors(form.name) }}</p>
-        <p>{{ form_widget(form.name) }}</p>
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
+<div class="row space-top">
+
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.streetAddress1) }}
+            {{ form_widget(form.streetAddress1, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.streetAddress1) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.streetAddress2) }}
+            {{ form_widget(form.streetAddress2, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.streetAddress2) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.city) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.state) }}
+            {{ form_widget(form.state, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.state) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.zipCode) }}
+            {{ form_widget(form.zipCode, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.zipCode) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.website) }}
+            {{ form_widget(form.website, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.website) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.phoneNumber) }}
+            {{ form_widget(form.phoneNumber, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.phoneNumber) }}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.contact1) }}
+            {{ form_widget(form.contact1, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.contact1) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.contact1Email) }}
+            {{ form_widget(form.contact1Email, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.contact1Email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.contact2) }}
+            {{ form_widget(form.contact2, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.contact2) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.contact2Email) }}
+            {{ form_widget(form.contact2Email, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.contact2Email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.children) }}
+            {{ form_widget(form.children, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.children) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.note) }}
+            {{ form_widget(form.note, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.note) }}
+        </div>
     </div>
 </div>
 
-<div class="form-left-cloumn">
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.streetAddress1) }}</p>
-        <p>{{ form_errors(form.streetAddress1) }}</p>
-        <p>{{ form_widget(form.streetAddress1) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.streetAddress2) }}</p>
-        <p>{{ form_errors(form.streetAddress2) }}</p>
-        <p>{{ form_widget(form.streetAddress2) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.city) }}</p>
-        <p>{{ form_errors(form.city) }}</p>
-        <p>{{ form_widget(form.city) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.state) }}</p>
-        <p>{{ form_errors(form.state) }}</p>
-        <p>{{ form_widget(form.state) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.zipCode) }}</p>
-        <p>{{ form_errors(form.zipCode) }}</p>
-        <p>{{ form_widget(form.zipCode) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.website) }}</p>
-        <p>{{ form_errors(form.website) }}</p>
-        <p>{{ form_widget(form.website) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.phoneNumber) }}</p>
-        <p>{{ form_errors(form.phoneNumber) }}</p>
-        <p>{{ form_widget(form.phoneNumber) }}</p>
-    </div>
-    
-    
-</div>
-
-<div class="form-right-cloumn">
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.contact1) }}</p>
-        <p>{{ form_errors(form.contact1) }}</p>
-        <p>{{ form_widget(form.contact1) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.contact1Email) }}</p>
-        <p>{{ form_errors(form.contact1Email) }}</p>
-        <p>{{ form_widget(form.contact1Email) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.contact2) }}</p>
-        <p>{{ form_errors(form.contact2) }}</p>
-        <p>{{ form_widget(form.contact2) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.contact2Email) }}</p>
-        <p>{{ form_errors(form.contact2Email) }}</p>
-        <p>{{ form_widget(form.contact2Email) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.children) }}</p>
-        <p>{{ form_errors(form.children) }}</p>
-        <p>{{ form_widget(form.children) }}</p>
-    </div>
-    
-    <div class= "form-element-controller">
-        <p class="label">{{ form_label(form.note) }}</p>
-        <p>{{ form_errors(form.note) }}</p>
-        <p>{{ form_widget(form.note) }}</p>
-    </div>
-    
-</div>
-
-<div class="property-cont-row-first">
-    <div class= "form-element-controller smaller-width">	
-        <p class="label">{{ form_label(form.isActive) }}</p>
-        <p>{{ form_errors(form.isActive) }}</p>
-        <p>{{ form_widget(form.isActive) }}</p>	 
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
     </div>
 </div>
 
-<div class="property-cont-row-first">	
-    <div class="button_place_holder">
-        <p><input type="submit" value="Save" class="vendor_form_button"></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="checkbox">
+            {{ form_label(form.isActive) }}
+            {{ form_widget(form.isActive) }}
+            {{ form_errors(form.isActive) }}
+        </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-2">
+        <div class="form-group">
+            <button type="Submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+    <div class="col-md-10"></div>
+</div>
+
 {{ form_end(form) }}

@@ -1,25 +1,32 @@
-    <table id="hor-minimalist-a">
-        <thead>
-            <th>Stage Name</th>
-            <th>Status</th>
-            <th>Updated</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Stage Name</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for stage in stages %}
-            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
-                <td>{{ stage.name }}</td>
-                <td>{{ (stage.isActive)?"Active":"Inactive" }}</td>
-                <td>{{ stage.updated|date('F j, Y h:iA') }}</td>
-                <td>
-                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_stage_update', {'id': stage.id}) }}">Edit</a> | 
-                    <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_stage_delete', {'id': stage.id}) }}" onclick="return confirmDel();">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ stage.name }}</td>
+                    <td>{{ (stage.isActive)?"Active":"Inactive" }}</td>
+                    <td>{{ stage.updated|date('F j, Y h:iA') }}</td>
+                    <td>
+                        <a class="my_custom_anchor" href="{{ path('SettingsConfigBundle_stage_update', {'id': stage.id}) }}">Edit</a> |
+                        <a class="my_custom_anchor delete" href="{{ path('SettingsConfigBundle_stage_delete', {'id': stage.id}) }}">Delete</a>
+                    </td>
+                </tr>
             {% else %}
-            <tr class="empty">
-                <td colspan="5">There are no stage entered yet</td>
-            </tr>
+                <tr>
+                    <td colspan="4">There are no stage entered yet</td>
+                </tr>
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>

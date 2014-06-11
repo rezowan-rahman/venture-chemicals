@@ -1,0 +1,31 @@
+<div class="col-md-3">
+    <div class="form-group">
+        {{ form_label(property.property) }}
+        {{ form_widget(property.property, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(property.property) }}
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="form-group">
+        {{ form_label(property.specificationMath) }}
+        {{ form_widget(property.specificationMath, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(property.specificationMath) }}
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="form-group">
+        {{ form_label(property.specification) }}
+        {{ form_widget(property.specification, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(property.specification) }}
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="form-group">
+        {{ form_label(property.testProcedure) }}
+        {{ form_widget(property.testProcedure, {'attr': {'class' : 'form-control input-sm'} }) }}
+        {{ form_errors(property.testProcedure) }}
+    </div>
+</div>

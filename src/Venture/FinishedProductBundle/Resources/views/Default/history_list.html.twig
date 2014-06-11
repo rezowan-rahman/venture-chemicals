@@ -2,37 +2,48 @@
 
 {% block title %}Finished Product History{% endblock%}
 
-
-
-{% block main %}
+{% block middle %}
     {{ parent() }}
-    <div class="cont"> 
-        <h2 class="heading">FINISHED PRODUCTS: {{ finishedProduct.itemNumber | upper }}: HISTORY</h2>
-        
-        <div class="clear"></div>
-         
-        <table class="raw-materials-listing">
-            <thead>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Finished Product:
+                <small>{{ finishedProduct.itemNumber }}:</small>
+                <small>History</small></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
                 <tr>
-                    <th width="33%">{{"date of revision" | upper}}</th>
-                    <th width="33%">{{"reason for change" | upper}}</th>
-                    <th width="33%">&nbsp;</th>
+                    <th width="33%">Date of Revision</th>
+                    <th width="33%">Reason For Change</th>
+                    <th width="33%">Action</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for version in versions %}
-                <tr class="records">
-                    <td>{{ version.loggedAt|date('F j, Y h:iA')}}</td>
-                    <td>{{ version.reasonForChange }}</td>
-                    <td><a href="{{ path('venture_finished_product_history_details', {'id': version.id}) }}">VIEW</a></td>
-                </tr>
+                    <tr>
+                        <td>{{ version.loggedAt|date('F j, Y h:iA')}}</td>
+                        <td>{{ version.reasonForChange }}</td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_finished_product_history_details', {'id': version.id}) }}">VIEW</a></td>
+                    </tr>
                 {% else %}
-                <tr class="records">
-                    <td colspan="3">No Records Found</td>
-                </tr>
+                    <tr>
+                        <td colspan="3">>No Records Found</td>
+                    </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-   </div>
-	
-{% endblock %}  
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}

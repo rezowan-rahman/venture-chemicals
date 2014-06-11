@@ -2,87 +2,152 @@
 
 {% block title %}Intermediate Details{% endblock%}
 
-{% block main %}
+{% block middle %}
     {{ parent() }}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Intermediates:
+                <small>{{ intermediate.ItemNumber }}: </small>
+                <small>{{ intermediate.ItemName }}:</small>
+            </h4>
+        </div>
+    </div>
 
-<div class="cont font-check">
-    <h2 class="heading">{{ "intermediates" | upper }}: {{ intermediate.ItemNumber | upper }}: {{ intermediate.ItemName | upper }}</h2>
-    
-    <h4 class="desc-cont">Description: {{ intermediate.itemDescription }}</h4>
-    
-    <div class="row-cont">
-        <div class="row">
-            <p class="left-side">Unit of measure: {{ intermediate.unitOfMeasure.name }}</p>
-            <p class="right-side">Quoting cost: {{ quoting_cost }}</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
         </div>
-    
-        <div class="row">
-            <p class="left-side">Tags: {{ intermediate.tags }}</p>
-            <p class="right-side">Lowest cost: {{ lowest_cost }}</p>
-        </div>
-            
     </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Properties:</h4>
-            {% for property in properties %}
-            <div class="property-row">
-                {% if property.property is empty %}
-                <p>N/A</p>
-                {% else %}
-                <p>{{ property.property.name}}</p>
-                {% endif %}
-                <p>{{ property.specification}}&nbsp;{{ property.specificationMath}}</p>
-                {% if property.testProcedure is empty %}
-                <p>N/A</p>
-                {% else %}
-                <p>{{ property.testProcedure.name}}</p>
-                {% endif %}
-            </div>
-            {% else %}
-            <div class="property-row">
-                <p class="single">There is no property listed</p>
-            </div>
-            {% endfor %}
-    </div>
-    
-    <div class="property-cont">
-        <h4 class="desc-cont no-brd">Formula:</h4>
-            {% for formula in formulas %}
-            <div class="property-row">
-                {% if formula.rawMaterial is empty %}
-                <p>{{ formula.ingredient.itemNumber }}</p>
-                {% elseif formula.ingredient is empty %}
-                <p>{{ formula.rawMaterial.itemNumber }}</p>
-                {% else %}
-                <p>{{ formula.ingredient.itemNumber }} - {{ formula.rawMaterial.itemNumber}}</p>
-                {% endif %}
-                <p>{{ formula.amount }} %</p>
-            </div>
-            {% else %}
-            <div class="property-row">
-                <p class="single">There is no formula listed</p>
-            </div>
-            {% endfor %}
-        {% if total_percentage['total_amount'] is not null %}
-        <div class="property-row">
-            <p class="space"></p>
-            <p>{{ total_percentage['total_amount'] }}% Total Percentage</p>
-        </div>
-        {% endif %}
-    </div>
-    
-    <div class="row-cont no-brd">
-        <h3 class="ven-label">Other Informations:</h3>
-        <div class="row">
-            <p class="left-side">Reason For Change: {{ intermediate.reasonForChange }}</p>
-            <p class="left-side">Amount in stock: 0</p>
-        </div> 
-        <button class="add-new edit target" data-location="{{ path('venture_intermediate_history',  {'id': id}) }}">History</button>
-        <button class="add-new edit target" data-location="{{ path('venture_intermediate_update',  {'id': id}) }}">Edit</button>
-        <button class="add-new edit target delete" data-location="{{ path('venture_intermediate_delete',  {'id': id}) }}">Delete</button>
-    </div>
-    
-</div>
 
-{% endblock %} 
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Description: {{ intermediate.itemDescription }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top">
+        <div class="col-md-6">
+            <p>Unit of measure: {{ intermediate.unitOfMeasure.name }}</p>
+            <p>Tags: {{ intermediate.tags }}</p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">Quoting cost: {{ quoting_cost }}</p>
+            <p class="text-right">Lowest cost: {{ lowest_cost }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Properties</h5>
+        </div>
+    </div>
+
+    {% for property in properties %}
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    <li>{{ property.property? property.property.name: "N/A" }}</li>
+                    <li>{{ property.specification }}</li>
+                    <li>{{ property.specificationMath }}</li>
+                    <li>{{ property.testProcedure? property.testProcedure.name: "N/A" }}</li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-12">
+                <p>There is no property listed</p>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    {% if formulas | length > 0 %}
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Formulas</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <dl class="dl-horizontal">
+                {% for formula in formulas %}
+                    <dt>
+                        {{ formula.ingredient?formula.ingredient.itemNumber:"" }}
+                         {{ formula.rawMaterial?formula.rawMaterial.itemNumber:"" }}
+                    </dt>
+                    <dd>{{ formula.amount }}%</dd>
+                {% endfor %}
+                    <dt>Total Percentage:</dt>
+                    <dd>{{ total_percentage['total_amount']? total_percentage['total_amount']:0 }}%</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Other Informations</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>Reason For Change: {{ intermediate.reasonForChange }}</p>
+            <p>Amount in stock: 0</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
+    <div class="row space-top space-bottom">
+        <div class="col-md-12">
+            <ul class="list-inline">
+                <li>
+                    <button type="button"
+                            data-path="{{ path('venture_intermediate_history',  {'id': id}) }}"
+                            class="btn btn-default btn-sm target">History</button>
+                </li>
+                <li>
+                    <button type="button"
+                            data-path="{{ path('venture_intermediate_update',  {'id': id}) }}"
+                            class="btn btn-default btn-sm target">Update</button>
+                </li>
+                <li>
+                    <button type="button"
+                            data-path="{{ path('venture_intermediate_delete',  {'id': id}) }}"
+                            class="btn btn-default btn-sm target confirm">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
