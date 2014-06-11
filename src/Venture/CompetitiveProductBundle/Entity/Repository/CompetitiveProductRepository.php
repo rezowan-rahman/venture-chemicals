@@ -12,19 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class CompetitiveProductRepository extends EntityRepository
 {
-    public function getLatestProducts($active = false, $limit = NULL) {
-         $qb = $this->createQueryBuilder('cp')
-                    ->select('cp')
-                    ->addOrderBy('cp.updated', 'DESC');
-        
-        if (true === $active)
-            $qb->andWhere('cp.isActive = :active')
-               ->setParameter('active', $active);
 
-
-        if (false === is_null($limit))
-            $qb->setMaxResults($limit);
-
-        return $qb->getQuery()->getResult();
-    }
 }

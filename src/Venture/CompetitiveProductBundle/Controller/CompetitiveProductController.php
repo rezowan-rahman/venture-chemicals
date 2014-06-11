@@ -28,8 +28,16 @@ class CompetitiveProductController extends Controller
      */
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
+
+        $condition = array();
+        if($active) $condition["isActive"] = $active;
+
         $em = $this->initDoctrine();
-        $competitiveProducts = $em->getRepository('VentureCompetitiveProductBundle:CompetitiveProduct')->getLatestProducts($active);
+        $competitiveProducts = $em
+            ->getRepository('VentureCompetitiveProductBundle:CompetitiveProduct')
+            ->findBy($condition, array(
+                "updated" => "DESC"
+            ));
         
         return array(
             'competitiveProducts' => $competitiveProducts,
