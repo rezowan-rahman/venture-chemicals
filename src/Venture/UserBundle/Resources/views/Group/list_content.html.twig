@@ -1,33 +1,37 @@
-<table id="hor-minimalist-a">
-    <thead>
-        <th>Role</th>
-        <th>Action</th>
-    </thead>
-    <tbody>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for group in groups %}
-            <tr class="comment {{ cycle(['odd', 'even'], loop.index0) }}">               
-                <td>{{ group.name }}</td>
-                <td>
-                    <a class="my_custom_anchor" href="{{path("fos_user_group_show", {"groupname" : group.name})}}">Show</a> |
-                    <a class="my_custom_anchor" href="{{path("fos_user_group_edit", {"groupname" : group.name})}}">Edit</a> | 
-                    <a class="my_custom_anchor" href="{{path("fos_user_group_delete", {"groupname" : group.name})}}" onclick="return confirmDel();">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ group.name }}</td>
+                    <td>
+                        <a class="my_custom_anchor" href="{{path("fos_user_group_show", {"groupname" : group.name})}}">Show</a> |
+                        <a class="my_custom_anchor" href="{{path("fos_user_group_edit", {"groupname" : group.name})}}">Edit</a> |
+                        <a class="my_custom_anchor delete" href="{{path("fos_user_group_delete", {"groupname" : group.name})}}">Delete</a>
+                    </td>
+                </tr>
             {% else %}
-            <tr class="empty">
-                <td colspan="3">There are no Roles defined yet</td>
-            </tr>
+                <tr class="empty">
+                    <td colspan="3">There are no Roles defined yet</td>
+                </tr>
             {% endfor %}
-            <tr class="empty">
-                <td colspan="3">&nbsp;</td>
-            </tr>
-            <tr class="empty">
-                 <td colspan="3">
-                     <input type="button" 
-                            class="config_form_button target" 
-                            value="Add Role" 
-                            onclick="window.location = '{{ path("fos_user_group_new") }}'"/>
-                 </td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="row space-bottom">
+    <div class="col-md-12">
+        <button type="button"
+                data-path="{{ path('fos_user_group_new') }}"
+                class="btn btn-default btn-sm target">Add Role</button>
+    </div>
+</div>
