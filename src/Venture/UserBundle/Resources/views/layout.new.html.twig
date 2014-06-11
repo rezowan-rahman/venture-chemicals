@@ -1,5 +1,23 @@
 {% extends '::venture-boot.html.twig' %}
 
+{% block msgBlock %}
+{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="row">
+            <div class="col-md-12 {{ type }} }}">
+                <h4 class="text-center">{ message|trans({}, 'FOSUserBundle') }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="border"></div>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% endblock %}
+
 {% block footer_menu3 %}
     <li><a href="{{ path('venture_users_list') }}" class="active">User</a></li>
 {% endblock %}

@@ -138,6 +138,7 @@
                         </div>
                     </div>
 
+                    {% block msgBlock %}
                     {% for flashMessage in app.session.flashbag.get('notice') %}
                         <div class="row">
                             <div class="col-md-12">
@@ -150,8 +151,8 @@
                                 <div class="border"></div>
                             </div>
                         </div>
-
                     {% endfor %}
+                    {% endblock %}
 
                     {% block middle %} {% endblock %}
                 </div>
