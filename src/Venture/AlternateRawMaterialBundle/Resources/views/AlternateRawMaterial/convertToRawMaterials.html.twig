@@ -1,24 +1,49 @@
-{{ form_start(form) }}
-	
-	<div class="cont fix-width">
-		<h2 class="heading">Convert to Raw Materials</h2>
-		
-		<div class="form-element-controller full-width">
-            <p>{{ form_label(form.itemNumber) }}</p>
-            <p>{{ form_widget(form.itemNumber) }}</p>
-            <p>{{ form_errors(form.itemNumber) }}</p>    
-        </div>
+{{ form_start(form, {'attr' : {'role': 'form'} } ) }}
 
-        <div class="form-element-controller full-width">
-        	<p>{{ form_label(form.reorderPoint) }}</p>
-        	<p>{{ form_widget(form.reorderPoint) }}</p>
-        	<p>{{ form_errors(form.reorderPoint) }}</p>    
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Alternate Raw Materials: Add</h4>
+    </div>
+</div>
 
-	    <div class="form-element-controller full-width">
-	    	<p>{{ form_label(form.convert) }}</p>
-	        <p>{{ form_widget(form.convert) }}</p>
-	    </div>
-	<div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.itemNumber) }}
+            {{ form_widget(form.itemNumber, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.itemNumber) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.reorderPoint) }}
+            {{ form_widget(form.reorderPoint, {'attr': {'class' : 'form-control input-sm'} }) }}
+            {{ form_errors(form.reorderPoint) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="border"></div>
+    </div>
+</div>
+
+<div class="row space-top">
+    <div class="col-md-12">
+        <div class="form-group">
+            <button type="Submit" class="btn btn-default">Convert</button>
+        </div>
+    </div>
+</div>
 
 {{ form_end(form) }}
