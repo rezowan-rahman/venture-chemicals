@@ -22,17 +22,28 @@ class RawMaterialsController extends Controller
     
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
+
         $em = $this->initDoctrine();
-        $raw_materials = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->getLatestRawMaterials($active);
+
+        $raw_materials = $em
+            ->getRepository('VentureRawMaterialsBundle:RawMaterials')
+            ->getLatestRawMaterials($active);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $raw_materials,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VentureRawMaterialsBundle:RawMaterials:list.html.twig', array(
             'raw_materials' => $raw_materials,
+            'pagination' => $pagination,
             'status' => $active
         ));
     }
-    
-    
-    
+
+
     public function viewAction($id) {
         $em = $this->initDoctrine();
         $raw_material = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->find($id);
@@ -51,18 +62,17 @@ class RawMaterialsController extends Controller
         ));
     }
     
-    public function addAction() {
+    public function addAction(\Symfony\Component\HttpFoundation\Request $request) {
         $em = $this->initDoctrine();
                 
         $raw_materials = new RawMaterials();
         
         $form = $this->createForm(new RawMaterialsType(), $raw_materials);
-        
-        $request = $this->getRequest();
+
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
                 foreach($raw_materials->getSpecs() as $spec) {
                     $spec->setRawMaterial($raw_materials);

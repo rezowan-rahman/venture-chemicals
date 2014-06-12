@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class RawMaterialsRepository extends EntityRepository {
     
-    public function getLatestRawMaterials($active = false, $limit = NULL) {
+    public function getLatestRawMaterials($active = false) {
          $qb = $this->createQueryBuilder('r')
                     ->select('r')
                     ->addOrderBy('r.updated', 'DESC');
@@ -21,10 +21,6 @@ class RawMaterialsRepository extends EntityRepository {
             $qb->andWhere('r.is_active = :active')
                ->setParameter('active', $active);
 
-
-        if (false === is_null($limit))
-            $qb->setMaxResults($limit);
-
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery();
     }
 }
