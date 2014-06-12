@@ -37,7 +37,6 @@ class RawMaterialsController extends Controller
         );
         
         return $this->render('VentureRawMaterialsBundle:RawMaterials:list.html.twig', array(
-            'raw_materials' => $raw_materials,
             'pagination' => $pagination,
             'status' => $active
         ));

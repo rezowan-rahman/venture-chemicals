@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class VendorRepository extends EntityRepository {
     
-    public function getLatestVendors($active = false, $limit = NULL) {
+    public function getLatestVendors($active = false) {
         $qb = $this->createQueryBuilder('v')
                     ->select('v')
                     ->addOrderBy('v.updated', 'DESC');
@@ -21,11 +21,7 @@ class VendorRepository extends EntityRepository {
             $qb->andWhere('v.active = :active')
                ->setParameter('active', $active);
 
-
-        if (false === is_null($limit))
-            $qb->setMaxResults($limit);
-
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery();
     }
     
     public function getCompanies($companyIds,$active = false) {

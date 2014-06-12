@@ -55,19 +55,31 @@
         </div>
     </div>
 
+    <div class="row space-top">
+        <div class="col-md-12">
+            <p class="text-left">Total Record: <b>{{ pagination.getTotalItemCount }}</b></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Vendor Name</th>
-                        <th>Phone Number</th>
-                        <th>E-mail</th>
-                        <th>Contact</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Name', 'v.name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Phone', 'v.phone') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'E-mail', 'v.contact_1_email') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Contact', 'v.contact_1') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for vendor in vendors %}
+                    {% for vendor in pagination %}
                         <tr>
                             <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.name }}</a></td>
                             <td><a class="my_custom_anchor" href="{{ path('VentureVendorBundle_vendor_details',  {'id': vendor.id}) }}">{{ vendor.phone }}</a></td>
@@ -82,6 +94,12 @@
                 </tbody>
                 <tfoot></tfoot>
             </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ knp_pagination_render(pagination) }}
         </div>
     </div>
 {% endblock %}

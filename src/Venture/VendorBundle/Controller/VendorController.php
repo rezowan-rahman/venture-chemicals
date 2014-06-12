@@ -14,10 +14,20 @@ class VendorController extends Controller
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
         $em = $this->getDoctrine()->getManager();
-        $vendors = $em->getRepository('VentureVendorBundle:Vendor')->getLatestVendors($active);
+
+        $vendors = $em
+            ->getRepository('VentureVendorBundle:Vendor')
+            ->getLatestVendors($active);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $vendors,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VentureVendorBundle:Vendor:list.html.twig', array(
-            'vendors' => $vendors,
+            'pagination' => $pagination,
             'id' => 0,
             'status' => $active
         ));
