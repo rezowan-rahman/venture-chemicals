@@ -68,3 +68,18 @@ button.my-btn{ margin-top: 10px; margin-bottom: 10px; color: #666666;}
 .no-margin{ margin-top: 0}
 a.my_custom_anchor{ color: #666666;}
 a.del_prop {float: right; font-size: 10px;}
+
+ul.pagination { margin: 5px 0}
+
+
+a.asc, a.desc {
+    padding: 0 20px 0 0;
+}
+
+a.asc {
+    background:url('/images/up_arrow.png') no-repeat 33px 0;
+}
+
+a.desc {
+    background:url('/images/down_arrow.ico') no-repeat 33px 0;
+}
