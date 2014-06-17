@@ -17,4 +17,10 @@
         </service>
     </services>
     -->
+    <services>
+        <service id="venture_common.type.tag" class="Venture\CommonBundle\Form\Type\TagType">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="form.type" alias="tag" />
+        </service>
+    </services>
 </container>

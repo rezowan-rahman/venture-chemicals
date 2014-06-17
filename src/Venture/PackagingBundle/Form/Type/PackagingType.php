@@ -39,7 +39,7 @@ class PackagingType extends AbstractType
                 "label" => "Unit of Measure",
                 "data" => $this->unitOfmeasure           
             ))    
-            ->add('tags', 'text', array("label" => "Tags, Keywords: Seperate by Comma", "required" => false)) 
+            ->add('tags', 'tag', array("label" => "Tags/Keywords", "required" => false))
             ->add('shipping_details', 'collection', array(
                 "type"      => new \Venture\PackagingBundle\Form\Type\ShippingDetailsType(),
                 "allow_add" => true,

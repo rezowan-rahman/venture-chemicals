@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class PackagingController extends Controller
 {
     public function initDoctrine() {
@@ -62,7 +64,7 @@ class PackagingController extends Controller
      * @Template()
      */
     
-    public function addAction() {
+    public function addAction(Request $request) {
         $em = $this->initDoctrine();
                 
         $packaging = new Packaging();
@@ -71,13 +73,16 @@ class PackagingController extends Controller
                 ->findOneBy(array("name" => "ea"));
         
         $form = $this->createForm(new PackagingType($unitOfMeasure), $packaging);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach($packaging->getTags() as $tag) {
+                    $tag->addPackaging($packaging);
+                }
+
                 foreach($packaging->getShippingDetails() as $shipping) {
                     $shipping->setVenturePackaging($packaging);
                 }
@@ -106,7 +111,7 @@ class PackagingController extends Controller
      * @Route("/update/{id}", name="venture_packaging_edit")
      * @Template()
      */
-    public function updateAction($id) {
+    public function updateAction(Request $request, $id) {
         $em = $this->initDoctrine();
                         
         $packaging = $em->getRepository('VenturePackagingBundle:Packaging')->find($id);
@@ -114,27 +119,44 @@ class PackagingController extends Controller
         if (!$packaging) {
             throw $this->createNotFoundException('Unable to find packaging');
         }
-        
+
+        $originalTags = new ArrayCollection();
         $originalShippingDetails = new ArrayCollection();
-        
+
+        foreach ($packaging->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
         foreach ($packaging->getShippingDetails() as $ship) {
             $originalShippingDetails->add($ship);
         }
         
         $form = $this->createForm(new PackagingType($packaging->getUnitOfMeasure()), $packaging);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach ($originalTags as $tag) {
+                    if (false === $packaging->getTags()->contains($tag)) {
+                        $tag->removePackaging($packaging);
+                    }
+                }
+
                 foreach ($originalShippingDetails as $ship) {
                     if (false === $packaging->getShippingDetails()->contains($ship)) {
                         $packaging->removeShippingDetail($ship);
                         $em->remove($ship);
                     }
                 }
+
+                foreach($packaging->getTags() as $tag) {
+                    if (false === $tag->getPackagings()->contains($packaging)) {
+                        $tag->addPackaging($packaging);
+                    }
+                }
+
                 foreach($packaging->getShippingDetails() as $shipping) {
                     $shipping->setVenturePackaging($packaging);
                 }

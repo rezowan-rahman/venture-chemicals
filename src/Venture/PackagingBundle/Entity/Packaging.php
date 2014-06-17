@@ -46,11 +46,6 @@ class Packaging {
     protected $description;
     
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $tags;
-    
-    /**
      * @ORM\Column(type="integer", length=10, nullable=true)
      */
     protected $reorder_point;
@@ -93,12 +88,19 @@ class Packaging {
      * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\ShippingDetails", mappedBy="venturePackaging", cascade={"all"})
      */
     protected $shipping_details;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Tag", mappedBy="packagings", cascade={"all"})
+     */
+    protected $tags;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->shipping_details = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -178,29 +180,6 @@ class Packaging {
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     * @return Packaging
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -343,5 +322,38 @@ class Packaging {
     
     public function getLowestCost() {
         return $this->lowestCost;
+    }
+
+    /**
+     * Add testTags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $testTags
+     * @return Packaging
+     */
+    public function addTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove testTags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $testTags
+     */
+    public function removeTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get testTags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

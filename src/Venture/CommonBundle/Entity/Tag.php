@@ -63,10 +63,20 @@ class Tag
      **/  
     protected $intermediates;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\PackagingBundle\Entity\Packaging", inversedBy="tags", cascade={"all"})
+     * @ORM\JoinTable(name="ven_packagings_tags",
+     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="packaging_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $packagings;
+
     
     public function __construct() {
         $this->finishedProducts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->intermediates    = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->packagings       = new \Doctrine\Common\Collections\ArrayCollection();
     }
     /**
      * Get id
@@ -145,5 +155,38 @@ class Tag
 
     public function getIntermediates() {
         return $this->intermediates;
+    }
+
+    /**
+     * Add packagings
+     *
+     * @param \Venture\PackagingBundle\Entity\Packaging $packagings
+     * @return Tag
+     */
+    public function addPackaging(\Venture\PackagingBundle\Entity\Packaging $packagings)
+    {
+        $this->packagings[] = $packagings;
+
+        return $this;
+    }
+
+    /**
+     * Remove packagings
+     *
+     * @param \Venture\PackagingBundle\Entity\Packaging $packagings
+     */
+    public function removePackaging(\Venture\PackagingBundle\Entity\Packaging $packagings)
+    {
+        $this->packagings->removeElement($packagings);
+    }
+
+    /**
+     * Get packagings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPackagings()
+    {
+        return $this->packagings;
     }
 }
