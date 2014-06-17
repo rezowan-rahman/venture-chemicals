@@ -35,7 +35,13 @@
     <div class="row space-top">
         <div class="col-md-6">
             <p>Packaging: {{ finishedProduct['configPackaging'] is defined?finishedProduct['configPackaging']:"N/A" }}</p>
-            <p>Tags: {{ finishedProduct['tags'] is defined?finishedProduct['tags']:'N/A' }}</p>
+            {% if finishedProduct['tags'] | length > 0 %}
+                <p>
+                    Tags: {% for tag in finishedProduct['tags'] %} {{ tag }} {% endfor %}
+                </p>
+            {% else %}
+                <p>Tags: {{ 'N/A' }}</p>
+            {% endif %}
         </div>
         <div class="col-md-6">
             <p class="text-right">Quoting cost: {{ finishedProduct['quotingCost'] is defined?finishedProduct['quotingCost']:"N/A" }}</p>

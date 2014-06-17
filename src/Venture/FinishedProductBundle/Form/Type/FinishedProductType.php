@@ -21,7 +21,7 @@ class FinishedProductType extends AbstractType
             ->add('itemName', 'text', array("label" => "Item Name", "required" => true))
             ->add('itemDescription', 'text', array("label" => "Description", "required" => true))
             ->add('reasonForChange', 'text', array("label" => "Reason for Change", "required" => true))
-            ->add('tags', 'text', array("label" => "Tags, Keywords: Seperate by Comma", "required" => true)) 
+            ->add('tags', 'tag', array("label" => "Tags/Keywords", "required" => false))
             ->add('reorderPoint', 'text', array("label" => "Recommended Stock Level", "required" => true))
             ->add('standardCost', 'text', array("label" => 'Standard Price', "required" => true))
             ->add('isActive', 'checkbox', array("label" => "Active", "required" => false))

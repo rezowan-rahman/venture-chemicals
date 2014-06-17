@@ -74,19 +74,22 @@ class DefaultController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function addAction() {
+    public function addAction(Request $request) {
         $em = $this->initDoctrine();
                 
         $finishedProduct = new FinishedProduct();
         
         $form = $this->createForm(new FinishedProductType(), $finishedProduct);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
+
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach($finishedProduct->getTags() as $tag) {
+                    $tag->addFinishedProduct($finishedProduct);
+                }
                 foreach($finishedProduct->getSalesPointCosts() as $spCost) {
                     $spCost->setFinishedProduct($finishedProduct);
                 }
@@ -123,7 +126,7 @@ class DefaultController extends Controller
      * @Template()
      */
     
-    public function editAction($id, Request $request) {
+    public function editAction(Request $request, $id) {
         $em = $this->initDoctrine();
         $finishedProduct = $em->getRepository('VentureFinishedProductBundle:FinishedProduct')->find($id);
 
@@ -132,12 +135,17 @@ class DefaultController extends Controller
         }
 
         $logData = $this->processChangeLogData($finishedProduct);
-        
+
+        $originalTags           = new ArrayCollection();
         $originalSpCosts        = new ArrayCollection();
         $originalProperties     = new ArrayCollection();
         $originalFormulas       = new ArrayCollection();
         $originalCProducts      = new ArrayCollection();
-        
+
+        foreach ($finishedProduct->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
         foreach ($finishedProduct->getSalesPointCosts() as $spCost) {
             $originalSpCosts->add($spCost);
         }
@@ -159,6 +167,13 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            foreach($originalTags as $tag) {
+                if (false === $finishedProduct->getTags()->contains($tag)) {
+                    $tag->removeFinishedProduct($finishedProduct);
+                }
+            }
+
             foreach($originalSpCosts as $spCost) {
                 if (false === $finishedProduct->getSalesPointCosts()->contains($spCost)) {
                     $em->remove($spCost);
@@ -182,7 +197,13 @@ class DefaultController extends Controller
                     $finishedProduct->removeCompetitiveProduct($cProduct);
                 }
             }
-            
+
+            foreach($finishedProduct->getTags() as $tag) {
+                if (false === $tag->getFinishedProducts()->contains($finishedProduct)) {
+                    $tag->addFinishedProduct($finishedProduct);
+                }
+            }
+
             foreach($finishedProduct->getSalesPointCosts() as $spCost) {
                 $spCost->setFinishedProduct($finishedProduct);
             }
@@ -292,8 +313,7 @@ class DefaultController extends Controller
         $log["itemNumber"]              = $finishedProduct->getItemNumber();
         $log["itemName"]                = $finishedProduct->getItemName();
         $log["itemDescription"]         = $finishedProduct->getItemDescription();
-        $log["configPackaging"]           = $finishedProduct->getConfigPackaging()->getName();
-        $log["tags"]                    = $finishedProduct->getTags();
+        $log["configPackaging"]         = $finishedProduct->getConfigPackaging()->getName();
         $log["quotingCost"]             = $finishedProduct->getQuotingCost();
         $log["lowestCost"]              = $finishedProduct->getLowestCost();
         $log["reasonForChange"]         = $finishedProduct->getReasonForChange();
@@ -301,7 +321,14 @@ class DefaultController extends Controller
         $log["salesPointCosts"]         = array();
         $log["properties"]              = array();
         $log["formulas"]                = array();
-        
+
+
+        $i = 0;
+        foreach($finishedProduct->getTags() as $tag) {
+            $log["tags"][$i] = $tag->getName();
+            $i++;
+        }
+
         $i = 0;
         foreach($finishedProduct->getSalesPointCosts() as $spCost) {
             $log["salesPointCosts"][$i]["salesCostPoint"]          = $spCost->getSalesPricePoint()->getSalesCostPoint();

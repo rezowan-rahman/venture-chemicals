@@ -46,7 +46,7 @@ class Tag
     private $updated;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="testTags")
+     * @ORM\ManyToMany(targetEntity="Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="tags", cascade={"all"})
      * @ORM\JoinTable(name="ven_finished_products_tags",
      *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="finished_product_id", referencedColumnName="id")}
