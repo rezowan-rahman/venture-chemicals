@@ -34,7 +34,13 @@
     <div class="row space-top">
         <div class="col-md-6">
             <p>Unit of measure: {{ intermediate['unitOfMeasure'] is defined?intermediate['unitOfMeasure']:"N/A" }}</p>
-            <p>Tags: {{ intermediate['tags'] is defined?intermediate['tags']:"N/A" }}</p>
+            {% if intermediate['tags'] | length > 0 %}
+                <p>
+                    Tags: {% for tag in intermediate['tags'] %} {{ tag }} {% endfor %}
+                </p>
+            {% else %}
+                <p>Tags: {{ 'N/A' }}</p>
+            {% endif %}
         </div>
         <div class="col-md-6">
             <p class="text-right">Quoting cost: {{ intermediate['quotingCost'] is defined?intermediate['quotingCost']:"N/A" }}</p>

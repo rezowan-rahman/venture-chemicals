@@ -75,19 +75,20 @@ class DefaultController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function addAction() {
+    public function addAction(Request $request) {
         $em = $this->initDoctrine();
                 
         $intermediate = new Intermediate();
         
         $form = $this->createForm(new IntermediateType(), $intermediate);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+                foreach($intermediate->getTags() as $tag) {
+                    $tag->addIntermediate($intermediate);
+                }
                 foreach($intermediate->getProperties() as $prop) {
                     $prop->setIntermediate($intermediate);
                 }
@@ -129,9 +130,14 @@ class DefaultController extends Controller
         }
 
         $logData = $this->processChangeLogData($intermediate);
-                
+
+        $originalTags = new ArrayCollection();
         $originalProperties = new ArrayCollection();
         $originalFormulas = new ArrayCollection();
+
+        foreach ($intermediate->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
 
         foreach ($intermediate->getProperties() as $property) {
             $originalProperties->add($property);
@@ -146,6 +152,13 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            foreach ($originalTags as $tag) {
+                if (false === $intermediate->getTags()->contains($tag)) {
+                    $tag->removeIntermediate($intermediate);
+                }
+            }
+
             foreach ($originalProperties as $property) {
                 if (false === $intermediate->getProperties()->contains($property)) {
                     $em->remove($property);
@@ -157,7 +170,13 @@ class DefaultController extends Controller
                     $em->remove($formula);
                 }
             }
-            
+
+            foreach($intermediate->getTags() as $tag) {
+                if (false === $tag->getIntermediates()->contains($intermediate)) {
+                    $tag->addIntermediate($intermediate);
+                }
+            }
+
             foreach($intermediate->getProperties() as $prop) {
                     $prop->setIntermediate($intermediate);
             }
@@ -263,13 +282,19 @@ class DefaultController extends Controller
         $log["itemName"]                = $intermediate->getItemName();
         $log["itemDescription"]         = $intermediate->getItemDescription();
         $log["unitOfMeasure"]           = $intermediate->getUnitOfMeasure()->getName();
-        $log["tags"]                    = $intermediate->getTags();
         $log["quotingCost"]             = $intermediate->getQuotingCost();
         $log["lowestCost"]              = $intermediate->getLowestCost();
         $log["reasonForChange"]         = $intermediate->getReasonForChange();
+        $log["tags"]                    = array();
         $log["properties"]              = array();
         $log["formulas"]                = array();
-        
+
+        $i = 0;
+        foreach($intermediate->getTags() as $tag) {
+            $log["tags"][$i] = $tag->getName();
+            $i++;
+        }
+
         $i = 0;
         foreach($intermediate->getProperties() as $prop) {
             $log["properties"][$i]["property"]          = $prop->getProperty()->getName();

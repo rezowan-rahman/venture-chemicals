@@ -55,7 +55,7 @@ class Tag
     protected $finishedProducts;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Venture\IntermediateBundle\Entity\Intermediate", inversedBy="testTags")
+     * @ORM\ManyToMany(targetEntity="Venture\IntermediateBundle\Entity\Intermediate", inversedBy="tags", cascade={"all"})
      * @ORM\JoinTable(name="ven_intermediates_tags",
      *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="intermediate_id", referencedColumnName="id")}

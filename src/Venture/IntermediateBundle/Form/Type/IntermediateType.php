@@ -21,7 +21,7 @@ class IntermediateType extends AbstractType
             ->add('itemName', 'text', array("label" => "Item Name", "required" => true))
             ->add('itemDescription', 'text', array("label" => "Description", "required" => true))
             ->add('reasonForChange', 'text', array("label" => "Reason for Change", "required" => true))
-            ->add('tags', 'text', array("label" => "Tags, Keywords: Seperate by Comma", "required" => true)) 
+            ->add('tags', 'tag', array("label" => "Tags/Keywords", "required" => false))
             ->add('isActive', 'checkbox', array("label" => "Active", "required" => false))
             ->add('unitOfMeasure', 'entity', array(
                 "class" => 'SettingsConfigBundle:UnitOfMeasure',

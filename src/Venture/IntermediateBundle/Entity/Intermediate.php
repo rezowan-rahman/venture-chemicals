@@ -45,12 +45,6 @@ class Intermediate
 
     /**
      * @var string
-     * @ORM\Column(name="tags", type="string", length=200)
-     */
-    private $tags;
-    
-    /**
-     * @var string
      * @ORM\Column(name="reason_for_change", type="text")
      */
     private $reasonForChange;
@@ -116,13 +110,13 @@ class Intermediate
     protected $changeLogs;
     
     /**
-     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Tag", mappedBy="intermediates")
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Tag", mappedBy="intermediates", cascade={"all"})
      */
-    protected $testTags;
+    protected $tags;
 
 
     public function __construct() {
-        $this->testTags     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags         = new \Doctrine\Common\Collections\ArrayCollection();
         $this->properties   = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formulas     = new \Doctrine\Common\Collections\ArrayCollection();
         $this->changeLogs   = new \Doctrine\Common\Collections\ArrayCollection();
@@ -207,29 +201,6 @@ class Intermediate
         return $this->itemDescription;
     }
 
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     * @return FinishedProduct
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-    
     public function setReasonForChange($reasonForChange) {
         $this->reasonForChange = $reasonForChange;
         return $this;
@@ -330,17 +301,17 @@ class Intermediate
         return $this->formulas;
     }
     
-    public function addTestTag(\Venture\CommonBundle\Entity\Tag $testTag) {
-        $this->testTags[] = $testTag;
+    public function addTag(\Venture\CommonBundle\Entity\Tag $tag) {
+        $this->tags[] = $tag;
         return $this;
     }
 
-    public function removeTestTag(\Venture\CommonBundle\Entity\Tag $testTag) {
-        $this->testTags->removeElement($testTag);
+    public function removeTag(\Venture\CommonBundle\Entity\Tag $tag) {
+        $this->tags->removeElement($tag);
     }
 
-    public function getTestTags() {
-        return $this->testTags;
+    public function getTags() {
+        return $this->tags;
     }
     
     public function addChangeLog(\Venture\CommonBundle\Entity\DataChangeLog $changeLog) {
