@@ -4,6 +4,7 @@ namespace Venture\CompetitiveProductBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -68,19 +69,21 @@ class CompetitiveProductController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function addAction() {
+    public function addAction(Request $request) {
         $em = $this->initDoctrine();
                 
         $competitiveProduct = new CompetitiveProduct();
         
         $form = $this->createForm(new CompetitiveProductType(), $competitiveProduct);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach($competitiveProduct->getTags() as $tag) {
+                    $tag->addCompetitiveProduct($competitiveProduct);
+                }
                 foreach($competitiveProduct->getProperties() as $prop) {
                     $prop->setCompetitiveProduct($competitiveProduct);
                 }
@@ -108,9 +111,14 @@ class CompetitiveProductController extends Controller
         
         $competitiveProduct = $em->getRepository('VentureCompetitiveProductBundle:CompetitiveProduct')->find($id);
         if (!$competitiveProduct) throw $this->createNotFoundException('Unable to find Product data');
-        
+
+        $originalTags     = new ArrayCollection();
         $originalProperties     = new ArrayCollection();
-        
+
+        foreach ($competitiveProduct->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
         foreach ($competitiveProduct->getProperties() as $property) {
             $originalProperties->add($property);
         }
@@ -120,12 +128,25 @@ class CompetitiveProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            foreach ($originalTags as $tag) {
+                if (false === $competitiveProduct->getTags()->contains($tag)) {
+                    $tag->removeCompetitiveProduct($competitiveProduct);
+                }
+            }
+
             foreach ($originalProperties as $property) {
                 if (false === $competitiveProduct->getProperties()->contains($property)) {
                     $em->remove($property);
                 }
             }
-            
+
+            foreach($competitiveProduct->getTags() as $tag) {
+                if (false === $tag->getCompetitiveProducts()->contains($competitiveProduct)) {
+                    $tag->addCompetitiveProduct($competitiveProduct);
+                }
+            }
+
             foreach($competitiveProduct->getProperties() as $prop) {
                     $prop->setCompetitiveProduct($competitiveProduct);
             }

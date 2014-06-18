@@ -49,13 +49,6 @@ class CompetitiveProduct
     private $itemSupplier;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="tags", type="text")
-     */
-    private $tags;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="standard_cost", type="float")
@@ -105,11 +98,17 @@ class CompetitiveProduct
      * )
      */
     protected $finishedProducts;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Tag", mappedBy="competitiveProducts", cascade={"persist"})
+     */
+    protected $tags;
     
     
     public function __construct() {
         $this->properties       = new ArrayCollection();
         $this->finishedProducts = new ArrayCollection();
+        $this->tags             = new ArrayCollection();
     }
 
 
@@ -190,29 +189,6 @@ class CompetitiveProduct
     public function getItemSupplier()
     {
         return $this->itemSupplier;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     * @return CompetitiveProduct
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -334,5 +310,38 @@ class CompetitiveProduct
     public function getFinishedProducts()
     {
         return $this->finishedProducts;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $tags
+     * @return CompetitiveProduct
+     */
+    public function addTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -41,7 +41,13 @@
         </div>
 
         <div class="col-md-6">
-            <p>Tags: {{ competitiveProduct.tags }}</p>
+            <p>Tags:
+                {% for tag in competitiveProduct.tags %}
+                    {{ tag.name }}
+                {% else %}
+                    {{ "N/A" }}
+                {% endfor %}
+            </p>
         </div>
     </div>
 

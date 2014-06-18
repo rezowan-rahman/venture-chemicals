@@ -81,12 +81,22 @@ class Tag
      **/
     protected $rawMaterials;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct", inversedBy="tags", cascade={"all"})
+     * @ORM\JoinTable(name="ven_competitive_products_tags",
+     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="competitive_product_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $competitiveProducts;
+
     
     public function __construct() {
-        $this->finishedProducts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->intermediates    = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->packagings       = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->rawMaterials     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->finishedProducts     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->intermediates        = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->packagings           = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rawMaterials         = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->competitiveProducts  = new \Doctrine\Common\Collections\ArrayCollection();
     }
     /**
      * Get id
@@ -231,5 +241,38 @@ class Tag
     public function getRawMaterials()
     {
         return $this->rawMaterials;
+    }
+
+    /**
+     * Add competitiveProducts
+     *
+     * @param \Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts
+     * @return Tag
+     */
+    public function addCompetitiveProduct(\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts)
+    {
+        $this->competitiveProducts[] = $competitiveProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove competitiveProducts
+     *
+     * @param \Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts
+     */
+    public function removeCompetitiveProduct(\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts)
+    {
+        $this->competitiveProducts->removeElement($competitiveProducts);
+    }
+
+    /**
+     * Get competitiveProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetitiveProducts()
+    {
+        return $this->competitiveProducts;
     }
 }
