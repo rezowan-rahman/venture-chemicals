@@ -2,8 +2,9 @@
 
 namespace Venture\AlternateRawMaterialBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -56,19 +57,21 @@ class AlternateRawMaterialController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function addAction() {
+    public function addAction(Request $request) {
         $em = $this->initDoctrine();
                 
         $alternateRawMaterial = new AlternateRawMaterial();
         
         $form = $this->createForm(new AlternateRawMaterialType(), $alternateRawMaterial);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach($alternateRawMaterial->getTags() as $tag) {
+                    $tag->addAlternateRawMaterial($alternateRawMaterial);
+                }
                 foreach($alternateRawMaterial->getProperties() as $property) {
                     $property->setAlternateRawMaterial($alternateRawMaterial);
                 }
@@ -119,7 +122,7 @@ class AlternateRawMaterialController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function updateAction($id) {
+    public function updateAction(Request $request, $id) {
         $em = $this->initDoctrine();
                         
         $alternateRawMaterial = $em->getRepository('VentureAlternateRawMaterialBundle:AlternateRawMaterial')->find($id);
@@ -127,10 +130,15 @@ class AlternateRawMaterialController extends Controller
         if(!$alternateRawMaterial || true === $alternateRawMaterial->getIsConvertedToRawMaterial()) {
             throw $this->createNotFoundException('Unable to find Alternate Raw material data');
         }
-        
+
+        $originalTags = new ArrayCollection();
         $originalProperties = new ArrayCollection();
         $originalOrderingDetails = new ArrayCollection();
-        
+
+        foreach ($alternateRawMaterial->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
         foreach ($alternateRawMaterial->getProperties() as $property) {
             $originalProperties->add($property);
         }
@@ -140,13 +148,17 @@ class AlternateRawMaterialController extends Controller
         }
         
         $form = $this->createForm(new AlternateRawMaterialType(), $alternateRawMaterial);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($form);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+                foreach ($originalTags as $tag) {
+                    if (false === $alternateRawMaterial->getTags()->contains($tag)) {
+                        $tag->removeAlternateRawMaterial($alternateRawMaterial);
+                    }
+                }
+
                 foreach ($originalProperties as $property) {
                     if (false === $alternateRawMaterial->getProperties()->contains($property)) {
                         $em->remove($property);
@@ -156,6 +168,12 @@ class AlternateRawMaterialController extends Controller
                 foreach ($originalOrderingDetails as $order) {
                     if (false === $alternateRawMaterial->getOrderingDetails()->contains($order)) {
                         $em->remove($order);
+                    }
+                }
+
+                foreach($alternateRawMaterial->getTags() as $tag) {
+                    if (false === $tag->getAlternateRawMaterials()->contains($alternateRawMaterial)) {
+                        $tag->addAlternateRawMaterial($alternateRawMaterial);
                     }
                 }
                             
@@ -231,7 +249,7 @@ class AlternateRawMaterialController extends Controller
      * @Method("GET|POST")
      * @Template()
      */
-    public function convertToRawMaterialsAction($id) {
+    public function convertToRawMaterialsAction(Request $request, $id) {
         $em = $this->initDoctrine();
         $alternateRawMaterial = $em->getRepository('VentureAlternateRawMaterialBundle:AlternateRawMaterial')->find($id);
         
@@ -245,12 +263,9 @@ class AlternateRawMaterialController extends Controller
                 "action" => $this->generateUrl('venture_convert_alternate_raw_material', array('id' => $id)),
                 "method" => 'POST',
             ));
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-
             /*convert into raw materials */
 
             $rawMaterial = new RawMaterials();
@@ -261,12 +276,18 @@ class AlternateRawMaterialController extends Controller
 
             $rawMaterial->setItemName($alternateRawMaterial->getItemName());
             $rawMaterial->setDescription($alternateRawMaterial->getItemDescription());
-            $rawMaterial->setTags($alternateRawMaterial->getTags());
             $rawMaterial->setUnitOfMeasure($alternateRawMaterial->getUnitOfMeasure());
             $rawMaterial->setQuotingCost($alternateRawMaterial->getQuotingCost());
             $rawMaterial->setLowestCost($alternateRawMaterial->getLowestCost());
             $rawMaterial->setIsActive($alternateRawMaterial->getIsActive());
-        
+
+            foreach($alternateRawMaterial->getTags() as $tag) {
+                $tag->removeAlternateRawMaterial($alternateRawMaterial);
+                if (false === $tag->getRawMaterials()->contains($rawMaterial)) {
+                    $tag->addRawMaterial($rawMaterial);
+                }
+            }
+
             foreach($alternateRawMaterial->getProperties() as $property) {
                 $property->setRawMaterial($rawMaterial);
                 $property->setAlternateRawMaterial(NULL);

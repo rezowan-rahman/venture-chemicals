@@ -42,13 +42,6 @@ class AlternateRawMaterial
     private $itemDescription;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="tags", type="string", length=255)
-     */
-    private $tags;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="quoting_cost", type="decimal", precision=10, scale=2)
@@ -118,6 +111,11 @@ class AlternateRawMaterial
      */
     protected $isConvertedToRawMaterial;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Tag", mappedBy="alternateRawMaterials", cascade={"all"})
+     */
+    protected $tags;
+
 
     /**
      * Constructor
@@ -126,6 +124,7 @@ class AlternateRawMaterial
         $this->properties = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orderingDetails = new \Doctrine\Common\Collections\ArrayCollection();
         $this->rawMaterials = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -182,29 +181,6 @@ class AlternateRawMaterial
     public function getItemDescription()
     {
         return $this->itemDescription;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     * @return AlternateRawMaterial
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -440,5 +416,38 @@ class AlternateRawMaterial
     public function getIsConvertedToRawMaterial()
     {
         return $this->isConvertedToRawMaterial;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $tags
+     * @return AlternateRawMaterial
+     */
+    public function addTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Venture\CommonBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Venture\CommonBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -90,13 +90,23 @@ class Tag
      **/
     protected $competitiveProducts;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial", inversedBy="tags", cascade={"all"})
+     * @ORM\JoinTable(name="ven_alternate_raw_materials_tags",
+     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="alternate_raw_material_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $alternateRawMaterials;
+
     
     public function __construct() {
-        $this->finishedProducts     = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->intermediates        = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->packagings           = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->rawMaterials         = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->competitiveProducts  = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->finishedProducts         = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->intermediates            = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->packagings               = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rawMaterials             = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->competitiveProducts      = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->alternateRawMaterials    = new \Doctrine\Common\Collections\ArrayCollection();
     }
     /**
      * Get id
@@ -274,5 +284,38 @@ class Tag
     public function getCompetitiveProducts()
     {
         return $this->competitiveProducts;
+    }
+
+    /**
+     * Add alternateRawMaterials
+     *
+     * @param \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials
+     * @return Tag
+     */
+    public function addAlternateRawMaterial(\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials)
+    {
+        $this->alternateRawMaterials[] = $alternateRawMaterials;
+
+        return $this;
+    }
+
+    /**
+     * Remove alternateRawMaterials
+     *
+     * @param \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials
+     */
+    public function removeAlternateRawMaterial(\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials)
+    {
+        $this->alternateRawMaterials->removeElement($alternateRawMaterials);
+    }
+
+    /**
+     * Get alternateRawMaterials
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAlternateRawMaterials()
+    {
+        return $this->alternateRawMaterials;
     }
 }

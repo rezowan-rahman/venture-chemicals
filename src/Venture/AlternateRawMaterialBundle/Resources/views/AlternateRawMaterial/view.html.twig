@@ -32,7 +32,13 @@
     <div class="row space-top">
         <div class="col-md-6">
             <p>Unit of measure: {{ alternateRawMaterial.unitOfMeasure?alternateRawMaterial.unitOfMeasure.name:"N/A" }}</p>
-            <p>Tags: {{ alternateRawMaterial.tags }}</p>
+            <p>Tags:
+                {% for tag in alternateRawMaterial.tags %}
+                    {{ tag.name }}
+                {% else %}
+                    {{ "N/A" }}
+                {% endfor %}
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-right">Quoting cost: {{ alternateRawMaterial.quotingCost }}</p>
