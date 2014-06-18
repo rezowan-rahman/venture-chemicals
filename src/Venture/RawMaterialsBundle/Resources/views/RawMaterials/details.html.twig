@@ -34,7 +34,13 @@
     <div class="row space-top">
         <div class="col-md-6">
             <p>Unit of measure: {{ raw_material.unitOfMeasure.name }}</p>
-            <p>Tags: {{ raw_material.tags }}</p>
+            <p>Tags:
+                {% for tag in raw_material.tags %}
+                    {{ tag.name }}
+                {% else %}
+                    {{ "N/A" }}
+                {% endfor %}
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-right">Quoting cost: {{ quoting_cost }}</p>

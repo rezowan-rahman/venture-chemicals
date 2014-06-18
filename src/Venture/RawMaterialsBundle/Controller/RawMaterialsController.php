@@ -73,6 +73,10 @@ class RawMaterialsController extends Controller
         if ($request->getMethod() == 'POST') {
 
             if ($form->isValid()) {
+
+                foreach($raw_materials->getTags() as $tag) {
+                    $tag->addRawMaterial($raw_materials);
+                }
                 foreach($raw_materials->getSpecs() as $spec) {
                     $spec->setRawMaterial($raw_materials);
                 }
@@ -99,7 +103,7 @@ class RawMaterialsController extends Controller
         ));
     }
     
-    public function updateAction($id) {
+    public function updateAction(\Symfony\Component\HttpFoundation\Request $request, $id) {
         $em = $this->initDoctrine();
                         
         $raw_materials = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->find($id);
@@ -107,11 +111,16 @@ class RawMaterialsController extends Controller
         if(!$raw_materials) {
             throw $this->createNotFoundException('Unable to find Raw material data');
         }
-        
+
+        $originalTags = new ArrayCollection();
         $originalSpecs = new ArrayCollection();
         $originalShippingDetails = new ArrayCollection();
         $originalAlternateRawMaterials = new ArrayCollection();
-        
+
+        foreach ($raw_materials->getTags() as $tag) {
+            $originalTags->add($tag);
+        }
+
         foreach ($raw_materials->getSpecs() as $sppec) {
             $originalSpecs->add($sppec);
         }
@@ -124,15 +133,20 @@ class RawMaterialsController extends Controller
             $originalAlternateRawMaterials->add($alternateRawMaterial);
         }
 
-        
         $form = $this->createForm(new RawMaterialsType(), $raw_materials);
-        
-        $request = $this->getRequest();
+        $form->handleRequest($request);
+
         
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            
+
             if ($form->isValid()) {
+
+                foreach ($originalTags as $tag) {
+                    if (false === $raw_materials->getTags()->contains($tag)) {
+                        $tag->removeRawMaterial($raw_materials);
+                    }
+                }
+
                 foreach ($originalSpecs as $sppec) {
                     if (false === $raw_materials->getSpecs()->contains($sppec)) {
                         $em->remove($sppec);
@@ -151,6 +165,11 @@ class RawMaterialsController extends Controller
                     }
                 }
 
+                foreach($raw_materials->getTags() as $tag) {
+                    if (false === $tag->getRawMaterials()->contains($raw_materials)) {
+                        $tag->addRawMaterial($raw_materials);
+                    }
+                }
             
                 foreach($raw_materials->getSpecs() as $spec) {
                     $spec->setRawMaterial($raw_materials);

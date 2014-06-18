@@ -72,11 +72,21 @@ class Tag
      **/
     protected $packagings;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Venture\RawMaterialsBundle\Entity\RawMaterials", inversedBy="tags", cascade={"all"})
+     * @ORM\JoinTable(name="ven_raw_materials_tags",
+     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="raw_material_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $rawMaterials;
+
     
     public function __construct() {
         $this->finishedProducts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->intermediates    = new \Doctrine\Common\Collections\ArrayCollection();
         $this->packagings       = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rawMaterials     = new \Doctrine\Common\Collections\ArrayCollection();
     }
     /**
      * Get id
@@ -188,5 +198,38 @@ class Tag
     public function getPackagings()
     {
         return $this->packagings;
+    }
+
+    /**
+     * Add rawMaterials
+     *
+     * @param \Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials
+     * @return Tag
+     */
+    public function addRawMaterial(\Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials)
+    {
+        $this->rawMaterials[] = $rawMaterials;
+
+        return $this;
+    }
+
+    /**
+     * Remove rawMaterials
+     *
+     * @param \Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials
+     */
+    public function removeRawMaterial(\Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials)
+    {
+        $this->rawMaterials->removeElement($rawMaterials);
+    }
+
+    /**
+     * Get rawMaterials
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRawMaterials()
+    {
+        return $this->rawMaterials;
     }
 }

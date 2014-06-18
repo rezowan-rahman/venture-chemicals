@@ -31,8 +31,8 @@ class RawMaterialsType extends AbstractType
                 "empty_value" => "Choose a Unit",
                 "property" => "name",
                 "label" => "Unit of Measure"
-            ))    
-            ->add('tags', 'text', array("label" => "Tags, Keywords: Seperate by Comma", "required" => false)) 
+            ))
+            ->add('tags', 'tag', array("label" => "Tags/Keywords", "required" => false))
             ->add('specs', 'collection', array(
                 "type"      => new \Venture\CommonBundle\Form\Type\PropertyType(),
                 "allow_add" => true,
