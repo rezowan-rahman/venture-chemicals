@@ -72,10 +72,13 @@ class Property
     protected $finishedProduct;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\RawMaterialsBundle\Entity\RawMaterials", inversedBy="specs")
-     * @ORM\JoinColumn(name="raw_material_id", referencedColumnName="id")
-     */
-    protected $raw_material;
+     * @ORM\ManyToMany(targetEntity="\Venture\RawMaterialsBundle\Entity\RawMaterials", inversedBy="specs", cascade={"all"})
+     * @ORM\JoinTable(name="ven_raw_materials_properties",
+     *      joinColumns={@ORM\JoinColumn(name="property_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="raw_material_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $rawMaterials;
     
     /**
      * @ORM\ManyToOne(targetEntity="Venture\IntermediateBundle\Entity\Intermediate", inversedBy="properties")
@@ -94,7 +97,15 @@ class Property
      * @ORM\JoinColumn(name="alternate_raw_material_id", referencedColumnName="id")
      */
     protected $alternateRawMaterial;
-    
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rawMaterials = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -199,15 +210,6 @@ class Property
         return $this->finishedProduct;
     }
     
-    public function setRawMaterial(\Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterial = null) {
-        $this->raw_material = $rawMaterial;
-        return $this;
-    }
-
-    public function getRawMaterial() {
-        return $this->raw_material;
-    }
-    
     public function setIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediate = null) {
         $this->intermediate = $intermediate;
         return $this;
@@ -247,5 +249,38 @@ class Property
     public function getAlternateRawMaterial()
     {
         return $this->alternateRawMaterial;
+    }
+
+    /**
+     * Add rawMaterials
+     *
+     * @param \Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials
+     * @return Property
+     */
+    public function addRawMaterial(\Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials)
+    {
+        $this->rawMaterials[] = $rawMaterials;
+
+        return $this;
+    }
+
+    /**
+     * Remove rawMaterials
+     *
+     * @param \Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials
+     */
+    public function removeRawMaterial(\Venture\RawMaterialsBundle\Entity\RawMaterials $rawMaterials)
+    {
+        $this->rawMaterials->removeElement($rawMaterials);
+    }
+
+    /**
+     * Get rawMaterials
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRawMaterials()
+    {
+        return $this->rawMaterials;
     }
 }

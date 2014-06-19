@@ -85,7 +85,7 @@ class RawMaterials {
     protected $unit_of_measure;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="raw_material", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="rawMaterials", cascade={"all"})
      */
     protected $specs;
     

@@ -78,7 +78,7 @@ class RawMaterialsController extends Controller
                     $tag->addRawMaterial($raw_materials);
                 }
                 foreach($raw_materials->getSpecs() as $spec) {
-                    $spec->setRawMaterial($raw_materials);
+                    $spec->addRawMaterial($raw_materials);
                 }
                 foreach($raw_materials->getShippingDetails() as $shipping) {
                     $shipping->setRawMaterial($raw_materials);
@@ -149,7 +149,7 @@ class RawMaterialsController extends Controller
 
                 foreach ($originalSpecs as $sppec) {
                     if (false === $raw_materials->getSpecs()->contains($sppec)) {
-                        $em->remove($sppec);
+                        $sppec->removeRawMaterial($raw_materials);
                     }
                 }
             
@@ -172,7 +172,9 @@ class RawMaterialsController extends Controller
                 }
             
                 foreach($raw_materials->getSpecs() as $spec) {
-                    $spec->setRawMaterial($raw_materials);
+                    if (false === $spec->getRawMaterials()->contains($raw_materials)) {
+                        $spec->addRawMaterial($raw_materials);
+                    }
                 }
 
                 foreach($raw_materials->getShippingDetails() as $shipping) {

@@ -20,11 +20,6 @@ jQuery(document).on("click", "button.target", function(e) {
     window.location = url;
 });
 
-function delTHis(obj){
-    if(!confirm("Are you sure you want to delete?")) return false;
-    jQuery(obj).parent().remove();
-    return true;
-}
 
 function addTagFormDeleteLink($tagFormLi) {
     var $removeFormA = jQuery('<div class="row"><div class="col-md-10"></div><div class="col-md-2"><a class="del_prop" href="#">Delete</a></div></div>');
@@ -58,3 +53,19 @@ jQuery(document).on("click", "a.delete", function(e) {
     return true;
 });
 
+jQuery(document).on('click', 'a.ask_del', function(e) {
+    if(!confirm('Are you sure you want to delete this?')) {
+        e.preventDefault();
+        return false;
+    }
+
+    var clickedObject = jQuery(this);
+    var index = clickedObject.index('a.ask_del');
+    var divClass = clickedObject.data('div');
+
+    jQuery('div.'+divClass)
+        .eq(index)
+        .remove();
+
+    clickedObject.remove();
+});
