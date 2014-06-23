@@ -85,7 +85,7 @@ class CompetitiveProduct
     private $configPackaging;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="competitiveProduct", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="competitiveProducts", cascade={"persist"})
      */
     protected $properties;
     

@@ -95,7 +95,7 @@ class Intermediate
     protected $commonFormulas;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="intermediate", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="intermediates", cascade={"persist"})
      */
     protected $properties;
     

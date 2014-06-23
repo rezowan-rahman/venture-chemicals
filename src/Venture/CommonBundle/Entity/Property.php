@@ -64,12 +64,15 @@ class Property
      * @ORM\JoinColumn(name="test_procedure_id", referencedColumnName="id")
      */
     protected $testProcedure;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="properties")
-     * @ORM\JoinColumn(name="finished_Product_id", referencedColumnName="id")
-     */
-    protected $finishedProduct;
+     * @ORM\ManyToMany(targetEntity="\Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="properties", cascade={"all"})
+     * @ORM\JoinTable(name="ven_finished_products_properties",
+     *      joinColumns={@ORM\JoinColumn(name="property_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="finished_product_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $finishedProducts;
     
     /**
      * @ORM\ManyToMany(targetEntity="\Venture\RawMaterialsBundle\Entity\RawMaterials", inversedBy="specs", cascade={"all"})
@@ -79,24 +82,33 @@ class Property
      *      )
      **/
     protected $rawMaterials;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\IntermediateBundle\Entity\Intermediate", inversedBy="properties")
-     * @ORM\JoinColumn(name="intermediate_id", referencedColumnName="id")
-     */
-    protected $intermediate;
-    
+     * @ORM\ManyToMany(targetEntity="\Venture\IntermediateBundle\Entity\Intermediate", inversedBy="properties", cascade={"all"})
+     * @ORM\JoinTable(name="ven_intermediates_properties",
+     *      joinColumns={@ORM\JoinColumn(name="property_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="intermediate_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $intermediates;
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\CompetitiveProductBundle\Entity\CompetitiveProduct", inversedBy="properties")
-     * @ORM\JoinColumn(name="competitive_product_id", referencedColumnName="id")
-     */
-    protected $competitiveProduct;
-    
+     * @ORM\ManyToMany(targetEntity="\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct", inversedBy="properties", cascade={"all"})
+     * @ORM\JoinTable(name="ven_competitive_products_properties",
+     *      joinColumns={@ORM\JoinColumn(name="property_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="competitive_product_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $competitiveProducts;
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial", inversedBy="properties")
-     * @ORM\JoinColumn(name="alternate_raw_material_id", referencedColumnName="id")
-     */
-    protected $alternateRawMaterial;
+     * @ORM\ManyToMany(targetEntity="\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial", inversedBy="properties", cascade={"all"})
+     * @ORM\JoinTable(name="ven_alternate_raw_materials_properties",
+     *      joinColumns={@ORM\JoinColumn(name="property_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="alternate_raw_material_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $alternateRawMaterials;
 
 
     /**
@@ -104,7 +116,11 @@ class Property
      */
     public function __construct()
     {
+        $this->finishedProducts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->rawMaterials = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->intermediates = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->competitiveProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->alternateRawMaterials = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -201,56 +217,6 @@ class Property
         return $this->testProcedure;
     }
     
-    public function setFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProduct = null) {
-        $this->finishedProduct = $finishedProduct;
-        return $this;
-    }
-    
-    public function getFinishedProduct() {
-        return $this->finishedProduct;
-    }
-    
-    public function setIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediate = null) {
-        $this->intermediate = $intermediate;
-        return $this;
-    }
-    
-    public function getIntermediate() {
-        return $this->intermediate;
-    }
-    
-    public function setCompetitiveProduct(\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $obj = null) {
-        $this->competitiveProduct = $obj;
-        return $this;
-    }
-    
-    public function getCompetitiveProduct() {
-        return $this->competitiveProduct;
-    }
-
-    /**
-     * Set alternateRawMaterial
-     *
-     * @param \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterial
-     * @return Property
-     */
-    public function setAlternateRawMaterial(\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterial = null)
-    {
-        $this->alternateRawMaterial = $alternateRawMaterial;
-    
-        return $this;
-    }
-
-    /**
-     * Get alternateRawMaterial
-     *
-     * @return \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial 
-     */
-    public function getAlternateRawMaterial()
-    {
-        return $this->alternateRawMaterial;
-    }
-
     /**
      * Add rawMaterials
      *
@@ -282,5 +248,137 @@ class Property
     public function getRawMaterials()
     {
         return $this->rawMaterials;
+    }
+
+    /**
+     * Add finishedProducts
+     *
+     * @param \Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts
+     * @return Property
+     */
+    public function addFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts)
+    {
+        $this->finishedProducts[] = $finishedProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove finishedProducts
+     *
+     * @param \Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts
+     */
+    public function removeFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts)
+    {
+        $this->finishedProducts->removeElement($finishedProducts);
+    }
+
+    /**
+     * Get finishedProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFinishedProducts()
+    {
+        return $this->finishedProducts;
+    }
+
+    /**
+     * Add intermediates
+     *
+     * @param \Venture\IntermediateBundle\Entity\Intermediate $intermediates
+     * @return Property
+     */
+    public function addIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediates)
+    {
+        $this->intermediates[] = $intermediates;
+
+        return $this;
+    }
+
+    /**
+     * Remove intermediates
+     *
+     * @param \Venture\IntermediateBundle\Entity\Intermediate $intermediates
+     */
+    public function removeIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediates)
+    {
+        $this->intermediates->removeElement($intermediates);
+    }
+
+    /**
+     * Get intermediates
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIntermediates()
+    {
+        return $this->intermediates;
+    }
+
+    /**
+     * Add competitiveProducts
+     *
+     * @param \Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts
+     * @return Property
+     */
+    public function addCompetitiveProduct(\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts)
+    {
+        $this->competitiveProducts[] = $competitiveProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove competitiveProducts
+     *
+     * @param \Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts
+     */
+    public function removeCompetitiveProduct(\Venture\CompetitiveProductBundle\Entity\CompetitiveProduct $competitiveProducts)
+    {
+        $this->competitiveProducts->removeElement($competitiveProducts);
+    }
+
+    /**
+     * Get competitiveProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetitiveProducts()
+    {
+        return $this->competitiveProducts;
+    }
+
+    /**
+     * Add alternateRawMaterials
+     *
+     * @param \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials
+     * @return Property
+     */
+    public function addAlternateRawMaterial(\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials)
+    {
+        $this->alternateRawMaterials[] = $alternateRawMaterials;
+
+        return $this;
+    }
+
+    /**
+     * Remove alternateRawMaterials
+     *
+     * @param \Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials
+     */
+    public function removeAlternateRawMaterial(\Venture\AlternateRawMaterialBundle\Entity\AlternateRawMaterial $alternateRawMaterials)
+    {
+        $this->alternateRawMaterials->removeElement($alternateRawMaterials);
+    }
+
+    /**
+     * Get alternateRawMaterials
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAlternateRawMaterials()
+    {
+        return $this->alternateRawMaterials;
     }
 }

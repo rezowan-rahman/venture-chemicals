@@ -101,7 +101,7 @@ class FinishedProduct
     protected $configPackaging;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="finishedProduct", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Property", mappedBy="finishedProducts", cascade={"persist"})
      */
     protected $properties;
     
