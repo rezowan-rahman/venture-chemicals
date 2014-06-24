@@ -73,7 +73,7 @@ class AlternateRawMaterialController extends Controller
                     $tag->addAlternateRawMaterial($alternateRawMaterial);
                 }
                 foreach($alternateRawMaterial->getProperties() as $property) {
-                    $property->setAlternateRawMaterial($alternateRawMaterial);
+                    $property->addAlternateRawMaterial($alternateRawMaterial);
                 }
                 foreach($alternateRawMaterial->getOrderingDetails() as $order) {
                     $order->setAlternateRawMaterial($alternateRawMaterial);
@@ -161,6 +161,7 @@ class AlternateRawMaterialController extends Controller
 
                 foreach ($originalProperties as $property) {
                     if (false === $alternateRawMaterial->getProperties()->contains($property)) {
+                        $property->removeAlternateRawMaterial($alternateRawMaterial);
                         $em->remove($property);
                     }
                 }
@@ -178,7 +179,9 @@ class AlternateRawMaterialController extends Controller
                 }
                             
                 foreach($alternateRawMaterial->getProperties() as $property) {
-                    $property->setAlternateRawMaterial($alternateRawMaterial);
+                    if (false === $property->getAlternateRawMaterials()->contains($alternateRawMaterial)) {
+                        $property->addAlternateRawMaterial($alternateRawMaterial);
+                    }
                 }
                 
                 foreach($alternateRawMaterial->getOrderingDetails() as $order) {
@@ -289,13 +292,15 @@ class AlternateRawMaterialController extends Controller
             }
 
             foreach($alternateRawMaterial->getProperties() as $property) {
-                $property->setRawMaterial($rawMaterial);
-                $property->setAlternateRawMaterial(NULL);
+                $property->removeAlternateRawMaterial($alternateRawMaterial);
+                if (false === $property->getRawMaterials()->contains($rawMaterial)) {
+                    $property->addRawMaterial($rawMaterial);
+                }
             }
         
             foreach($alternateRawMaterial->getOrderingDetails() as $order) {
                 $order->setRawMaterial($rawMaterial);
-                $order->setAlternateRawMaterial(NULL);
+                $order->setAlternateRawMaterial($alternateRawMaterial);
             }
             
             $alternateRawMaterial->setIsConvertedToRawMaterial(true);

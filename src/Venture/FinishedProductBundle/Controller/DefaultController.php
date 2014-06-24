@@ -94,7 +94,7 @@ class DefaultController extends Controller
                     $spCost->setFinishedProduct($finishedProduct);
                 }
                 foreach($finishedProduct->getProperties() as $prop) {
-                    $prop->setFinishedProduct($finishedProduct);
+                    $prop->addFinishedProduct($finishedProduct);
                 }
                 foreach($finishedProduct->getFormulas() as $formula) {
                     $formula->setFinishedProduct($finishedProduct);
@@ -182,6 +182,7 @@ class DefaultController extends Controller
                     
             foreach ($originalProperties as $property) {
                 if (false === $finishedProduct->getProperties()->contains($property)) {
+                    $property->removeFinishedProduct($finishedProduct);
                     $em->remove($property);
                 }
             }
@@ -209,7 +210,9 @@ class DefaultController extends Controller
             }
             
             foreach($finishedProduct->getProperties() as $prop) {
-                    $prop->setFinishedProduct($finishedProduct);
+                if (false === $prop->getFinishedProducts()->contains($finishedProduct)) {
+                    $prop->addFinishedProduct($finishedProduct);
+                }
             }
             
             foreach($finishedProduct->getFormulas() as $formula) {

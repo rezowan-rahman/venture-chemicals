@@ -85,7 +85,7 @@ class CompetitiveProductController extends Controller
                     $tag->addCompetitiveProduct($competitiveProduct);
                 }
                 foreach($competitiveProduct->getProperties() as $prop) {
-                    $prop->setCompetitiveProduct($competitiveProduct);
+                    $prop->addCompetitiveProduct($competitiveProduct);
                 }
                 
                 $em->persist($competitiveProduct);
@@ -137,6 +137,7 @@ class CompetitiveProductController extends Controller
 
             foreach ($originalProperties as $property) {
                 if (false === $competitiveProduct->getProperties()->contains($property)) {
+                    $property->removeCompetitiveProduct($competitiveProduct);
                     $em->remove($property);
                 }
             }
@@ -148,7 +149,9 @@ class CompetitiveProductController extends Controller
             }
 
             foreach($competitiveProduct->getProperties() as $prop) {
-                    $prop->setCompetitiveProduct($competitiveProduct);
+                if (false === $prop->getCompetitiveProducts()->contains($competitiveProduct)) {
+                    $prop->addCompetitiveProduct($competitiveProduct);
+                }
             }
             
             $em->persist($competitiveProduct);

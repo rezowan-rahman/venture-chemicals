@@ -90,7 +90,7 @@ class DefaultController extends Controller
                     $tag->addIntermediate($intermediate);
                 }
                 foreach($intermediate->getProperties() as $prop) {
-                    $prop->setIntermediate($intermediate);
+                    $prop->addIntermediate($intermediate);
                 }
                 foreach($intermediate->getFormulas() as $formula) {
                     $formula->setIntermediate($intermediate);
@@ -161,6 +161,7 @@ class DefaultController extends Controller
 
             foreach ($originalProperties as $property) {
                 if (false === $intermediate->getProperties()->contains($property)) {
+                    $property->removeIntermediate($intermediate);
                     $em->remove($property);
                 }
             }
@@ -178,7 +179,9 @@ class DefaultController extends Controller
             }
 
             foreach($intermediate->getProperties() as $prop) {
-                    $prop->setIntermediate($intermediate);
+                if (false === $prop->getIntermediates()->contains($intermediate)) {
+                    $prop->addIntermediate($intermediate);
+                }
             }
             
             foreach($intermediate->getFormulas() as $formula) {

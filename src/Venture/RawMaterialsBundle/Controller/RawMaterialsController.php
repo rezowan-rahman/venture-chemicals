@@ -150,6 +150,7 @@ class RawMaterialsController extends Controller
                 foreach ($originalSpecs as $sppec) {
                     if (false === $raw_materials->getSpecs()->contains($sppec)) {
                         $sppec->removeRawMaterial($raw_materials);
+                        $em->remove($sppec);
                     }
                 }
             
