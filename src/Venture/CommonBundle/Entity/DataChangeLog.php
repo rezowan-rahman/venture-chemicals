@@ -44,18 +44,31 @@ class DataChangeLog
      * @ORM\Column(name="logged_at", type="datetime")
      */
     private $loggedAt;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="changeLogs")
-     * @ORM\JoinColumn(name="finished_product_id", referencedColumnName="id")
-     */
-    private $finishedProduct;
-    
+     * @ORM\ManyToMany(targetEntity="\Venture\FinishedProductBundle\Entity\FinishedProduct", inversedBy="changeLogs", cascade={"all"})
+     * @ORM\JoinTable(name="ven_finished_products_logs",
+     *      joinColumns={@ORM\JoinColumn(name="log_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="finished_product_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $finishedProducts;
+
     /**
-     * @ORM\ManyToOne(targetEntity="Venture\IntermediateBundle\Entity\Intermediate", inversedBy="changeLogs")
-     * @ORM\JoinColumn(name="intermediate_id", referencedColumnName="id")
-     */
-    private $intermediate;
+     * @ORM\ManyToMany(targetEntity="\Venture\IntermediateBundle\Entity\Intermediate", inversedBy="changeLogs", cascade={"all"})
+     * @ORM\JoinTable(name="ven_intermediates_logs",
+     *      joinColumns={@ORM\JoinColumn(name="log_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="intermediate_id", referencedColumnName="id")}
+     *      )
+     **/
+    protected $intermediates;
+
+
+
+    public function __construct() {
+        $this->finishedProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->intermediates = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -127,21 +140,71 @@ class DataChangeLog
         return $this->loggedAt;
     }
     
-    public function setFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProduct = null) {
-        $this->finishedProduct = $finishedProduct;
+
+
+    /**
+     * Add finishedProducts
+     *
+     * @param \Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts
+     * @return DataChangeLog
+     */
+    public function addFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts)
+    {
+        $this->finishedProducts[] = $finishedProducts;
+
         return $this;
     }
-    
-    public function getFinishedProduct() {
-        return $this->finishedProduct;
+
+    /**
+     * Remove finishedProducts
+     *
+     * @param \Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts
+     */
+    public function removeFinishedProduct(\Venture\FinishedProductBundle\Entity\FinishedProduct $finishedProducts)
+    {
+        $this->finishedProducts->removeElement($finishedProducts);
     }
-    
-    public function setIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediate = null) {
-        $this->intermediate = $intermediate;
+
+    /**
+     * Get finishedProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFinishedProducts()
+    {
+        return $this->finishedProducts;
+    }
+
+    /**
+     * Add intermediates
+     *
+     * @param \Venture\IntermediateBundle\Entity\Intermediate $intermediates
+     * @return DataChangeLog
+     */
+    public function addIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediates)
+    {
+        $this->intermediates[] = $intermediates;
+
         return $this;
     }
-    
-    public function getIntermediate() {
-        return $this->intermediate;
+
+    /**
+     * Remove intermediates
+     *
+     * @param \Venture\IntermediateBundle\Entity\Intermediate $intermediates
+     */
+    public function removeIntermediate(\Venture\IntermediateBundle\Entity\Intermediate $intermediates)
+    {
+        $this->intermediates->removeElement($intermediates);
+    }
+
+    /**
+     * Get intermediates
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIntermediates()
+    {
+        return $this->intermediates;
     }
 }

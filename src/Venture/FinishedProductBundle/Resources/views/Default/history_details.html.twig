@@ -35,7 +35,7 @@
     <div class="row space-top">
         <div class="col-md-6">
             <p>Packaging: {{ finishedProduct['configPackaging'] is defined?finishedProduct['configPackaging']:"N/A" }}</p>
-            {% if finishedProduct['tags'] | length > 0 %}
+            {% if finishedProduct['tags'] is defined %}
                 <p>
                     Tags: {% for tag in finishedProduct['tags'] %} {{ tag }} {% endfor %}
                 </p>

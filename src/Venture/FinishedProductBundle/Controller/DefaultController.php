@@ -59,7 +59,7 @@ class DefaultController extends Controller
             'finishedProduct'   => $finishedProduct,
             'properties'        => $finishedProduct->getProperties(),
             'formulas'          => $finishedProduct->getFormulas(),
-            'total_percentage'  => $em->getRepository('VentureFinishedProductBundle:FinishedProduct')->getTotalPercentage($id),
+            'total_percentage'  => $this->calculateTotalPercentage($finishedProduct),
             'quoting_cost'      => $finishedProduct->getQuotingCost(),
             'lowest_cost'       => $finishedProduct->getLowestCost(),
             'id'                => $id,
@@ -100,10 +100,10 @@ class DefaultController extends Controller
                     $formula->addFinishedProduct($finishedProduct);
                 }
                 
-                $maxCost = $this->processQuotingCost($finishedProduct->getFormulas());
+                $maxCost = $this->processQuotingCost($finishedProduct);
                 $finishedProduct->setQuotingCost($maxCost);
                 
-                $minCost = $this->processLowestCost($finishedProduct->getFormulas());
+                $minCost = $this->processLowestCost($finishedProduct);
                 $finishedProduct->setLowestCost($minCost);
                 
                 $em->persist($finishedProduct);
@@ -222,20 +222,20 @@ class DefaultController extends Controller
                 }
             }
             
-            $maxCost = $this->processQuotingCost($finishedProduct->getFormulas());
+            $maxCost = $this->processQuotingCost($finishedProduct);
             $finishedProduct->setQuotingCost($maxCost);
                 
-            $minCost = $this->processLowestCost($finishedProduct->getFormulas());
+            $minCost = $this->processLowestCost($finishedProduct);
             $finishedProduct->setLowestCost($minCost);
             
             $logObject = new \Venture\CommonBundle\Entity\DataChangeLog();
-            $logObject->setFinishedProduct($finishedProduct);
             $logObject->setData(serialize($logData));
             $logObject->setReasonForChange($logData["reasonForChange"]);
             $logObject->setLoggedAt($logData["revisionDate"]);
-            
-            $finishedProduct->addChangeLog($logObject);
-            
+
+            $logObject->getFinishedProducts()->add($finishedProduct);
+            $finishedProduct->getChangeLogs()->add($logObject);
+
             $em->persist($finishedProduct);
             $em->flush();
             
@@ -279,18 +279,13 @@ class DefaultController extends Controller
         $em = $this->initDoctrine();
         
         $finishedProduct = $em->getRepository('VentureFinishedProductBundle:FinishedProduct')->find($id);
-        
-        $versions = $em->getRepository('VentureCommonBundle:DataChangeLog')->findBy(
-                array("finishedProduct" => $finishedProduct),
-                array("loggedAt" => "DESC"));
-        
         if (!$finishedProduct) {
             throw $this->createNotFoundException('Unable to find Product data');
         }
         
         return $this->render('VentureFinishedProductBundle:Default:history_list.html.twig', array(
             "finishedProduct"   => $finishedProduct,
-            "versions"          => $versions,
+            "versions"          => $finishedProduct->getChangeLogs(),
         ));
     }
     
@@ -363,7 +358,7 @@ class DefaultController extends Controller
             $i++;
         }
         
-        $log["totalPercentage"] = $em->getRepository('VentureFinishedProductBundle:FinishedProduct')->getTotalPercentage($finishedProduct->getId());
+        $log["totalPercentage"] = $this->calculateTotalPercentage($finishedProduct);
         $log["amountInStock"] = 0;
         $log["amountInPurchaseOrder"] = 0;
         $log["reorderPoint"] = $finishedProduct->getReorderPoint();
@@ -372,11 +367,11 @@ class DefaultController extends Controller
         return $log;
     }
     
-    public function processQuotingCost($formulas) {
+    public function processQuotingCost($finishedProduct) {
         $cost = 0;
-        foreach($formulas as $formula) {
+        foreach($finishedProduct->getFormulas() as $formula) {
             if(is_object($formula->getRawMaterial())) {
-                $weight = $formula->getFinishedProduct()->getConfigPackaging()->getValue();
+                $weight = $finishedProduct->getConfigPackaging()->getValue();
                 $materialCost = $formula->getRawMaterial()->getQuotingCost();
                 $amount = $formula->getAmount() /100;
                 
@@ -384,7 +379,7 @@ class DefaultController extends Controller
             }
             
             if(is_object($formula->getIngredient())) {
-                $weight = $formula->getFinishedProduct()->getConfigPackaging()->getValue();
+                $weight = $finishedProduct->getConfigPackaging()->getValue();
                 $materialCost = $formula->getIngredient()->getQuotingCost();
                 $amount = $formula->getAmount() /100;
                 
@@ -395,11 +390,11 @@ class DefaultController extends Controller
         return $cost;
     }
     
-    public function processLowestCost($formulas) {
+    public function processLowestCost($finishedProduct) {
         $cost = 0;
-        foreach($formulas as $formula) {
+        foreach($finishedProduct->getFormulas() as $formula) {
             if(is_object($formula->getRawMaterial())) {
-                $weight = $formula->getFinishedProduct()->getConfigPackaging()->getValue();
+                $weight = $finishedProduct->getConfigPackaging()->getValue();
                 $materialCost = $formula->getRawMaterial()->getLowestCost();
                 $amount = $formula->getAmount() /100;
                 
@@ -407,7 +402,7 @@ class DefaultController extends Controller
             }
             
             if(is_object($formula->getIngredient())) {
-                $weight = $formula->getFinishedProduct()->getConfigPackaging()->getValue();
+                $weight = $finishedProduct->getConfigPackaging()->getValue();
                 $materialCost = $formula->getIngredient()->getLowestCost();
                 $amount = $formula->getAmount() /100;
                 
@@ -416,6 +411,19 @@ class DefaultController extends Controller
         }
         
         return $cost;
+    }
+
+    public function calculateTotalPercentage($finishedProduct) {
+        if (!$finishedProduct) {
+            throw $this->createNotFoundException('Requested Revision is not found');
+        }
+
+        $amount = 0;
+        foreach($finishedProduct->getFormulas() as $formula) {
+            $amount = $amount + $formula->getAmount();
+        }
+
+        return $amount;
     }
     
 }

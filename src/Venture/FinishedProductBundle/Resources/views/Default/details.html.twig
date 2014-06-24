@@ -127,7 +127,7 @@
                         <dd>{{ formula.amount }}%</dd>
                     {% endfor %}
                     <dt>Total Percentage:</dt>
-                    <dd>{{ total_percentage['total_amount']? total_percentage['total_amount']:0 }}%</dd>
+                    <dd>{{ total_percentage? total_percentage:0 }}%</dd>
                 </dl>
             </div>
         </div>

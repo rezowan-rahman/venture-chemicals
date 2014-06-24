@@ -111,7 +111,7 @@ class FinishedProduct
     protected $formulas;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\DataChangeLog", mappedBy="finishedProduct", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\DataChangeLog", mappedBy="finishedProducts", cascade={"all"})
      */
     protected $changeLogs;
     

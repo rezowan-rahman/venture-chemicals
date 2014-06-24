@@ -105,7 +105,7 @@ class Intermediate
     protected $formulas;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\DataChangeLog", mappedBy="intermediate", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\DataChangeLog", mappedBy="intermediates", cascade={"all"})
      */
     protected $changeLogs;
     
