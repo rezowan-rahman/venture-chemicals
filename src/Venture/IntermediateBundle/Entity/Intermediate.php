@@ -100,7 +100,7 @@ class Intermediate
     protected $properties;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Formula", mappedBy="intermediate", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Formula", mappedBy="intermediates", cascade={"all"})
      */
     protected $formulas;
     

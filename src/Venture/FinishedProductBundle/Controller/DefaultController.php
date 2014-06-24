@@ -97,7 +97,7 @@ class DefaultController extends Controller
                     $prop->addFinishedProduct($finishedProduct);
                 }
                 foreach($finishedProduct->getFormulas() as $formula) {
-                    $formula->setFinishedProduct($finishedProduct);
+                    $formula->addFinishedProduct($finishedProduct);
                 }
                 
                 $maxCost = $this->processQuotingCost($finishedProduct->getFormulas());
@@ -189,6 +189,7 @@ class DefaultController extends Controller
             
             foreach ($originalFormulas as $formula) {
                 if (false === $finishedProduct->getFormulas()->contains($formula)) {
+                    $formula->removeFinishedProduct($finishedProduct);
                     $em->remove($formula);
                 }
             }
@@ -216,7 +217,9 @@ class DefaultController extends Controller
             }
             
             foreach($finishedProduct->getFormulas() as $formula) {
-                    $formula->setFinishedProduct($finishedProduct);
+                if (false === $formula->getFinishedProducts()->contains($finishedProduct)) {
+                    $formula->addFinishedProduct($finishedProduct);
+                }
             }
             
             $maxCost = $this->processQuotingCost($finishedProduct->getFormulas());

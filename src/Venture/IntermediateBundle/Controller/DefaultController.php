@@ -93,7 +93,7 @@ class DefaultController extends Controller
                     $prop->addIntermediate($intermediate);
                 }
                 foreach($intermediate->getFormulas() as $formula) {
-                    $formula->setIntermediate($intermediate);
+                    $formula->addIntermediate($intermediate);
                 }
                 
                 $maxCost = $this->processQuotingCost($intermediate->getFormulas());
@@ -168,6 +168,7 @@ class DefaultController extends Controller
             
             foreach ($originalFormulas as $formula) {
                 if (false === $intermediate->getFormulas()->contains($formula)) {
+                    $formula->removeIntermediate($intermediate);
                     $em->remove($formula);
                 }
             }
@@ -185,7 +186,9 @@ class DefaultController extends Controller
             }
             
             foreach($intermediate->getFormulas() as $formula) {
-                    $formula->setIntermediate($intermediate);
+                if (false === $formula->getIntermediates()->contains($intermediate)) {
+                    $formula->addIntermediate($intermediate);
+                }
             }
             
             $maxCost = $this->processQuotingCost($intermediate->getFormulas());

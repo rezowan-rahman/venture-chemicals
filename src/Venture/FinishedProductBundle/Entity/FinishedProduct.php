@@ -106,7 +106,7 @@ class FinishedProduct
     protected $properties;
     
     /**
-     * @ORM\OneToMany(targetEntity="\Venture\CommonBundle\Entity\Formula", mappedBy="finishedProduct", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Venture\CommonBundle\Entity\Formula", mappedBy="finishedProducts", cascade={"all"})
      */
     protected $formulas;
     
