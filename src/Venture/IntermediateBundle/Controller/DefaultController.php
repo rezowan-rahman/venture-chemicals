@@ -50,10 +50,6 @@ class DefaultController extends Controller
         $em = $this->initDoctrine();
         $intermediate = $em->getRepository('VentureIntermediateBundle:Intermediate')->find($id);
         
-        $versions = $em->getRepository('VentureCommonBundle:DataChangeLog')->findBy(
-                array("intermediate" => $intermediate),
-                array("loggedAt" => "DESC"));
-        
         if (!$intermediate) {
             throw $this->createNotFoundException('Unable to find Intermediate data');
         }
@@ -62,7 +58,7 @@ class DefaultController extends Controller
             'intermediate'      => $intermediate,
             'properties'        => $intermediate->getProperties(),
             'formulas'          => $intermediate->getFormulas(),
-            'total_percentage'  => $em->getRepository('VentureIntermediateBundle:Intermediate')->getTotalPercentage($id),
+            'total_percentage'  => $this->calculateTotalPercentage($intermediate),
             'quoting_cost'      => $intermediate->getQuotingCost(),
             'lowest_cost'       => $intermediate->getLowestCost(),
             'id'                => $id,
@@ -198,12 +194,12 @@ class DefaultController extends Controller
             $intermediate->setLowestCost($minCost);
             
             $logObject = new \Venture\CommonBundle\Entity\DataChangeLog();
-            $logObject->setIntermediate($intermediate);
             $logObject->setData(serialize($logData));
             $logObject->setReasonForChange($logData["reasonForChange"]);
             $logObject->setLoggedAt($logData["revisionDate"]);
-            
-            $intermediate->addChangeLog($logObject);
+
+            $logObject->getIntermediates()->add($intermediate);
+            $intermediate->getChangeLogs()->add($logObject);
             
             $em->persist($intermediate);
             $em->flush();
@@ -248,17 +244,13 @@ class DefaultController extends Controller
         $em = $this->initDoctrine();
         $intermediate = $em->getRepository('VentureIntermediateBundle:Intermediate')->find($id);
         
-        $versions = $em->getRepository('VentureCommonBundle:DataChangeLog')->findBy(
-                array("intermediate" => $intermediate),
-                array("loggedAt" => "DESC"));
-        
         if (!$intermediate) {
             throw $this->createNotFoundException('Unable to find Intermediate data');
         }
         
         return $this->render('VentureIntermediateBundle:Default:history_list.html.twig', array(
             "intermediate"   => $intermediate,
-            "versions"       => $versions,
+            "versions"       => $intermediate->getChangeLogs(),
         ));
     }
     
@@ -322,7 +314,7 @@ class DefaultController extends Controller
             $i++;
         }
         
-        $log["totalPercentage"] = $em->getRepository('VentureIntermediateBundle:Intermediate')->getTotalPercentage($intermediate->getId());
+        $log["totalPercentage"] = $this->calculateTotalPercentage($intermediate);
         $log["amountInStock"] = 0;
         $log["revisionDate"] = $intermediate->getUpdated();
         
@@ -357,5 +349,18 @@ class DefaultController extends Controller
         }
         
         return $cost;
+    }
+
+    public function calculateTotalPercentage($intermediate) {
+        if (!$intermediate) {
+            throw $this->createNotFoundException('Requested Revision is not found');
+        }
+
+        $amount = 0;
+        foreach($intermediate->getFormulas() as $formula) {
+            $amount = $amount + $formula->getAmount();
+        }
+
+        return $amount;
     }
 }
