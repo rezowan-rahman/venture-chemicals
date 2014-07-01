@@ -29,8 +29,7 @@ class RawMaterialsController extends Controller
             ->getRepository('VentureRawMaterialsBundle:RawMaterials')
             ->getLatestRawMaterials($active);
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
+        $pagination = $this->get('knp_paginator')->paginate(
             $raw_materials,
             $this->get('request')->query->get('page', 1),
             5
