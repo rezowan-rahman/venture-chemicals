@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets '@SettingsConfigBundle/Resources/public/css/page/style.css' %}
+    {% stylesheets 'bundles/settingsconfig/css/page/style.css' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
