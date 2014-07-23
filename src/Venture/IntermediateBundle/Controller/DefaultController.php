@@ -33,10 +33,20 @@ class DefaultController extends Controller
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
         $em = $this->initDoctrine();
-        $intermediates = $em->getRepository('VentureIntermediateBundle:Intermediate')->getLatestIntermediates($active);
+
+        $intermediates = $em
+            ->getRepository('VentureIntermediateBundle:Intermediate')
+            ->getLatestIntermediates($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $intermediates,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VentureIntermediateBundle:Default:list.html.twig', array(
             'intermediates' => $intermediates,
+            'pagination' => $pagination,
             'status' => $active
         ));
     }
