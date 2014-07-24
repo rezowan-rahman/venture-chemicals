@@ -148,7 +148,7 @@ class AlternateRawMaterialController extends Controller
         }
         
         $form = $this->createForm(new AlternateRawMaterialType(), $alternateRawMaterial);
-        $form->handleRequest($form);
+        $form->handleRequest($request);
         
         if ($request->getMethod() == 'POST') {
 
