@@ -257,10 +257,20 @@ class DefaultController extends Controller
         if (!$intermediate) {
             throw $this->createNotFoundException('Unable to find Intermediate data');
         }
-        
+
+        $revisions = $em
+            ->getRepository('VentureCommonBundle:DataChangeLog')
+            ->findLogByIntermediateId($id);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $revisions,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
+
         return $this->render('VentureIntermediateBundle:Default:history_list.html.twig', array(
             "intermediate"   => $intermediate,
-            "versions"       => $intermediate->getChangeLogs(),
+            'pagination' => $pagination,
         ));
     }
     
