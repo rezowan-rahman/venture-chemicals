@@ -22,4 +22,15 @@ class DataChangeLogRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    public function findLogByFinishedProductId($id) {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c')
+            ->leftJoin('c.finishedProducts', 'fp')
+            ->where('fp.id = :id')
+            ->setParameter('id', $id)
+            ->addOrderBy('c.loggedAt', 'DESC');
+
+        return $qb->getQuery();
+    }
 }

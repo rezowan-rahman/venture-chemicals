@@ -33,10 +33,19 @@ class DefaultController extends Controller
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
         $em = $this->initDoctrine();
-        $finishedProducts = $em->getRepository('VentureFinishedProductBundle:FinishedProduct')->getLatestProducts($active);
+
+        $finishedProducts = $em
+            ->getRepository('VentureFinishedProductBundle:FinishedProduct')
+            ->getLatestProducts($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $finishedProducts,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VentureFinishedProductBundle:Default:list.html.twig', array(
-            'finishedProducts' => $finishedProducts,
+            'pagination' => $pagination,
             'status' => $active
         ));
     }
@@ -282,13 +291,23 @@ class DefaultController extends Controller
         if (!$finishedProduct) {
             throw $this->createNotFoundException('Unable to find Product data');
         }
+
+        $revisions = $em
+            ->getRepository('VentureCommonBundle:DataChangeLog')
+            ->findLogByFinishedProductId($id);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $revisions,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VentureFinishedProductBundle:Default:history_list.html.twig', array(
             "finishedProduct"   => $finishedProduct,
-            "versions"          => $finishedProduct->getChangeLogs(),
+            'pagination' => $pagination,
         ));
     }
-    
+
     /**
      * @Route("/history/{id}/details", name="venture_finished_product_history_details")
      * @Method("GET")
