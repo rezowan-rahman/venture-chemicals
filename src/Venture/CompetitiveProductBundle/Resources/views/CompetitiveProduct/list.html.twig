@@ -55,19 +55,31 @@
         </div>
     </div>
 
+    <div class="row space-top">
+        <div class="col-md-12">
+            <p class="text-left">Total Record: <b>{{ pagination.getTotalItemCount }}</b></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Item#</th>
-                    <th>Supplier</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Item', 'p.itemName') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Supplier', 'p.itemSupplier') }}</th>
                     <th>Amount In Stock</th>
                     <th>Amount on Sales order</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for product in competitiveProducts %}
+                {% for product in pagination %}
                     <tr>
                         <td><a class="my_custom_anchor" href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">{{ product.ItemName }}</a></td>
                         <td><a class="my_custom_anchor" href="{{ path('venture_competitive_product_view',  {'id': product.id}) }}">{{ product.ItemSupplier }}</a></td>
@@ -84,4 +96,11 @@
             </table>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+
 {% endblock %}
