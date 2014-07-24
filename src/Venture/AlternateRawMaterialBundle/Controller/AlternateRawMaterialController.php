@@ -32,20 +32,20 @@ class AlternateRawMaterialController extends Controller
      */
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
-
-        $condition = array();
-        $condition['isConvertedToRawMaterial'] = false;
-        if($active) $condition["isActive"] = $active;
-
         $em = $this->initDoctrine();
+
         $alternateRawMaterials = $em
             ->getRepository('VentureAlternateRawMaterialBundle:AlternateRawMaterial')
-            ->findBy($condition, array(
-                "updated" => "DESC",
-            ));
+            ->getLatestAlternateRawMaterials($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $alternateRawMaterials,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return array(
-            'alternateRawMaterials' => $alternateRawMaterials,
+            'pagination' => $pagination,
             'status' => $active
         );
     }
