@@ -81,10 +81,10 @@
                 <tbody>
                 {% for raw_material in pagination %}
                     <tr>
-                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': raw_material.id}) }}">{{ raw_material.ItemNumber }}</a></td>
-                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': raw_material.id}) }}">{{ raw_material.ItemName }}</a></td>
-                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': raw_material.id}) }}">0</a></td>
-                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'id': raw_material.id}) }}">0</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'itemNumber': raw_material.itemNumber}) }}">{{ raw_material.ItemNumber }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'itemNumber': raw_material.itemNumber}) }}">{{ raw_material.ItemName }}</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'itemNumber': raw_material.itemNumber}) }}">0</a></td>
+                        <td><a class="my_custom_anchor" href="{{ path('venture_raw_materials_details',  {'itemNumber': raw_material.itemNumber}) }}">0</a></td>
 
                     </tr>
                 {% else %}
