@@ -21,9 +21,6 @@ class CustomerRepository extends EntityRepository {
                ->setParameter('active', $active);
 
 
-        if (false === is_null($limit))
-            $qb->setMaxResults($limit);
-
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery();
     }
 }

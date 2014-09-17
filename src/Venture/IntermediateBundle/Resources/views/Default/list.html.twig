@@ -55,18 +55,30 @@
         </div>
     </div>
 
+    <div class="row space-top">
+        <div class="col-md-12">
+            <p class="text-left">Total Record: <b>{{ pagination.getTotalItemCount }}</b></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border"></div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Item#</th>
-                    <th>Name</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Item#', 'i.itemNumber') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Name', 'i.itemName') }}</th>
                     <th>Amount In Stock</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for product in intermediates %}
+                {% for product in pagination %}
                     <tr>
                         <td><a class="my_custom_anchor" href="{{ path('venture_intermediate_view',  {'id': product.id}) }}">{{ product.ItemNumber }}</a></td>
                         <td><a class="my_custom_anchor" href="{{ path('venture_intermediate_view',  {'id': product.id}) }}">{{ product.ItemName }}</a></td>
@@ -82,4 +94,11 @@
             </table>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+
 {% endblock %}

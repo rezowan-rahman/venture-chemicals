@@ -12,5 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class AlternateRawMaterialRepository extends EntityRepository
 {
-    
+    public function getLatestAlternateRawMaterials($active = false) {
+        $qb = $this->createQueryBuilder('arm')
+            ->select('arm')
+            ->where('arm.isConvertedToRawMaterial = :isConvertedToRawMaterial')
+            ->setParameter('isConvertedToRawMaterial', false)
+            ->addOrderBy('arm.updated', 'DESC');
+
+        if (true === $active)
+            $qb->andWhere('arm.isActive = :active')
+                ->setParameter('active', $active);
+
+        return $qb->getQuery();
+    }
 }

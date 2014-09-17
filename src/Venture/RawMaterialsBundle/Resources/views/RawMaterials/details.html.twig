@@ -183,12 +183,12 @@
             <ul class="list-inline">
                 <li>
                     <button type="button"
-                            data-path="{{ path('venture_raw_materials_edit',  {'id': id}) }}"
+                            data-path="{{ path('venture_raw_materials_edit',  {'itemNumber': raw_material.itemNumber}) }}"
                             class="btn btn-default btn-sm target">Update</button>
                 </li>
                 <li>
                     <button type="button"
-                            data-path="{{ path('venture_raw_materials_delete',  {'id': id}) }}"
+                            data-path="{{ path('venture_raw_materials_delete',  {'itemNumber': raw_material.itemNumber}) }}"
                             class="btn btn-default btn-sm target confirm">Delete</button>
                 </li>
             </ul>
