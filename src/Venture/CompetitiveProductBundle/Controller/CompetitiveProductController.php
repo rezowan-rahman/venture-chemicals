@@ -29,23 +29,24 @@ class CompetitiveProductController extends Controller
      */
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
-
-        $condition = array();
-        if($active) $condition["isActive"] = $active;
-
         $em = $this->initDoctrine();
+
         $competitiveProducts = $em
             ->getRepository('VentureCompetitiveProductBundle:CompetitiveProduct')
-            ->findBy($condition, array(
-                "updated" => "DESC"
-            ));
+            ->getLatestProducts($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $competitiveProducts,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return array(
-            'competitiveProducts' => $competitiveProducts,
+            'pagination' => $pagination,
             'status' => $active
         );
     }
-    
+
     /**
      * @Route("/{id}/details", name="venture_competitive_product_view")
      * @Method("GET")

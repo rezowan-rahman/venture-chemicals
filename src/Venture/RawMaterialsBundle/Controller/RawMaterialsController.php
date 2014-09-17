@@ -42,9 +42,11 @@ class RawMaterialsController extends Controller
     }
 
 
-    public function viewAction($id) {
+    public function viewAction($itemNumber) {
         $em = $this->initDoctrine();
-        $raw_material = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->find($id);
+        $raw_material = $em
+            ->getRepository('VentureRawMaterialsBundle:RawMaterials')
+            ->findOneBy(array('item_number' => $itemNumber));
 
         if (!$raw_material) {
             throw $this->createNotFoundException('Unable to find Raw material data');
@@ -56,7 +58,6 @@ class RawMaterialsController extends Controller
             'shipping_details'  => $raw_material->getShippingDetails(),
             'quoting_cost'      => $raw_material->getQuotingCost(),
             'lowest_cost'       => $raw_material->getLowestCost(),
-            'id'                => $id,
         ));
     }
     
@@ -102,10 +103,12 @@ class RawMaterialsController extends Controller
         ));
     }
     
-    public function updateAction(\Symfony\Component\HttpFoundation\Request $request, $id) {
+    public function updateAction(\Symfony\Component\HttpFoundation\Request $request, $itemNumber) {
         $em = $this->initDoctrine();
                         
-        $raw_materials = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->find($id);
+        $raw_materials = $em
+            ->getRepository('VentureRawMaterialsBundle:RawMaterials')
+            ->findOneBy(array('item_number' => $itemNumber));
         
         if(!$raw_materials) {
             throw $this->createNotFoundException('Unable to find Raw material data');
@@ -201,13 +204,15 @@ class RawMaterialsController extends Controller
         
         return $this->render('VentureRawMaterialsBundle:RawMaterials:template.html.twig', array(
             'form' => $form->createView(),
-            'id' => $id
         ));
     }
     
-    public function removeAction($id) {
+    public function removeAction($itemNumber) {
         $em = $this->initDoctrine();
-        $raw_material = $em->getRepository('VentureRawMaterialsBundle:RawMaterials')->find($id);
+
+        $raw_material = $em
+            ->getRepository('VentureRawMaterialsBundle:RawMaterials')
+            ->findOneBy(array('item_number' => $itemNumber));
 
         if (!$raw_material) {
             throw $this->createNotFoundException('Unable to find raw material');

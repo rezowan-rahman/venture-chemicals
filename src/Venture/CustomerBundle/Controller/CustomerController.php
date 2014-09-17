@@ -24,10 +24,19 @@ class CustomerController extends Controller
     public function indexAction($type = "show_all") {
         $em = $this->getDoctrine()->getManager();
         $active = ($type != "show_all") ? true: false;
-        $entities = $em->getRepository('VentureCustomerBundle:Customer')->getLatestCustomers($active);
+
+        $entities = $em
+            ->getRepository('VentureCustomerBundle:Customer')
+            ->getLatestCustomers($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
 
         return array(
-            'entities' => $entities,
+            'pagination' => $pagination,
             "status" => $active
         );
     }

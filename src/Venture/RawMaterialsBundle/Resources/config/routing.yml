@@ -5,7 +5,7 @@ venture_raw_materials_list:
         _method:  GET   
         
 venture_raw_materials_details:
-    pattern:  /details/{id}
+    pattern:  /{itemNumber}/details
     defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:view }
     requirements:
         _method:  GET 
@@ -16,14 +16,14 @@ venture_raw_materials_add:
     defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:add }
 
 venture_raw_materials_edit:
-    pattern:  /edit/{id}
+    pattern:  /{itemNumber}/update
     defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:update }
     requirements:
         _method:  GET|POST
         id: \d+
 
 venture_raw_materials_delete:
-    pattern:  /remove/{id}
+    pattern:  /{itemNumber}/remove
     defaults: { _controller: VentureRawMaterialsBundle:RawMaterials:remove }
     requirements:
         _method:  GET 

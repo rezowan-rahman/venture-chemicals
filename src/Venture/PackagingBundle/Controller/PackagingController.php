@@ -29,10 +29,19 @@ class PackagingController extends Controller
     public function listAction($type = "show_all") {
         $active = ($type != "show_all") ? true: false;
         $em = $this->initDoctrine();
-        $packaging = $em->getRepository('VenturePackagingBundle:Packaging')->getLatestPackaging($active);
+
+        $packaging = $em
+            ->getRepository('VenturePackagingBundle:Packaging')
+            ->getLatestPackaging($active);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $packaging,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
         
         return $this->render('VenturePackagingBundle:Packaging:list.html.twig', array(
-            'packaging' => $packaging,
+            'pagination' => $pagination,
             'status' => $active
         ));
     }
